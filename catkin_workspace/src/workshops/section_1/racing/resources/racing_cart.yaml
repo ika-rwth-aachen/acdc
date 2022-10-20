@@ -1,0 +1,115 @@
+bodies:
+  - name: base
+    type: dynamic  
+    color: [1, 1, 1, 0.75] 
+    footprints:
+      - type: polygon
+        density: 100
+        points: [ [-1.5, -0.5],
+                  [0.1, -0.5],
+                  [0.2, -.2],
+                  [0.2, .2],
+                  [0.1, 0.5],
+                  [-1.55, 0.3],
+                  [-1.55, -0.3],
+                  [-1.5, 0.5]]
+  - name: front_wheel
+    color: [1, 1, 1, 0.75] 
+    footprints:
+      - type: polygon
+        density: 1.0
+        points: [[ 0.2, -0.05],
+                 [ 0.2,  0.05],
+                 [-0.2, 0.05],
+                 [-0.2, -0.05]]
+
+  - name: rear_left_wheel
+    color: [1, 1, 1, 0.75] 
+    footprints:
+      - type: polygon
+        density: 1.0
+        points: [[ 0.2, -0.05],
+                 [ 0.2,  0.05],
+                 [-0.2, 0.05],
+                 [-0.2, -0.05]]
+
+  - name: rear_right_wheel
+    color: [1, 1, 1, 0.75]
+    footprints:
+      - type: polygon
+        density: 1.0
+        points: [[ 0.2, -0.05],
+                 [ 0.2,  0.05],
+                 [-0.2, 0.05],
+                 [-0.2, -0.05]]
+
+joints:
+  - type: revolute
+    name: front_wheel_revolute
+    limits: [-30, 30]
+    bodies: 
+      - name: front_wheel
+        anchor: [0, 0]
+      - name: base
+        anchor: [0, 0]
+
+  - type: weld
+    name: rear_right_wheel_weld
+    bodies: 
+      - name: rear_left_wheel
+        anchor: [0, 0]
+      - name: base
+        anchor: [-1.2, 0.5]
+
+  - type: weld
+    name: rear_left_wheel_weld  
+    bodies: 
+      - name: rear_right_wheel
+        anchor: [0, 0]
+      - name: base
+        anchor: [-1.2, -0.5]
+
+plugins:
+  - type: ModelTfPublisher
+    name: tf_publisher
+    publish_tf_world: true
+
+  - type: flatland_ika_plugins::SingleTrackDrive
+    name: cart_drive
+    body: base
+    front_wheel_joint: front_wheel_revolute
+    rear_left_wheel_joint: rear_left_wheel_weld
+    rear_right_wheel_joint: rear_right_wheel_weld
+    odom_frame_id: map
+    target_twist_sub: vehicle/actuator_commands
+    current_twist_pub: vehicle/wheel_sensors
+    max_angular_velocity: 1.5
+    max_steering_angle: 0.7
+    max_forward_velocity: 30
+    max_backward_velocity: 5
+    max_linear_acceleration: 3.0
+    max_linear_deceleration: 8.0
+
+  - type: Laser
+    name: laser_front
+    frame: laser_front
+    topic: vehicle/lidar_measurements
+    body: base
+    broadcast_tf: true
+    origin: [0.28, 0, 0]
+    range: 40
+    angle: {min: -1.45, max: 1.45, increment: 0.725}
+    noise_std_dev: 0.1
+    update_rate: 12.5
+
+  - type: Laser
+    name: laser_top
+    frame: laser_top
+    topic: vehicle/lidar_measurements_ref
+    body: base
+    broadcast_tf: true
+    origin: [0, 0, 1]
+    range: 100
+    angle: {min: -3.1415, max: 3.1415, increment: 0.005}
+    noise_std_dev: 0.0
+    update_rate: 25

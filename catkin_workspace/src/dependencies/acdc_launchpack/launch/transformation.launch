@@ -1,0 +1,16 @@
+<launch>
+
+    <arg name="source_topic" default="fusion/ikaObjectList"/>
+    <arg name="target_topic" default="vehicle/ikaObjectList"/>
+    <arg name="source_frame_id" default="base_link"/>
+    <arg name="target_topic_id" default="vehicle_body"/>
+    <arg name="node_name" default="transformation"/>
+
+    <node name="$(arg node_name)" pkg="acdc_launchpack" type="transformation_node" output="screen">
+        <!-- put arguments defined above into parameter server -->
+        <param name="source_topic" value="$(arg source_topic)" type="str"/>
+        <param name="target_topic" value="$(arg target_topic)" type="str"/>
+        <param name="source_frame_id" value="$(arg source_frame_id)" type="str"/>
+        <param name="target_frame_id" value="$(arg target_topic_id)" type="str"/>
+    </node>
+</launch>

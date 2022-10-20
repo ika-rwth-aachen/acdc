@@ -1,0 +1,8 @@
+spat_data:
+  stationID: 1234
+  name: "ACDC SPAT"           # optional
+  intersection:
+    name: "ACDC Intersection"    # optional
+    id_region: 2              # optional
+    id_id: 1234
+    nSignalGoups: 2           # currently only working with 2 signal groups

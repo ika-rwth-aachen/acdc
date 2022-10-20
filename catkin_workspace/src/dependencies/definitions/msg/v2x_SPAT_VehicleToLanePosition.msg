@@ -1,0 +1,2 @@
+uint32 stationID
+uint8 laneID

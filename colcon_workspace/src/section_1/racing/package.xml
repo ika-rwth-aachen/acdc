@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>racing</name>
+  <version>0.1.0</version>
+  <description>Controller for the racing vehicle</description>
+
+  <maintainer email="simon.schaefer@ika.rwth-aachen.de">Simon Schaefer</maintainer>
+  <maintainer email="nico.neumann@ika.rwth-aachen.de">Nico Neumann</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+
+<export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

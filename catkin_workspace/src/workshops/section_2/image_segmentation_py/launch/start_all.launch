@@ -1,0 +1,52 @@
+<launch>
+
+    <param name ="/use_sim_time" value="true"/>
+    
+    <!-- ROSBAG PLAY -->
+    <node pkg="rosbag" 
+          type="play"
+          name="player"
+          output="screen"
+          args="--rate 0.05 -l --clock /home/rosuser/ws/bag/left_camera_templergraben.bag
+                --topics /sensors/camera/left/image_raw
+                         /sensors/camera/left/camera_info">
+    </node>
+
+    <!-- STEREO IMAGE PROC -->
+    <node name="stereo_image_proc"
+          pkg="stereo_image_proc"
+          type="stereo_image_proc"
+          ns="sensors/camera/"
+          output="screen">
+    </node>
+
+
+    <!--- CAMERA SEGMENTATION NODE -->
+    <rosparam
+      command="load"
+      file="$(find image_segmentation_py)/launch/params.yaml"
+    />
+
+    <node
+        name="image_segmentation"
+        pkg="image_segmentation_py"
+        type="image_segmentation.py"
+        output="screen">
+        <remap from="/image_rect_color" to="/sensors/camera/left/image_rect_color"/>
+    </node>
+
+
+    <!--- NODES FOR VISUALIZATION -->
+    <node pkg="image_view"
+          type="image_view"
+          name="segmentation_viewer"
+          args="image:=/image_rect_segmented">
+    </node>
+
+    <node pkg="image_view"
+          type="image_view"
+          name="camera_left"
+          args="image:=/sensors/camera/left/image_rect_color">
+    </node>
+
+</launch>

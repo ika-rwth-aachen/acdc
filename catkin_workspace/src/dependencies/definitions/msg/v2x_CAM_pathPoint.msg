@@ -1,0 +1,5 @@
+int32 deltaLatitude
+int32 deltaLongitude
+int16 deltaAltitude
+bool pathDeltaTimePresent
+uint16 pathDeltaTime

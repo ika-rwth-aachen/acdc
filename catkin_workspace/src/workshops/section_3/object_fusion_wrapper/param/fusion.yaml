@@ -1,0 +1,57 @@
+fusion_passat: #used in FusionConstants.h and FusionConstants.cpp
+    constants:
+        existence_probability_loss_rate: 1.0            # unit: 100% existence probability per second. How quickly are non-measured objects forgotten?
+        chosen_distance_measure: 1                      # 1 - Mahalanobis distance, 2 - Intersection over Union 
+        iou_overlap_threshold: 0.01                     # below this overlap threshold the objects are not matched, esentially it should be just higher than 0, then highest iou chosen anyway
+        mahalanobis_threshold: 6.0                      # unit: std devs of innovation. should be 2 or 3 (95% or 99% error ellipses) to be realistic.
+        mahalanobis_global_threshold: 2.0               # currently not supported! for global-to-global fusion.
+        existence_probability_output_threshold: 0.001   # below this, global objects are not outputted (but may be kept internally).
+        existence_probability_delete_threshold: 0.001   # below this, global objects get deleted.
+        measurement_history_threshold_sec: 0.2          # time in seconds after which fused objects forget by whom they have been measured
+        time_jump:                                      # global object list is cleared when ROS time jumps of greater / smaller than this get detected
+            forward_threshold_sec: 5.0
+            backward_threshold_sec: -0.5
+
+    mahalanobis_penalty:    # penalize classification clashes between measured and global in association
+        # >=0: penalty = value * mahalanobis_threshold
+        # <0 : penalty = mahalanobis_threshold + 1.0 (prevent association)
+        # row = measured object type; column = global object type
+        id:   [  0,   1,   2,   3,   4,   5,  11,   12,   13,   14,   15]
+        "0":  [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "1":  [0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "2":  [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "3":  [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "4":  [0.0, -1., 0.0, 0.0, 0.0, 0.1, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "5":  [0.0, -1., 0.0, 0.0, 0.1, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "11": [0.0, 0.0, 0.0, 0.0, -1., 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "12": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "13": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "14": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+        "15": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0,  0.0,  0.0,  0.0]
+
+    weights:
+        sensor_weights_object_existence: # for simple weighted-sum existence fusion
+            default: 1.0
+            "1": 0.5 # RADAR
+            "2": 1.5 # CAMERA
+            "3": 1.5 # RADAR
+
+
+    initial_global_variances:  # initial variances used in newly created global objects for state variables that are not yet measured.
+        velocity:
+            default: 100
+            "1": 400     # CAR, see object_definitions.h for type ids
+            "3": 80      # BIKE
+            "4": 9       # PEDESTRIAN
+
+        acceleration:
+            default: 100
+            "1": 25      # CAR
+            "3": 15      # BIKE
+            "4": 100     # PEDESTRIAN
+
+        other_state_variables:
+            default: 400
+        
+        heading_angle:
+            default: 1e6

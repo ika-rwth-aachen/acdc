@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>object_fusion_wrapper</name>
+    <version>0.1.0</version>
+    <description>
+        ROS-wrapper for usage of the object_fusion package as a ROS node.
+    </description>
+
+    <maintainer email="michael.hoss@ika.rwth-aachen.de">Michael Hoss</maintainer>
+    <license>TODO</license>
+
+    <depend>message_generation</depend>
+    <depend>definitions</depend>
+    <depend>roscpp</depend>
+    <depend>object_fusion</depend>
+
+    <exec_depend>message_runtime</exec_depend>
+
+    <buildtool_depend>catkin</buildtool_depend>
+</package>

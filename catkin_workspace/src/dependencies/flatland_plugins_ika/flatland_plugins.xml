@@ -1,0 +1,15 @@
+<library path="lib/libflatland_ika_plugins_lib">
+  <class type="flatland_ika_plugins::LaserScanner" base_class_type="flatland_server::ModelPlugin">
+    <description>Ika flatland laser scanner plugin</description>
+  </class>
+  <class type="flatland_ika_plugins::TrajectoryDrive" base_class_type="flatland_server::ModelPlugin">
+    <description>Ika flatland trajectory drive plugin</description>
+  </class>
+  <class type="flatland_ika_plugins::SimulatedDrive" base_class_type="flatland_server::ModelPlugin">
+    <description>Ika flatland vw passat drive plugin</description>
+  </class>
+  <class type="flatland_ika_plugins::SingleTrackDrive" base_class_type="flatland_server::ModelPlugin">
+    <description>Ika flatland single track vehicle plugin</description>
+  </class>
+
+</library>

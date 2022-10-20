@@ -1,0 +1,32 @@
+<launch>
+  <!-- Set arguments to make quick change of settings possible -->
+  <arg name="world_path"   default="$(find racing)/resources/racing_world.yaml"/>
+  <arg name="update_rate" default="200.0"/>
+  <arg name="step_size" default="0.005"/>
+  <arg name="pub_debug_viz" default="true"/>
+  <arg name="viz_pub_rate" default="30.0"/>
+  <arg name="show_viz" default="true"/>
+
+  <env name="ROSCONSOLE_FORMAT" value="[${severity} ${time} ${logger}]: ${message}" />
+
+  <!-- Set ros to use the simulation time so that the time can be set by flatland-->
+  <param name="use_sim_time" value="true"/>  
+
+  <!-- launch flatland server -->
+  <node name="flatland_server" pkg="flatland_server" type="flatland_server" output="screen">  
+    <!-- Use the arguments passed into the launchfile for this node -->
+    <param name="world_path" value="$(arg world_path)" />
+    <param name="update_rate" value="$(arg update_rate)" />
+    <param name="step_size" value="$(arg step_size)" />
+    <param name="show_viz" value="$(arg pub_debug_viz)" />
+    <param name="viz_pub_rate" value="$(arg viz_pub_rate)" />
+  </node>
+
+  <!-- Launch rviz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racing)/rviz/racing.rviz" />
+
+  <!-- Generate relation between vehicle and map -->
+  <param name="robot_description" command="cat $(find racing)/urdf/racing_cart.urdf"/>
+  <node name="vehicle_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+</launch>

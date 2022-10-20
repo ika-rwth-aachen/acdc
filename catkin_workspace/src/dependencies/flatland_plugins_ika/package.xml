@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>flatland_ika_plugins</name>
+  <version>0.1.0</version>
+  <description>Plugin for the flatland server to support the single track model.</description>
+  <license>Copyright (c) 2020, Institute for Automotive Engineering (ika), RWTH University</license>
+
+  <maintainer email="simon.schaefer@ika.rwth-aachen.de">Simon Schaefer</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>flatland_server</depend>
+  <depend>flatland_plugins</depend>
+  <depend>pluginlib</depend>
+  <depend>roscpp</depend>
+  <depend>yaml-cpp</depend>
+  <depend>cmake_modules</depend>
+  <depend>tf</depend>
+  <depend>rospy</depend>
+  <depend>rostest</depend>
+  <depend>std_msgs</depend>
+  <depend>flatland_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>definitions</depend>
+  <depend>angles</depend>
+
+  <export>
+    <flatland_server plugin="${prefix}/flatland_plugins.xml" />
+  </export>
+</package>

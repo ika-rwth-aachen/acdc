@@ -1,0 +1,17 @@
+# model_path:  # set in launch file
+measure_execution_time: true
+input_topics:
+  - pointcloud
+grid_map:
+  cell_size: 0.32      # in m; size of grid cells
+pointcloud:
+  x_min: -40.96
+  x_max: 40.96
+  y_min: -28.16
+  y_max: 28.16
+  z_min: -3.0
+  z_max: 1.0
+  min_distance: 3.0  # in m; min distance of points in pointcloud to be processed
+  step_x_size: 0.16
+  step_y_size: 0.16
+  intensity_threshold: 100.0  # maximum value used for scaling the point intensity

@@ -1,0 +1,31 @@
+<launch>
+
+    <arg name="params" value="static_params.yaml"/>
+    <arg name="slikaf" value="../model/lidar_detection.yml"/>
+
+    <arg name="input_topic" default="/points2"/>
+    <arg name="model_name" default="model"/>
+    <arg name="model_checkpoint" default="lidar_detection"/>
+    
+    <node 
+        name="lidar_manager"
+        pkg="nodelet" 
+        type="nodelet" 
+        args="manager" 
+        output="screen"/>
+
+   <node
+        name="lidar_detection"
+        pkg="nodelet"
+        type="nodelet"
+        args="load lidar_detection/LidarDetection lidar_manager"
+        output="screen" >
+
+        <param name="input_topic" value="$(arg input_topic)"/>
+        <param name="model_name" value="$(arg model_name)"/>
+        <param name="model_checkpoint" value="$(arg model_checkpoint)"/>
+
+        <rosparam command="load" file="$(dirname)/$(arg params)" ns="static_params"/>
+        <rosparam command="load" file="$(dirname)/$(arg slikaf)" ns="slikaf"/>
+    </node>
+</launch>

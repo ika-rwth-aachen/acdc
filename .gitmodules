@@ -1,0 +1,12 @@
+[submodule "catkin_workspace/src/dependencies/kindr"]
+	path = catkin_workspace/src/dependencies/kindr
+	url = https://github.com/ANYbotics/kindr.git
+[submodule "catkin_workspace/src/dependencies/control-toolbox"]
+	path = catkin_workspace/src/dependencies/control-toolbox
+	url = https://github.com/ethz-adrl/control-toolbox.git
+[submodule "catkin_workspace/src/dependencies/flatland"]
+	path = catkin_workspace/src/dependencies/flatland
+	url = https://github.com/avidbots/flatland.git
+[submodule "catkin_workspace/src/dependencies/tensorflow_cpp"]
+	path = catkin_workspace/src/dependencies/tensorflow_cpp
+	url = https://github.com/ika-rwth-aachen/tensorflow_cpp

@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- default -->
+    <node name="spat_generator_node" pkg="v2x_spat_generator" type="v2x_spat_generator_node" output="screen">
+        <rosparam command="load" file="$(find v2x_spat_generator)/launch/custom_spat_message.yaml" />
+        <param name="config/frequency" value="10.0" type="double" />
+        <param name="config/topic_out" value="/TopicSPATs" type="string" />
+        <param name="config/time_to_green" value="35.0" type="double" />
+        <param name="config/time_to_red" value="20.0" type="double" />
+    </node>
+
+</launch>

@@ -1,0 +1,10 @@
+string movementName
+bool movementName_present
+uint8 signalGroup
+v2x_SPAT_MovementEvent[] state_time_speed#enumerated
+v2x_SPAT_ConnectionManeuverAssist[] maneuverAssistList
+bool maneuverAssistList_present
+
+#unused
+#RegionalMovementState_regional
+#bool RegionalMovementState_regional_present

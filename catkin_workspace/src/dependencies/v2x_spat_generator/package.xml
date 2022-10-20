@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>v2x_spat_generator</name>
+  <version>0.1.0</version>
+  <description>The v2x_spat_generator package publishes a sample SPaT message with 2 signal groups</description>
+
+  <maintainer email="jean-pierre.busch@ika.rwth-aachen.de">Jean-Pierre Busch</maintainer>
+  <author email="jean-pierre.busch@ika.rwth-aachen.de">Jean-Pierre Busch</author>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>definitions</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>definitions</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>definitions</exec_depend>
+
+</package>

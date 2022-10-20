@@ -1,0 +1,16 @@
+<launch>
+
+  <arg name="nodelet_manager" value="GeometricISM_Manager" />
+  <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager)" args="manager" output="screen" />
+
+  <arg name="model_path" default="$(dirname)/../models/2021-10-03_Town_Passat_reflDep2" />
+  
+  <node pkg="nodelet" type="nodelet" name="DeepISM" args="load pointcloud_ogm/DeepISM $(arg nodelet_manager)" output="screen">
+    <rosparam command="load" file="$(dirname)/deep_ism_params.yml" />
+    <param name="model_path" value="$(arg model_path)"/>
+    <remap to="/points2" from="input"/>
+  </node>
+
+  <node pkg="rviz" type="rviz" name="Rviz" args="-d $(dirname)/config.rviz" output="screen" />
+
+</launch>

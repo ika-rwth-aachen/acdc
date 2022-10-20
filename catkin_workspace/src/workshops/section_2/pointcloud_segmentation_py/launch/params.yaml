@@ -1,0 +1,15 @@
+pointcloud_segmentation:
+    model_path: models/miou59_squeezeseg
+    palette_file: convert_xml/class_id_to_rgb.xml
+    do_visualizations: True
+        # class labels output of Keras SavedModel:
+        # Road (0), Sidewalk (1), Building (2), Pole (3), Vegetation (4), Person (5),
+        # Two-Wheeler (6), Car (7), Truck (8), Bus (9), None (10)
+        # None class should be the last class and will be excluded from the output
+    num_classes: 11
+    num_rings: 32
+    num_azimuth: 240
+    left_azimuth: 24.32
+    right_azimuth: 22.23
+    normalization_mean: [24.810, 0.819, 0.000, 16.303, 25.436]
+    normalization_std: [30.335, 7.807, 2.058, 25.208, 30.897]

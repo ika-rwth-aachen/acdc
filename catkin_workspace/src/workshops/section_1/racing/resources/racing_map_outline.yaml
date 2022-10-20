@@ -1,0 +1,6 @@
+image: Outline.png
+resolution: 0.0161
+origin: [-16.5, -20.6, 0.0]
+negate: 0
+occupied_thresh: 0.5
+free_thresh: 0.0

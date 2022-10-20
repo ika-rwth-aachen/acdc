@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="racing_cart">	
+    <link name="map">
+        <visual>		
+            <origin xyz="0 0 -1"/>
+            <geometry>
+                <mesh filename="package://racing/resources/Map.dae" scale="33 33 1"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>	

@@ -1,0 +1,8 @@
+<launch>
+
+  <node pkg="etsi_message_generation" type="cam_generator" name="cam_generator" output="screen">
+    <param name="CAM_Topic_Name" value="/TopicCAM" />
+  </node>
+
+</launch>
+

@@ -1,0 +1,57 @@
+# ===== APPLICATION ============================================================
+
+# custom learning rate schedule
+init_learning_rate: 1e-3
+min_learning_rate: 1e-5
+min_learning_rate_epoch: 100
+
+# pointcloud inputs
+intensity_threshold: 10000
+
+# factor to add distance-proportional noise to pointcloud
+# noise_std_factor:
+
+# object list labels
+label_class_names: [Unclassified, Pedestrian, Bicycle, Motorbike, Car, Truck, Van, Bus, Animal, Road_Obstacle]
+
+# grid
+x_min: -40.96
+x_max:  40.96
+y_min: -28.16
+y_max:  28.16
+z_min:   -3
+z_max:   1
+delta_x: 0.16
+delta_y: 0.16
+
+# network
+max_points_per_pillar: 100
+max_pillars: 10000
+n_features: 9
+n_channels: 64
+downscaling: 2
+
+# label tensor
+pos_iou_thresh: 0.40
+neg_iou_thresh: 0.25
+angle_thresh: 0.87
+
+# loss
+alpha: 0.25
+gamma: 4.0
+focal_weight: 1000.0
+loc_weight: 2.0
+size_weight: 2.0
+angle_weight: 0.5
+heading_weight: 0.2
+class_weight: 0.2
+
+# anchors
+anchors: [3.9, 1.6, 1.56, -1.0, 0.0,  3.9, 1.6, 1.56, -1.0, 1.5708, 0.8, 0.6, 1.73, -0.6, 0.0, 0.8, 0.6, 1.73, -0.6, 1.5708]
+class_names: [Car, Pedestrian, Bicycle, Truck]
+
+# postprocessing
+#score_thresh: [0.1, 0.1, 0.1] # for evaluation
+score_thresh: [0.35, 0.3, 0.25, 0.25] # for inference
+nms_max_objects: 50
+nms_iou_thresh: 0.25

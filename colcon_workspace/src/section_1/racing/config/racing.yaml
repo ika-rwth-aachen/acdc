@@ -1,0 +1,10 @@
+vehicle_controller_node:
+    ros__parameters:
+        vehicle:
+            sensor_topic: "/vehicle/lidar_measurements"
+            actuator_topic: "/vehicle/actuator_commands"
+
+vehicle_timer_node:
+    ros__parameters:
+        vehicle:
+            position_topic: "/odometry/ground_truth"

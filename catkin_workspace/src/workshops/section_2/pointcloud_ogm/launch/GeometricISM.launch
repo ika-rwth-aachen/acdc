@@ -1,0 +1,24 @@
+<launch>
+
+  <arg name="nodelet_manager" value="GeometricISM_Manager" />
+  <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager)" args="manager" output="screen" />
+
+  <node pkg="nodelet" type="nodelet" name="GroundExtraction" args="load pcl/PassThrough $(arg nodelet_manager)" output="screen">
+    <remap from="~input" to="/points2" />
+    <remap from="~output" to="/points2_obstacles" />
+    <rosparam>
+      filter_limit_negative: False
+      filter_field_name: x
+      filter_limit_min: -50
+      filter_limit_max: 50
+    </rosparam>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="GeometricISM" args="load pointcloud_ogm/GeometricISM $(arg nodelet_manager)" output="screen">
+    <remap to="/points2_obstacles" from="input"/>
+  </node>
+
+  <node pkg="rviz" type="rviz" name="Rviz" args="-d $(dirname)/config.rviz" output="screen" />
+  
+</launch>
+

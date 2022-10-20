@@ -1,0 +1,10 @@
+<library path="lib/liblidar_detection">
+
+    <class name="lidar_detection/LidarDetection"
+           type="lidar_detection::LidarDetection"
+           base_class_type="nodelet::Nodelet">
+        <description>
+            Nodelet for running object detection on point cloud signals.
+        </description>
+    </class>
+</library>

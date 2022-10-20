@@ -1,0 +1,12 @@
+<launch>
+
+    <param name="/use_sim_time" value="true" />
+
+    <!-- Fusion node. -->
+    <node name="object_fusion_wrapper" pkg="object_fusion_wrapper" type="object_fusion_wrapper_node" output="screen">
+        <rosparam command="load" file="$(find object_fusion_wrapper)/param/config_inout.yaml" />
+        <rosparam command="load" file="$(find object_fusion_wrapper)/param/fusion.yaml" />
+        <rosparam command="load" file="$(find object_fusion_wrapper)/param/kalman_filter.yaml" />
+    </node>
+
+</launch>

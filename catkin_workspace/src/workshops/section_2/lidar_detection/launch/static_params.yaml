@@ -1,0 +1,14 @@
+# general
+inference_frame: vlp16_link                           # this is the frame for inference
+output_frame: vlp16_link                               # this is the frame for output object lists
+
+publish_pcl: false                                    # point_cloud publisher in inference_frame
+
+# object dimension filters
+max_width:  5
+max_length: 5
+max_height: 5
+
+# variances
+# x, y, z, vel_abs, acc_abs, yaw_angle, yaw_rate, width, length, height
+variance: [0.2, 0.2, 0.1, -1.01, -1.01, -1.01, -1.01, 0.3, 0.3, 0.3]

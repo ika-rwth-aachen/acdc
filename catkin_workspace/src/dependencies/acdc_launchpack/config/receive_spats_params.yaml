@@ -1,0 +1,17 @@
+mqtt:
+  client:
+    protocol: 4      # MQTTv311
+  connection:
+    host: 134.130.20.42
+    port: 1883
+    keepalive: 60
+  private_path: device/001
+  account:
+    username: acdc
+    password: connectedDriving#2022!
+bridge:
+  #SPATS
+  - factory: mqtt_bridge.bridge:MqttToRosBridge
+    msg_type: definitions.msg:v2x_SPAT
+    topic_from: SPATEMs
+    topic_to: /TopicSPATs

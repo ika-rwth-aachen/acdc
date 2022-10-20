@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>object_fusion</name>
+  <version>0.0.0</version>
+  <description>
+    Source code in C++ of the core object fusion functionality. Does not contain a ROS node.
+  </description>
+
+  <maintainer email="michael.hoss@ika.rwth-aachen.de">Michael Hoss</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>definitions</depend>
+  <depend>eigen</depend>
+
+  <export>
+
+  </export>
+</package>

@@ -1,0 +1,2 @@
+\n<library path="lib/libGeometricISM">\n <class name="pointcloud_ogm/GeometricISM" type="pointcloud_ogm::GeometricISM" base_class_type="nodelet::Nodelet">\n <description>\nSample Nodelet\n </description>\n </class>\n</library>
+\n<library path="lib/libDeepISM">\n <class name="pointcloud_ogm/DeepISM" type="pointcloud_ogm::DeepISM" base_class_type="nodelet::Nodelet">\n <description>\nSample Nodelet\n </description>\n </class>\n</library>

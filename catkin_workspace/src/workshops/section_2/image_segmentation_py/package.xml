@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>image_segmentation_py</name>
+  <version>0.1.0</version>
+  <description>This package performs semantic image segmentation on camera images.</description>
+
+  <maintainer email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</maintainer>
+
+  <author email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</author>
+
+
+  <license>MIT</license>
+  
+  <exec_depend>python-tensorflow-pip</exec_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+</package>

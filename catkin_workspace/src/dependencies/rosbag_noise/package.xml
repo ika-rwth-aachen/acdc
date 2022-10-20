@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rosbag_noise</name>
+  <version>1.0.0</version>
+  <description>Script to modify bag files offline in python</description>
+
+  <maintainer email="nico.neumann@ika.rwth-achen.de">Nico Neumann</maintainer>
+
+  <license>Copyright (c) 2020, Institute for Automotive Engineering (ika), RWTH University</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>rosbag</depend>
+  <depend>rospy</depend>
+  <depend>definitions</depend>
+ 
+  <export>
+  </export>
+</package>

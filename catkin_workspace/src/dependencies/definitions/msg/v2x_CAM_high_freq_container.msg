@@ -1,0 +1,52 @@
+# HighFrequencyContainer
+uint8 containerType
+# BasicVehicleContainerHighFrequency
+    # Heading
+        float64 heading_headingValue
+        uint8 heading_headingConfidence
+    # Speed
+        float64 speed_speedValue
+        uint8 speed_speedConfidence
+    uint8 driveDirection
+    # VehicleLength
+        float64 vehicleLength_vehicleLengthValue
+        uint8 vehicleLength_vehicleLengthConfidenceIndication
+    float64 vehicleWidth
+    # LongitudinalAcceleration
+        int16 longitudinalAcceleration_longitudinalAccelerationValue
+        uint8 longitudinalAcceleration_longitudinalAccelerationConfidence
+    # Curvature
+        int16 curvature_curvatureValue
+        uint8 curvature_curvatureConfidence
+    uint8 curvatureCalculationMode
+    # YawRate
+        int16 yawRate_yawRateValue
+        uint8 yawRate_yawRateConfidence
+    bool accelerationControlPresent
+    ASN_bitstring accelerationControl # Optional, Bitstring Size 7
+    bool lanePositionPresent
+    int8 lanePosition
+    # SteeringWheelAngle
+    bool steeringWheelAnglePresent
+        int16 steeringWheelAngle_steeringWheelAngleValue
+        uint8 steeringWheelAngle_steeringWheelAngleConfidence
+    # LateralAcceleration
+    bool lateralAccelerationPresent
+        int16 lateralAcceleration_lateralAccelerationValue
+        uint8 lateralAcceleration_lateralAccelerationConfidence
+    # VerticalAcceleration
+    bool verticalAccelerationPresent
+        int16    verticalAcceleration_verticalAccelerationValue
+        uint8 verticalAcceleration_verticallAccelerationConfidence
+    bool performanceClassPresent
+    uint8 performanceClass
+    # CenDsrcTollingZone
+    bool cenDsrcTollingZonePresent
+        int32 cenDsrcTollingZone_cenDsrcTollingZoneLatitude
+        int32 cenDsrcTollingZone_cenDsrcTollingZoneLongitude
+        bool cenDsrcTollingZone_cenDsrcTollingZoneIDPresent
+        uint32 cenDsrcTollingZone_cenDsrcTollingZoneID
+# RSUContainerHighFrequency
+    #ProtectedCommunicationZonesRSU
+    bool rsuContainerHighFrequency_protectedCommunicationZonesRSUPresent
+        v2x_CAM_protectedCommunicationZone[] rsuContainerHighFrequency_protectedCommunicationZonesRSU

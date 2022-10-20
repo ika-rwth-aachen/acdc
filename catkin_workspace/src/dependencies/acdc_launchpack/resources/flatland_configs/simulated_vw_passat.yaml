@@ -1,0 +1,168 @@
+bodies:
+  - name: vehicle_body
+    color: [1, 0.25, 0.25, 1]
+    footprints:
+      - type: polygon
+        density: 120.0
+        friction: 0.0
+        layers: ["3d_floor"]
+        points: [
+        [3.1, -0.9275],
+        [3.711, -0.4275],
+        [3.711, 0.4275],
+        [3.1, 0.9275],
+        [-0.7, 0.9275],
+        [-1.0, 0.4275],
+        [-1.0, -0.4275],
+        [-0.7, -0.9275]
+        ]
+  - name: front_left_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["3d_floor"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: front_right_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["3d_floor"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: rear_left_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["3d_floor"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: rear_right_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["3d_floor"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+joints:
+  - type: revolute
+    name: front_right_wheel_joint
+    limits: [-30, 30]
+    bodies:
+      - name: front_right_wheel_body
+        anchor: [0, 0]
+      - name: vehicle_body
+        anchor: [2.711, 0.85]
+
+  - type: revolute
+    name: front_left_wheel_joint
+    limits: [-30, 30]
+    bodies:
+      - name: front_left_wheel_body
+        anchor: [0, 0]
+      - name: vehicle_body
+        anchor: [2.711, -0.85]
+
+  - type: weld
+    name: rear_right_wheel_joint
+    bodies:
+      - name: rear_left_wheel_body
+        anchor: [0, 0]
+      - name: vehicle_body
+        anchor: [0.0, 0.85]
+
+  - type: weld
+    name: rear_left_wheel_joint
+    bodies:
+      - name: rear_right_wheel_body
+        anchor: [0, 0]
+      - name: vehicle_body
+        anchor: [0.0, -0.85]
+
+plugins:
+  - type: ModelTfPublisher
+    name: tf_publisher
+    publish_tf_world: true
+    world_frame_id: map
+    reference: vehicle_body
+
+  - type: flatland_ika_plugins::SimulatedDrive
+    name: simulated_cart_drive
+    # Joints ad bodies
+    vehicle_body: vehicle_body
+    front_left_tire_body: front_left_wheel_body
+    front_right_tire_body: front_right_wheel_body
+    rear_left_tire_body: rear_left_wheel_body
+    rear_right_tire_body: rear_right_wheel_body
+    front_left_tire_joint: front_left_wheel_joint
+    front_right_tire_joint: front_right_wheel_joint
+    rear_left_tire_joint: rear_left_wheel_joint
+    rear_right_tire_joint: rear_right_wheel_joint
+    # Publisher and subscriber
+    update_rate: 25.0
+    odom_frame_id: map
+    state_frame_id: vehicle_body
+    target_twist_subscribe_topic: vehicle/actuator_commands
+    current_twist_publish_topic: vehicle/wheel_sensor
+    # Steering limitations
+    max_steering_angle_rate: 1.57
+    max_steering_angle: 0.5
+    # Longitudinal limitations
+    max_forward_velocity: 9
+    max_backward_velocity: 5
+    max_front_acceleration: 6.0
+    max_front_deceleration: 8.0
+    max_rear_acceleration: 6.0
+    max_rear_deceleration: 8.0
+    # Lateral limitations (skidding)
+    max_rear_lateral_impulse: 350.0
+    max_front_lateral_impulse: 750.0
+
+  - type: Laser
+    name: laser_front
+    frame: laser_front
+    topic: vehicle/lidar_measurements
+    body: vehicle_body
+    broadcast_tf: true
+    origin: [3.4, 0, 0]
+    range: 100
+
+    angle: {min: -1.45, max: 1.45, increment: 1.45}
+    noise_std_dev: 0.0
+    update_rate: 12.5
+
+  - type: flatland_ika_plugins::LaserScanner
+    name: laser_front_ref
+    frame: laser_front_ref
+    world_frame_id: map
+    laser_scan_topic: vehicle/ref_lidar_measurements
+    marker_topic: vehicle/lane_markings
+    body: vehicle_body
+    origin: [0, 0, 0]
+    range: 80
+    angle: {min: -1.57, max: 1.57, increment: 3.14}
+    noise_std_dev: 0.0
+    update_rate: 12.5
+    left_border: "teststrecke_links_polyline_lanelet.dat"
+    right_border: "teststrecke_rechts_polyline_lanelet.dat"
+    lane_marking_distance: 80

@@ -1,0 +1,4 @@
+type: line_segments
+data: teststrecke_rechts_polyline_lanelet.dat
+scale: 0.1
+origin: [0, 0, 0]

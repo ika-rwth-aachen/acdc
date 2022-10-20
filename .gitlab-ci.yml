@@ -1,0 +1,63 @@
+image: docker:19.03.12-git
+services:
+  - name: docker:19.03.12-dind
+    command: ["--experimental"]
+
+variables:
+  DOCKER_DRIVER: overlay
+  DOCKER_TLS_CERTDIR: "/certs"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+services:
+  - name: docker:19.03.5-dind
+
+stages:
+  - Build Buildx
+  - Build Docker Images
+  - Build ROS Workspace
+  - Lint ROS Workspace
+
+# https://stackoverflow.com/questions/58600986/gitlab-ci-trying-to-use-docker-buildx-to-build-for-arm64
+Build Buildx: 
+  stage: Build Buildx
+  variables:
+    GIT_STRATEGY: none
+  artifacts:
+    paths:
+      - buildx
+    expire_in: 1 hour
+  script:
+    - export DOCKER_BUILDKIT=1
+    - git clone https://github.com/docker/buildx.git ./docker-buildx
+    - docker build --platform=local -o . ./docker-buildx
+
+Docker Build (amd64 and arm64):
+        stage: Build Docker Images
+        script:
+                - mkdir -p ~/.docker/cli-plugins
+                - mv buildx ~/.docker/cli-plugins/docker-buildx
+                - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+                - docker info
+                - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+                - docker context create mycontext 
+                - docker buildx create --use mycontext
+                - docker buildx build --pull --push --cache-from $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:latest --platform linux/amd64,linux/arm64 docker/.
+
+
+ROS Build Workspace:
+        stage: Build ROS Workspace
+        image: $CI_REGISTRY_IMAGE:latest
+        before_script:
+            # source ROS
+            - source /opt/ros/noetic/setup.bash
+            - cd catkin_workspace
+        script:
+        # build workspace
+            - catkin build --summarize --no-notify --no-status --force-color
+
+ROS Lint:
+        stage: Lint ROS Workspace
+        image: $CI_REGISTRY_IMAGE:latest
+        allow_failure: true
+        script:
+                - catkin_lint catkin_workspace/src -W2 --ignore exported_pkg_config --color always

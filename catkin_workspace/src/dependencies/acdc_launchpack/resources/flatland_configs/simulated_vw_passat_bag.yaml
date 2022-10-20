@@ -1,0 +1,120 @@
+bodies:
+  - name: base_link
+    color: [1, 0.25, 0.25, 1]
+    footprints:
+      - type: polygon
+        density: 120.0
+        friction: 0.0
+        layers: ["recording"]
+        points: [
+        [3.1, -0.9275],
+        [3.711, -0.4275],
+        [3.711, 0.4275],
+        [3.1, 0.9275],
+        [-0.7, 0.9275],
+        [-1.0, 0.4275],
+        [-1.0, -0.4275],
+        [-0.7, -0.9275]
+        ]
+  - name: recording_front_left_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["recording"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: recording_front_right_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["recording"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: recording_rear_left_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["recording"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+  - name: recording_rear_right_wheel_body
+    color: [1, 0.25, 0.25, 0.75]
+    footprints:
+      - type: polygon
+        density: 1600.0
+        friction: 1.0
+        layers: ["recording"]
+        points: [[ 0.32, -0.118],
+                 [ 0.32,  0.118],
+                 [-0.32, 0.118],
+                 [-0.32, -0.118]]
+
+joints:
+  - type: revolute
+    name: recording_front_right_wheel_joint
+    limits: [-30, 30]
+    bodies:
+      - name: recording_front_right_wheel_body
+        anchor: [0, 0]
+      - name: base_link
+        anchor: [2.711, 0.85]
+
+  - type: revolute
+    name: recording_front_left_wheel_joint
+    limits: [-30, 30]
+    bodies:
+      - name: recording_front_left_wheel_body
+        anchor: [0, 0]
+      - name: base_link
+        anchor: [2.711, -0.85]
+
+  - type: weld
+    name: recording_rear_right_wheel_joint
+    bodies:
+      - name: recording_rear_left_wheel_body
+        anchor: [0, 0]
+      - name: base_link
+        anchor: [0.0, 0.85]
+
+  - type: weld
+    name: recording_rear_left_wheel_joint
+    bodies:
+      - name: recording_rear_right_wheel_body
+        anchor: [0, 0]
+      - name: base_link
+        anchor: [0.0, -0.85]
+
+plugins:
+  - type: ModelTfPublisher
+    name: recording_tf_publisher
+    publish_tf_world: true
+
+  - type: flatland_ika_plugins::TrajectoryDrive
+    name: recording_simulated_cart_drive
+    vehicle_body: base_link
+    front_left_tire_body: recording_front_left_wheel_body
+    front_right_tire_body: recording_front_right_wheel_body
+    rear_left_tire_body: recording_rear_left_wheel_body
+    rear_right_tire_body: recording_rear_right_wheel_body
+    front_left_tire_joint: recording_front_left_wheel_joint
+    front_right_tire_joint: recording_front_right_wheel_joint
+    rear_left_tire_joint: recording_rear_left_wheel_joint
+    rear_right_tire_joint: recording_rear_right_wheel_joint
+    odom_frame_id: map
+    target_gps_topic: ikaGPS
+    target_ego_motion_topic: sensors/vehicleCAN/ikaEgoMotion

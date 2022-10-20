@@ -1,0 +1,53 @@
+<launch>
+    <!-- Rosbag -->
+    <param name="use_sim_time" value="true"/>
+    <node 
+        pkg="rosbag"
+        type="play"
+        args="--clock -l -r 0.1 -d 1 /home/rosuser/ws/bag/lidar_campus_melaten.bag"
+        name="player"
+        output="screen">
+    </node>
+
+    <!-- RViz -->
+    <node
+        type="rviz"
+        name="rviz"
+        pkg="rviz"
+        args="-d $(find lidar_detection)/rviz/point_cloud.rviz">
+    </node>    
+
+    <!-- Static transformer -->
+    <node pkg="tf" type="static_transform_publisher" name="link_to_output" args="0 0 0 0 0 0 base_link lidar_detection 100" />
+    <node pkg="tf" type="static_transform_publisher" name="link_from_intput" args="0 0 0 0 0 0 lidar_detection vlp16_link 100" />
+
+    <arg name="params" value="static_params.yaml"/>
+    <arg name="slikaf" value="../model/lidar_detection.yml"/>
+
+    <arg name="input_topic" default="/points2"/>
+    <arg name="model_name" default="model"/>
+    <arg name="model_checkpoint" default="lidar_detection"/>
+
+    <node 
+        name="lidar_manager"
+        pkg="nodelet" 
+        type="nodelet" 
+        args="manager" 
+        output="screen"/>
+
+    <!-- Lidar Detection -->
+    <node
+        name="lidar_detection"
+        pkg="nodelet"
+        type="nodelet"
+        args="load lidar_detection/LidarDetection lidar_manager"
+        output="screen" >
+
+        <param name="input_topic" value="$(arg input_topic)"/>
+        <param name="model_name" value="$(arg model_name)"/>
+        <param name="model_checkpoint" value="$(arg model_checkpoint)"/>
+
+        <rosparam command="load" file="$(dirname)/$(arg params)" ns="static_params"/>
+        <rosparam command="load" file="$(dirname)/$(arg slikaf)" ns="slikaf"/>
+    </node>
+</launch>

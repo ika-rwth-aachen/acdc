@@ -1,0 +1,72 @@
+name: Build Main
+
+on: [push, pull_request]
+  
+jobs:
+
+  build_images:
+    runs-on: [self-hosted, linux]
+
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
+          with:
+            token: ${{ secrets.ACCESS_TOKEN }}
+            submodules: recursive
+        
+        - name: Logout from any Docker Repository
+          run: docker logout
+        
+        - name: Login to Docker Hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v1
+        
+        - name: Build and push
+          uses: docker/build-push-action@v3
+          with:
+            context: docker/.
+            file: docker/Dockerfile
+            builder: ${{ steps.buildx.outputs.name }}
+            # build on feature branches, push only on main branch
+            push: ${{ github.ref == 'refs/heads/main' }}
+            tags: rwthika/acdc:latest
+            cache-from: type=registry,ref=rwthika/acdc:buildcache
+            cache-to: type=registry,ref=rwthika/acdc:buildcache,mode=max
+            platforms: linux/amd64,linux/arm64
+
+
+  build_workspace:
+    needs: build_images
+    runs-on: [self-hosted, linux]
+    container: 
+      image: rwthika/acdc:latest
+
+    
+    steps:
+      - name: Build Workspace
+        shell: bash
+        run: |
+             source /opt/ros/noetic/setup.bash
+             cd catkin_workspace
+             catkin build --summarize --no-notify --no-status --force-color
+
+
+  clean_workspace:
+    needs: build_workspace
+    runs-on: [self-hosted, linux]
+    if: always()
+    container: 
+      image: rwthika/acdc:latest
+    
+    steps:
+      - name: Clean Workspace
+        shell: bash
+        run: |
+             cd catkin_workspace
+             catkin clean --yes --all
+             rm -r .catkin_tools

@@ -1,0 +1,47 @@
+<launch>
+
+    <param name ="/use_sim_time" value="true"/>
+    
+    <!-- ROSBAG PLAY -->
+    <node pkg="rosbag" 
+          type="play"
+          name="player"
+          output="screen"
+          args="--rate 0.1 -l --clock /home/rosuser/ws/bag/semantic_8_cams.bag">
+    </node>
+
+    <!--- Semantic Grid Mapping Node -->
+    <rosparam
+      command="load"
+      file="$(find camera_based_semantic_grid_mapping)/launch/params.yaml"
+    />
+
+    <node
+        name="camera_based_semantic_grid_mapping"
+        pkg="camera_based_semantic_grid_mapping"
+        type="semantic_grid_mapping.py"
+        output="screen">
+    </node>
+
+    <!--- NODES FOR VISUALIZATION -->
+    <node pkg="image_view"
+          type="image_view"
+          name="front_left_segmented_image"
+          args="image:=/carla/ego_vehicle/semantic_segmentation_front_left_1/image">
+    </node>
+    <!--- NODES FOR VISUALIZATION -->
+    <node pkg="image_view"
+          type="image_view"
+          name="front_right_segmented_image"
+          args="image:=/carla/ego_vehicle/semantic_segmentation_front_right_1/image">
+    </node>
+    
+    <node pkg="image_view"
+          type="image_view"
+          name="segmentation_viewer"
+          args="image:=/BEV_image">
+    </node>
+   
+
+
+</launch>

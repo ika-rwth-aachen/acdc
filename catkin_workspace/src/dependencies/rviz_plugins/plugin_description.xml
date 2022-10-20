@@ -1,0 +1,28 @@
+<library path="lib/librviz_plugins_object_list">
+  <class name="rviz_plugin/IkaObjectList"
+         type="rviz_plugin::IkaObjectListDisplay"
+         base_class_type="rviz::Display">
+    <description>
+      Will display a IkaObjectList in RViz.
+    </description>
+    <message_type>definitions/IkaObjectList</message_type>
+  </class>
+  <class name="rviz_plugin/IkaObjectListOverlay"
+         type="rviz_plugin::IkaObjectListOverlay"
+         base_class_type="rviz::Display">
+    <description>
+      Will display a IkaObjectList meta data in RViz.
+    </description>
+    <message_type>definitions/IkaObjectList</message_type>
+  </class>
+</library>
+<library path="lib/librviz_plugins_detection_list">
+<class name="rviz_plugin/IkaDetectionList"
+       type="rviz_plugin::IkaDetectionListDisplay"
+       base_class_type="rviz::Display">
+  <description>
+    Will display a IkaDetectionList in RViz.
+  </description>
+  <message_type>definitions/IkaDetectionList</message_type>
+</class>
+</library>

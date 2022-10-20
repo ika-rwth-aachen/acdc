@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>definitions</name>
+  <version>0.1.0</version>
+  <description>
+    The definitions package contains all ros specific messages by all ika packages.
+  </description>
+  <license>Copyright (c) 2020, Institute for Automotive Engineering (ika), RWTH University</license>
+
+  <author email="simon.schaefer@ika.rwth-aachen.de">Simon Schäfer</author>
+  <maintainer email="simon.schaefer@ika.rwth-aachen.de">Simon Schäfer</maintainer>
+
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2</depend>
+  <depend>eigen</depend>
+  <depend>visualization_msgs</depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

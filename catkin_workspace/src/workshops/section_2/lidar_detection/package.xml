@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>lidar_detection</name>
+  <version>0.2.0</version>
+  <description>This package runs point cloud object detection with different output formats</description>
+
+  <maintainer email="christian.geller@ika.rwth-aachen.de">Christian Geller</maintainer>
+
+  <author email="christian.geller@ika.rwth-aachen.de">Christian Geller</author>
+  <author email="fabian.thomsen@ika.rwth-aachen.de">Fabian Thomsen</author>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>nodelet</depend>
+  <depend>roscpp</depend>
+  <depend>roslib</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_sensor_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>pcl_conversions</depend>
+  <depend>libpcl-all</depend>
+  <depend>tensorflow_cpp</depend>
+  <depend>eigen</depend>
+  <depend>boost</depend>
+
+  <!-- own message definitions -->
+  <depend>definitions</depend>
+  <depend>rviz_plugins</depend>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelet_plugins.xml" />
+  </export>
+
+</package>

@@ -1,0 +1,8 @@
+<launch>
+  <!-- Launch rviz with the playback configuration -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find acdc_launchpack)/rviz/cloud_processing.rviz" />
+
+  <!-- Start publisher for tf2 and parts of rviz visualisation-->
+  <param name="robot_description" command="cat $(find acdc_launchpack)/urdf/cloud_processing.urdf"/>
+
+</launch>

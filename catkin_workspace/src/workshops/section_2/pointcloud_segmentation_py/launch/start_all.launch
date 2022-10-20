@@ -1,0 +1,26 @@
+<launch>
+    <param name ="/use_sim_time" value="true"/>
+
+    <!-- PLAY ROSBAG-->
+    <node 
+        pkg="rosbag"
+        type="play"
+        args="--clock -l -r 0.75 /home/rosuser/ws/bag/lidar_campus_melaten.bag"
+        name="player">
+    </node>
+
+    <!--- PCL SEGMENTATION NODE Parameters -->
+    <rosparam
+      command="load"
+      file="$(find pointcloud_segmentation_py)/launch/params.yaml">
+    </rosparam>
+
+    <!-- PCL SEGMENTATION NODE -->
+    <node
+        name="pointcloud_segmentation"
+        pkg="pointcloud_segmentation_py"
+        type="pointcloud_segmentation.py"
+        output="screen">
+    </node>
+
+</launch>

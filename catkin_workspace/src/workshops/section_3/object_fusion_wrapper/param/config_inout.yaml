@@ -1,0 +1,13 @@
+input_topics:
+    object_lists: [
+        /sensors/camera_front/ikaObjectList,
+        /sensors/radar_front/ikaObjectList
+    ]
+
+    ego_motion: /sensors/vehicleCAN/ikaEgoMotion
+
+output_topics:
+    object_list_fused:
+        publish: true
+        topic: /sensors/fusion/ikaObjectList
+        frame_id: base_link

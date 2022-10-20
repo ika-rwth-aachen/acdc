@@ -1,0 +1,37 @@
+<launch>
+  <!-- Set arguments for the flatland simulation server -->
+  <!-- Define main flatland configuration file -->
+  <arg name="world_path"   default="$(find acdc_launchpack)/resources/flatland_configs/world_bag.yaml"/>
+  <!-- To stay in realtime make sure that update_rate and step_size always result in 1s/1s -->
+  <arg name="update_rate" default="100.0"/>
+  <arg name="step_size" default="0.01"/>
+  <!-- If true all objects are publishing a wire frame to visualize there position -->
+  <arg name="pub_debug_viz" default="true"/>
+  <!-- Update rate for all visualization elements; Should be in sync with rviz update rate -->
+  <arg name="viz_pub_rate" default="25.0"/>
+  <!-- If true additional visualization elements are published; Like the interactive markers -->
+  <arg name="show_viz" default="true"/>
+  <!--  If true flatland will publish its internal clock; Should only be used if simulation is required -->
+  <arg name="pub_clock" default="false"/>
+
+  <!-- Set ros to use the simulation time so that the time can be set by flatland or the bag file -->
+  <param name="use_sim_time" value="true"/>  
+
+  <!-- Launch flatland simulation -->
+  <node name="flatland_server" pkg="flatland_server" type="flatland_server" output="screen">  
+    <param name="world_path" value="$(arg world_path)" />
+    <param name="update_rate" value="$(arg update_rate)" />
+    <param name="step_size" value="$(arg step_size)" />
+    <param name="show_viz" value="$(arg pub_debug_viz)" />
+    <param name="viz_pub_rate" value="$(arg viz_pub_rate)" />
+    <param name="pub_clock" value="$(arg pub_clock)" />
+  </node>
+
+  <!-- Launch rviz with the playback configuration -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find acdc_launchpack)/rviz/bag_playback.rviz" />
+
+  <!-- Start publisher for tf2 and parts of rviz visualisation-->
+  <param name="robot_description" command="cat $(find acdc_launchpack)/urdf/bag_playback.urdf"/>
+  <node name="vehicle_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+</launch>

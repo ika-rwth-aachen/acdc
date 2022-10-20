@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>pointcloud_segmentation_py</name>
+  <version>0.0.1</version>
+  <description>This package performs semantic point cloud segmentation.</description>
+
+  <maintainer email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</maintainer>
+
+  <author email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</author>
+
+  <license>MIT</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- catkin package dependencies -->
+  <depend>cv_bridge</depend>
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <!-- Python dependencies -->
+  <depend>python-tensorflow-gpu-pip</depend>
+  <depend>python3-numpy</depend>
+  <depend>python3-opencv</depend>
+
+</package>

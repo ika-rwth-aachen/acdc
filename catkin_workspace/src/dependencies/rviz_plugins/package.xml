@@ -1,0 +1,27 @@
+<package format="2">
+  <name>rviz_plugins</name>
+  <version>0.10.3</version>
+  <description>
+     Tutorials showing how to write plugins for RViz.
+  </description>
+  <maintainer email="william@osrfoundation.org">William Woodall</maintainer>
+  <license>BSD</license>
+
+  <url>http://ros.org/wiki/rviz_plugin_tutorials</url>
+  <author>Dave Hershberger</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>qtbase5-dev</build_depend>
+  <depend>rviz</depend>
+  <depend>definitions</depend>
+
+  <exec_depend>libqt5-core</exec_depend>
+  <exec_depend>libqt5-gui</exec_depend>
+  <exec_depend>libqt5-widgets</exec_depend>
+
+  <export>
+      <rosdoc config="${prefix}/rosdoc.yaml"/>
+      <rviz plugin="${prefix}/plugin_description.xml"/>
+  </export>
+</package>

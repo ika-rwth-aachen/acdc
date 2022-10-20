@@ -1,0 +1,840 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Radar1
+        - /Radar1/SRR1
+        - /Radar1/SRR1/SRR_front_right_01
+        - /BoundingBoxes1/Car1
+        - /PointCloud21/Status1
+        - /FusedDetectionList1
+      Splitter Ratio: 0.424196005
+    Tree Height: 1281
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.588679016
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: PointCloud2
+  - Class: rviz_plugin_tutorials/Teleop
+    Name: Teleop
+    Topic: ""
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Cell Size: 1
+          Class: rviz/Grid
+          Color: 137; 137; 141
+          Enabled: false
+          Line Style:
+            Line Width: 0.0299999993
+            Value: Lines
+          Name: Grid
+          Normal Cell Count: 0
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Plane: XY
+          Plane Cell Count: 100
+          Reference Frame: base_link
+          Value: false
+        - Class: rviz/Axes
+          Enabled: true
+          Length: 1
+          Name: Axes
+          Radius: 0.100000001
+          Reference Frame: base_link
+          Value: true
+      Enabled: true
+      Name: Native RVIZ
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: false
+          Filter Source ID: true
+          Geometric Color: 18; 204; 5
+          Internal ID: 2
+          Name: ESR_rear_2
+          Source ID: 2
+          Topic: /sensors/delphi_esr/rear/ikaDetectionList
+          Unreliable: false
+          Value: false
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: false
+          Filter Source ID: true
+          Geometric Color: 18; 204; 5
+          Internal ID: 1
+          Name: ESR_rear_1
+          Source ID: 2
+          Topic: /sensors/delphi_esr/rear/ikaDetectionList
+          Unreliable: false
+          Value: false
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: false
+          Filter Source ID: true
+          Geometric Color: 18; 204; 5
+          Internal ID: 2
+          Name: ESR_front_2
+          Source ID: 1
+          Topic: /sensors/delphi_esr/front/ikaDetectionList
+          Unreliable: false
+          Value: false
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: false
+          Filter Source ID: true
+          Geometric Color: 18; 204; 5
+          Internal ID: 1
+          Name: ESR_front_1
+          Source ID: 1
+          Topic: /sensors/delphi_esr/front/ikaDetectionList
+          Unreliable: false
+          Value: false
+          Z axes shift.: 0
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 204; 137; 190
+              Internal ID: 0
+              Name: SRR_front_right_0
+              Source ID: 3
+              Topic: /sensors/delphi_srr/front_right/ikaDetectionList
+              Unreliable: false
+              Value: false
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 204; 137; 190
+              Internal ID: 1
+              Name: SRR_front_right_1
+              Source ID: 3
+              Topic: /sensors/delphi_srr/front_right/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 255; 25; 113
+              Internal ID: 0
+              Name: SRR_front_left_0
+              Source ID: 4
+              Topic: /sensors/delphi_srr/front_left/ikaDetectionList
+              Unreliable: false
+              Value: false
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 25; 113
+              Internal ID: 1
+              Name: SRR_front_left_1
+              Source ID: 4
+              Topic: /sensors/delphi_srr/front_left/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 156; 32; 204
+              Internal ID: 0
+              Name: SRR_rear_right_0
+              Source ID: 5
+              Topic: /sensors/delphi_srr/rear_right/ikaDetectionList
+              Unreliable: false
+              Value: false
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 156; 32; 204
+              Internal ID: 1
+              Name: SRR_rear_right_1
+              Source ID: 5
+              Topic: /sensors/delphi_srr/rear_right/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 255; 69; 193
+              Internal ID: 0
+              Name: SRR_rear_left_0
+              Source ID: 6
+              Topic: /sensors/delphi_srr/rear_left/ikaDetectionList
+              Unreliable: false
+              Value: false
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 69; 193
+              Internal ID: 1
+              Name: SRR_rear_left_1
+              Source ID: 6
+              Topic: /sensors/delphi_srr/rear_left/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+          Enabled: true
+          Name: SRR
+      Enabled: false
+      Name: Radar
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz/RobotModel
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            Link Tree Style: Links in Alphabetic Order
+          Name: VW Passat
+          Robot Description: robot_description
+          TF Prefix: ""
+          Update Interval: 0
+          Value: true
+          Visual Enabled: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.300000012
+          Head Length: 0.200000003
+          Length: 0.300000012
+          Line Style: Lines
+          Line Width: 0.0299999993
+          Name: Path
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.0299999993
+          Shaft Diameter: 0.100000001
+          Shaft Length: 0.100000001
+          Topic: /Path_odometry
+          Unreliable: false
+          Value: true
+      Enabled: false
+      Name: Ego Vehicle
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Road
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_0
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 138; 138; 138
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Sidewalk
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_1
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 35; 35; 35
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Building
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_2
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 170; 0; 162
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Pole
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_3
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 85; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Vegetation
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_4
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 243; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Sky
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_5
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 0; 4
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Person
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_6
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 0.600000024
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 2; 153; 170
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 219
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Rider
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.100000001
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_7
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 251; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Car
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_8
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 110; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Truck
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_9
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 46; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Bus
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_10
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 238; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 66
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: None
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /pointcloud_segmentation_2/points_class_11
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: false
+      Name: PointClouds
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz_plugin/IkaObjectList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 204; 51; 204
+          Name: Ped
+          Show Text: true
+          Source ID: -1
+          Text Color: 204; 51; 204
+          Topic: /pointcloud_segmentation_2/bboxes_pedestrian
+          Unreliable: false
+          Value: true
+          Z axes shift for text.: 0
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaObjectList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 204; 51; 204
+          Name: Truck
+          Show Text: true
+          Source ID: -1
+          Text Color: 204; 51; 204
+          Topic: /pointcloud_segmentation_2/bboxes_truck
+          Unreliable: false
+          Value: true
+          Z axes shift for text.: 0
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaObjectList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 112; 0; 204
+          Name: Car
+          Show Text: true
+          Source ID: -1
+          Text Color: 119; 0; 204
+          Topic: /pointcloud_segmentation_2/bboxes_car
+          Unreliable: false
+          Value: true
+          Z axes shift for text.: 0
+          Z axes shift.: 0
+      Enabled: false
+      Name: BoundingBoxes
+    - Class: rviz_plugin/IkaObjectList
+      Enabled: true
+      Filter Source ID: false
+      Geometric Color: 204; 0; 0
+      Name: FusedObjects
+      Show Text: true
+      Source ID: -1
+      Text Color: 204; 0; 0
+      Topic: /fusion/ikaObjectList
+      Unreliable: false
+      Value: true
+      Z axes shift for text.: 0
+      Z axes shift.: 0
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 212
+      Min Color: 173; 221; 221
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.0799999982
+      Style: Flat Squares
+      Topic: /points2
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /sensors/camera/right/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: MantaRight
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /sensors/camera/left/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: MantaLeft
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz_plugin/IkaDetectionList
+      Enabled: true
+      Filter Source ID: false
+      Geometric Color: 0; 204; 170
+      Internal ID: -1
+      Name: FusedDetectionList
+      Source ID: -1
+      Topic: /radar_detection/fused_list
+      Unreliable: false
+      Value: true
+      Z axes shift.: 0
+    - Class: rviz_plugin/IkaObjectList
+      Enabled: false
+      Filter Source ID: false
+      Geometric Color: 204; 51; 204
+      Name: LidarDetection
+      Show Text: true
+      Source ID: -1
+      Text Color: 204; 51; 204
+      Topic: /lidar_detection/object_list
+      Unreliable: false
+      Value: false
+      Z axes shift for text.: 0
+      Z axes shift.: 0
+    - Class: rviz_plugin/IkaDetectionList
+      Enabled: false
+      Filter Source ID: false
+      Geometric Color: 126; 126; 126
+      Internal ID: -1
+      Name: IkaDetectionList
+      Source ID: -1
+      Topic: /radar_detection/fused_list_old
+      Unreliable: false
+      Value: false
+      Z axes shift.: 0
+    - Class: rviz_plugin/IkaObjectList
+      Enabled: true
+      Filter Source ID: false
+      Geometric Color: 204; 51; 204
+      Name: IkaObjectList
+      Show Text: true
+      Source ID: -1
+      Text Color: 204; 51; 204
+      Topic: /radar_detection/object_list
+      Unreliable: false
+      Value: true
+      Z axes shift for text.: 0
+      Z axes shift.: 0
+  Enabled: true
+  Global Options:
+    Background Color: 70; 70; 70
+    Default Light: true
+    Fixed Frame: base_link
+    Frame Rate: 20
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Angle: -7.91999292
+      Class: rviz/TopDownOrtho
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.0599999987
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.00999999978
+      Scale: 10.235981
+      Target Frame: base_link
+      Value: TopDownOrtho (rviz)
+      X: 5.2824049
+      Y: 1.72475755
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1416
+  Hide Left Dock: false
+  Hide Right Dock: false
+  MantaLeft:
+    collapsed: false
+  MantaRight:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000020b00000542fc020000000afb00000012004d0061006e00740061004c00650066007400000000280000015c0000001600fffffffc0000002800000542000000d700fffffffa000000010100000002fb00000008004c0065006600740000000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000000002db0000016a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000002cf00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00540065006c0065006f00700000000306000000b70000007300fffffffb0000000a0049006d0061006700650000000217000001120000000000000000000000010000010f00000542fc0200000004fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb00000014004d0061006e007400610052006900670068007400000000280000015b0000001600fffffffb0000000a00560069006500770073010000002800000249000000ad00fffffffb0000001200530065006c0065006300740069006f006e0100000277000002f30000006100ffffff000000020000073f000000e2fc010000000bfb0000001200530065006c0065006300740069006f006e0100000000000001780000000000000000fb00000014004d0061006e007400610020004c0065006600740100000000000004020000000000000000fb00000016004d0061006e007400610020005200690067006800740100000408000003370000000000000000fb0000002e004d0061006e007400610020004c0065006600740020005300650067006d0065006e0074006100740069006f006e000000056e000001d10000000000000000fb00000040004d0061006e007400610020004c0065006600740020004d006f006e006f00200044006500700074006800200045007300740069006d006100740069006f006e00000004bd000002820000000000000000fb0000000a00560069006500770073030000004e00000080000002e100000197fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000001200430061006d005f005200690067006800740100000000000003bb0000000000000000fb0000001000430061006d005f004c00650066007401000003c10000037e000000000000000000000003000005a00000003efc0100000002fb0000000800540069006d00650000000000000005a00000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000006990000054200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Teleop:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 2495
+  X: 65
+  Y: 24

@@ -1,0 +1,68 @@
+<launch>
+
+    <!-- Set arguments to make quick change of settings possible -->
+  <arg name="world_path"   default="$(find acdc_launchpack)/resources/flatland_configs/world.yaml"/>
+  <arg name="update_rate" default="200.0"/>
+  <arg name="step_size" default="0.005"/>
+  <arg name="pub_debug_viz" default="true"/>
+  <arg name="viz_pub_rate" default="30.0"/>
+  <arg name="show_viz" default="true"/>
+  <arg name="pub_clock" default="true"/>
+
+  <!-- Set ros to use the simulation time so that the time can be set by flatland-->
+  <param name="use_sim_time" value="true"/>  
+
+  <!-- launch flatland server launch-prefix="gdb -args"-->
+  <node name="flatland_server" pkg="flatland_server" type="flatland_server" output="screen">
+    <!-- Use the arguments passed into the launchfile for this node -->
+    <param name="world_path" value="$(arg world_path)" />
+    <param name="update_rate" value="$(arg update_rate)" />
+    <param name="step_size" value="$(arg step_size)" />
+    <param name="show_viz" value="$(arg pub_debug_viz)" />
+    <param name="viz_pub_rate" value="$(arg viz_pub_rate)" />
+    <param name="pub_clock" value="$(arg pub_clock)" />
+  </node>
+
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find acdc_launchpack)/rviz/simulation.rviz" />
+
+
+  <!-- Generate relation between vehicle and map -->
+  <param name="robot_description" command="cat $(find acdc_launchpack)/urdf/flatland_simulation.urdf"/>
+  <node name="vehicle_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Transformation of Objects -->
+  <include file="$(find acdc_launchpack)/launch/transformation.launch">
+    <arg name="source_topic" default="sensors/fusion/ikaObjectList"/>
+    <arg name="target_topic" default="vehicle/ikaObjectList"/>
+    <arg name="source_frame_id" default="base_link"/>
+    <arg name="target_topic_id" default="vehicle_body"/>
+    <arg name="node_name" default="transformer_fusion"/>
+  </include>
+  <include file="$(find acdc_launchpack)/launch/transformation.launch">
+    <arg name="source_topic" default="sensors/radar_front/ikaObjectList"/>
+    <arg name="target_topic" default="vehicle/radar_front/ikaObjectList"/>
+    <arg name="source_frame_id" default="base_link"/>
+    <arg name="target_topic_id" default="vehicle_body"/>
+    <arg name="node_name" default="transformer_radar"/>
+  </include>
+  <include file="$(find acdc_launchpack)/launch/transformation.launch">
+    <arg name="source_topic" default="sensors/camera_front/ikaObjectList"/>
+    <arg name="target_topic" default="vehicle/camera_front/ikaObjectList"/>
+    <arg name="source_frame_id" default="base_link"/>
+    <arg name="target_topic_id" default="vehicle_body"/>
+    <arg name="node_name" default="transformer_camera"/>
+  </include>
+
+  <!-- Trajectory Planner -->
+  <node name="trajectory_planner_clean" pkg="trajectory_planner" type="trajectory_planner_clean.sh" output="screen"></node>
+  <node name="trajectory_planner" pkg="trajectory_planner" type="trajectory_planner" output="screen">
+  </node>
+
+   <!-- Trajectory Controller -->
+  <node name="trajectory_ctrl_node" pkg="trajectory_ctrl" type="trajectory_control_node" output="screen"/>
+
+  <!-- Object Fusion -->
+  <include file="$(find object_fusion_wrapper)/launch/fusion.launch">
+  </include>
+
+</launch>

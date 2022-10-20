@@ -1,0 +1,3 @@
+uint32 stationID
+uint8 priorState#enumerated
+uint8 signalGroup

@@ -1,0 +1,9 @@
+<launch>
+  <!-- Rviz visualization-->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/rosuser/ws/catkin_workspace/src/workshops/section_1/carla/carla_ad_demo.rviz" required="true" output="screen">
+    <remap from="carla/ego_vehicle/spectator_pose" to="/carla/ego_vehicle/rgb_view/control/set_transform"/>
+  </node>
+    
+  <!-- ROS bag play-->
+  <node pkg="rosbag" type="play" args="--clock -l /home/rosuser/ws/bag/carla.bag" name="player" output="screen" />
+</launch>

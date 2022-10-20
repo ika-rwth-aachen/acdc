@@ -1,0 +1,19 @@
+<launch>
+    <!-- Rosbag -->
+    <param name="use_sim_time" value="true"/>
+    <node 
+        pkg="rosbag"
+        type="play"
+        args="--clock -l -r 0.5 -d 1 /home/rosuser/ws/bag/lidar_campus_melaten.bag"
+        name="player"
+        output="screen">
+    </node>
+
+    <!-- RViz -->
+    <node
+        type="rviz"
+        name="rviz"
+        pkg="rviz"
+        args="-d $(find lidar_detection)/rviz/point_cloud.rviz">
+    </node>    
+</launch>

@@ -1,0 +1,16 @@
+properties: {} # For later use
+layers:  # Support for arbitrary number of layers
+  - name: "2d_left_border"  # layer 0 named "2d"
+    map: "left_border.yaml"  # leading / denotes absolute file path, otherwise relative
+    color: [0.3, 0.7, 1, 1]  # List of floats [r,g,b,a] to color debug boundary
+  - name: "2d_right_border"  # layer 0 named "2d"
+    map: "right_border.yaml"  # leading / denotes absolute file path, otherwise relative
+    color: [0.3, 0.7, 1, 1]  # List of floats [r,g,b,a] to color debug boundary
+  - name: "3d_floor"  # layer 0 named "2d"
+  - name: "recording"  # layer 0 named "2d"
+
+models:
+  - name: racing_cart
+    pose: [-11, -17, 1.57]
+    model: "simulated_vw_passat_bag.yaml"
+

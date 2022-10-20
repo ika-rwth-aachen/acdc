@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>etsi_visualization</name>
+  <version>0.1.0</version>
+  <description>This package is responsible for the visualization of several ETSI Messages in RVIZ.</description>
+
+  <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
+  <author email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</author>
+  <author email="jean-pierre.busch@ika.rwth-aachen.de">Jean-Pierre Busch</author>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>tf2_ros</depend>
+  <depend>roslaunch</depend>
+  <depend>definitions</depend>
+  <depend>visualization_msgs</depend>
+  <exec_depend>message_runtime</exec_depend>
+
+</package>

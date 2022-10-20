@@ -1,0 +1,9 @@
+<launch>
+  <arg name="load_params" default="true" /> <!-- flag if parameter file is used -->
+  <arg name="params_file" default="$(find acdc_launchpack)/config/send_cam_params.yaml" /> <!-- path to default parameter file, which will be used -->
+
+  <node pkg="nodelet" type="nodelet" name="mqtt_client_cam_sender" args="standalone mqtt_client/MqttClient" output="screen"> <!-- starts the nodelet -->
+    <rosparam command="delete" param="" if="$(arg load_params)" />
+    <rosparam command="load" file="$(arg params_file)" if="$(arg load_params)" /> <!-- loads the parameter file -->
+  </node>
+</launch>

@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="etsi_visualization" type="ETSIViz" name="ETSIViz" output="screen">
+    <param name="SPAT_Topic_Name" value="/SPATEM" /> <!-- fill in here your choosen topic name -->
+    <param name="MAP_Topic_Name" value="/MAPEM" /> <!-- fill in here your choosen topic name -->
+    <param name="CAM_Topic_Name" value="/CAM" />
+  </node>
+
+</launch>

@@ -1,0 +1,7 @@
+<launch>
+  <arg name="use_tls" default="false" />
+  <node name="mqtt_bridge_spats" pkg="mqtt_bridge" type="mqtt_bridge_node.py" output="screen">
+    <rosparam command="load" file="$(find acdc_launchpack)/config/receive_spats_params.yaml" />
+    <rosparam if="$(arg use_tls)" command="load" ns="mqtt" file="$(find mqtt_bridge)/config/tls_params.yaml" />
+  </node>
+</launch>

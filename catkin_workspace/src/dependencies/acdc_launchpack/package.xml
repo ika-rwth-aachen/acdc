@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>acdc_launchpack</name>
+  <version>0.1.0</version>
+  <description>Launch-Pack for ACDC Workshops. Containing URDF and Launch-Files. Moreover holding the transformation node.</description>
+
+  <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
+
+  <license>Copyright (c) 2020, Institute for Automotive Engineering (ika), RWTH University</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>definitions</depend>
+
+</package>

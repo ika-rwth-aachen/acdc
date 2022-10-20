@@ -1,0 +1,1062 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Object Lists1
+        - /Object Lists1/Object Lists Filtered1
+        - /Object Lists1/Object Lists Fused1
+        - /Ego Vehicle1
+        - /Ego Vehicle1/VW Passat1/Status1
+      Splitter Ratio: 0.580375791
+    Tree Height: 729
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.588679016
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: Ibeo Scala PointCloud2
+  - Class: rviz_plugin_tutorials/Teleop
+    Name: Teleop
+    Topic: ""
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Cell Size: 1
+          Class: rviz/Grid
+          Color: 137; 137; 141
+          Enabled: false
+          Line Style:
+            Line Width: 0.0299999993
+            Value: Lines
+          Name: Grid
+          Normal Cell Count: 0
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Plane: XY
+          Plane Cell Count: 100
+          Reference Frame: base_link
+          Value: false
+        - Class: rviz/Axes
+          Enabled: true
+          Length: 1
+          Name: Axes
+          Radius: 0.100000001
+          Reference Frame: base_link
+          Value: true
+      Enabled: true
+      Name: Native RVIZ
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: false
+              Geometric Color: 204; 51; 204
+              Name: VLP32 Pedestrians
+              Show Text: true
+              Source ID: -1
+              Text Color: 204; 51; 204
+              Topic: /sensors/vlp/center/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 0
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 204; 137; 190
+              Name: Delphi Srr Front
+              Show Text: false
+              Source ID: 5
+              Text Color: 227; 227; 227
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 0
+              Z axes shift.: 0.0199999996
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 255; 69; 193
+              Name: Delphi Srr Rear
+              Show Text: false
+              Source ID: 7
+              Text Color: 227; 227; 227
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0.0299999993
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 255; 25; 113
+              Name: Delphi Srr Left
+              Show Text: false
+              Source ID: 8
+              Text Color: 227; 227; 227
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0.0399999991
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: true
+              Geometric Color: 156; 32; 204
+              Name: Delphi Srr Right
+              Show Text: false
+              Source ID: 9
+              Text Color: 227; 227; 227
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0.0500000007
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: true
+              Filter Source ID: false
+              Geometric Color: 23; 174; 228
+              Name: Ibeo Scala
+              Show Text: true
+              Source ID: -1
+              Text Color: 23; 174; 228
+              Topic: /sensors/ibeo_scala/ikaObjectList
+              Unreliable: false
+              Value: true
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: false
+              Geometric Color: 0; 255; 0
+              Name: RTRange Target
+              Show Text: true
+              Source ID: -1
+              Text Color: 0; 255; 0
+              Topic: /sensors/RT_Range/targetObjectList_Can
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: true
+              Filter Source ID: false
+              Geometric Color: 255; 0; 0
+              Name: EPM3
+              Show Text: true
+              Source ID: -1
+              Text Color: 255; 0; 0
+              Topic: /sensors/epm3/ikaObjectList_Can
+              Unreliable: false
+              Value: true
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: false
+              Geometric Color: 170; 85; 0
+              Name: Delphi Esr Front
+              Show Text: false
+              Source ID: -1
+              Text Color: 170; 85; 0
+              Topic: /sensors/delphi_esr/front/ikaObjectList_Can
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: false
+              Geometric Color: 170; 85; 0
+              Name: Delphi Esr Rear
+              Show Text: false
+              Source ID: -1
+              Text Color: 170; 85; 0
+              Topic: /sensors/delphi_esr/rear/ikaObjectList_Can
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+          Enabled: true
+          Name: Object Lists Filtered
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: true
+              Filter Source ID: false
+              Geometric Color: 255; 255; 0
+              Name: VLP32 Segementation Pedestrian Bounding Boxes
+              Show Text: true
+              Source ID: -1
+              Text Color: 255; 255; 0
+              Topic: /ika_pointcloud_segmentation/bounding_boxes_class_1
+              Unreliable: false
+              Value: true
+              Z axes shift for text.: 0
+              Z axes shift.: 0
+          Enabled: false
+          Name: Object Lists Unfiltered
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: true
+              Filter Source ID: false
+              Geometric Color: 255; 255; 255
+              Name: ika_sensor_fusion
+              Show Text: true
+              Source ID: 0
+              Text Color: 255; 255; 255
+              Topic: /fusion/ikaObjectList
+              Unreliable: false
+              Value: true
+              Z axes shift for text.: 2
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaObjectList
+              Enabled: false
+              Filter Source ID: false
+              Geometric Color: 255; 255; 0
+              Name: RTK Associations
+              Show Text: true
+              Source ID: -1
+              Text Color: 255; 255; 0
+              Topic: /fusion/rt_associations/ikaObjectList
+              Unreliable: false
+              Value: false
+              Z axes shift for text.: 0
+              Z axes shift.: 0
+          Enabled: true
+          Name: Object Lists Fused
+        - Class: rviz/Group
+          Displays:
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 170; 85; 0
+              Name: Delphi Esr Front
+              Source ID: 7
+              Topic: /sensors/delphi_esr/front/ikaObjectList_Can
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 0
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 170; 85; 0
+              Name: Delphi Esr Rear
+              Source ID: 7
+              Topic: /sensors/delphi_esr/rear/ikaObjectList_Can
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 40
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 255; 0; 0
+              Name: EPM3
+              Source ID: 5
+              Topic: /sensors/epm3/ikaObjectList_Can
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 80
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: true
+              Foreground Alpha: 0.800000012
+              Foreground Color: 204; 137; 190
+              Name: Delphi Srr Front
+              Source ID: 5
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 120
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: true
+              Foreground Alpha: 0.800000012
+              Foreground Color: 204; 55; 152
+              Name: Delphi Srr Rear
+              Source ID: 7
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 160
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: true
+              Foreground Alpha: 0.800000012
+              Foreground Color: 204; 20; 90
+              Name: Delphi Srr Left
+              Source ID: 8
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 200
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: true
+              Foreground Alpha: 0.800000012
+              Foreground Color: 156; 32; 204
+              Name: Delphi Srr Right
+              Source ID: 9
+              Topic: /sensors/delphi_srr/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 240
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 23; 174; 228
+              Name: Ibeo Scala
+              Source ID: 11
+              Topic: /sensors/ibeo_scala/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 280
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 0; 255; 0
+              Name: RTRange Target
+              Source ID: 11
+              Topic: /sensors/RT_Range/targetObjectList_Can
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 320
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 255; 255; 255
+              Name: Fused Objects
+              Source ID: 7
+              Topic: /fusion/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 360
+              width: 200
+            - Background Alpha: 0.800000012
+              Background Color: 39; 39; 39
+              Class: rviz_plugin/IkaObjectListOverlay
+              Enabled: true
+              Filter Source ID: false
+              Foreground Alpha: 0.800000012
+              Foreground Color: 255; 255; 0
+              Name: RTK Associations
+              Source ID: 7
+              Topic: /fusion/rt_associations/ikaObjectList
+              Unreliable: false
+              Value: true
+              Visibility property.: true
+              font: DejaVu Sans Mono
+              height: 35
+              left: 0
+              line width: 2
+              text size: 12
+              top: 400
+              width: 200
+          Enabled: true
+          Name: Object List Overlays
+      Enabled: true
+      Name: Object Lists
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz_plugin/IkaObjectList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 255; 255; 0
+          Name: VLP32 Segementation Pedestrian Bounding Boxes
+          Show Text: true
+          Source ID: -1
+          Text Color: 255; 255; 0
+          Topic: /lidar_object_detection/bounding_boxes_class_1
+          Unreliable: false
+          Value: true
+          Z axes shift for text.: 0
+          Z axes shift.: 0
+      Enabled: true
+      Name: Object Lists Unfiltered
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /sensors/camera/left/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Manta Left
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /sensors/camera/right/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Manta Right
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /camera_segmentation/segmented_image
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Manta Left Segmentation
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /mono_depth_estimation/depth_image
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Manta Left Mono Depth Estimation
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: false
+      Enabled: true
+      Name: Camera images
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 255
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Velodyne VLP32 PointCloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /vlp_32c/velodyne_points
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 170; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Velodyne VLP32 Ground
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /Ground
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 170; 0; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Velodyne VLP32 Obstacles
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.0500000007
+          Style: Flat Squares
+          Topic: /Obstacles
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: ring
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 23; 174; 228
+          Max Intensity: 3
+          Min Color: 23; 174; 228
+          Min Intensity: 1
+          Name: Ibeo Scala PointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.0500000007
+          Style: Points
+          Topic: /sensors/ibeo_scala/PointCloud2
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: false
+          Value: true
+      Enabled: true
+      Name: Lidar point clouds
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 18; 204; 5
+          Internal ID: -1
+          Name: ESR_rear
+          Source ID: 0
+          Topic: /sensors/delphi_esr/rear/ikaDetectionList
+          Unreliable: false
+          Value: true
+          Z axes shift.: 0
+        - Class: rviz_plugin/IkaDetectionList
+          Enabled: true
+          Filter Source ID: false
+          Geometric Color: 18; 204; 5
+          Internal ID: -1
+          Name: ESR_front
+          Source ID: 0
+          Topic: /sensors/delphi_esr/front/ikaDetectionList
+          Unreliable: false
+          Value: true
+          Z axes shift.: 0
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 204; 137; 190
+              Internal ID: 0
+              Name: SRR_front_right_0
+              Source ID: 3
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 204; 137; 190
+              Internal ID: 1
+              Name: SRR_front_right_1
+              Source ID: 3
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 25; 113
+              Internal ID: 0
+              Name: SRR_front_left_0
+              Source ID: 4
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 25; 113
+              Internal ID: 1
+              Name: SRR_front_left_1
+              Source ID: 4
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 156; 32; 204
+              Internal ID: 0
+              Name: SRR_rear_right_0
+              Source ID: 5
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 156; 32; 204
+              Internal ID: 1
+              Name: SRR_rear_right_1
+              Source ID: 5
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 69; 193
+              Internal ID: 0
+              Name: SRR_rear_left_0
+              Source ID: 6
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+            - Class: rviz_plugin/IkaDetectionList
+              Enabled: true
+              Filter Source ID: true
+              Geometric Color: 255; 69; 193
+              Internal ID: 1
+              Name: SRR_rear_left_1
+              Source ID: 6
+              Topic: /sensors/delphi_srr/ikaDetectionList
+              Unreliable: false
+              Value: true
+              Z axes shift.: 0
+          Enabled: true
+          Name: SRR
+      Enabled: false
+      Name: Radar
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz/RobotModel
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            Link Tree Style: Links in Alphabetic Order
+            base_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            camera_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            car_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            epm3_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            esr_front_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            esr_rear_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            front_left_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            front_right_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            gps_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            ibeo_lux_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            ibeo_scalab2_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            ibeo_scalab3_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            imu_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            left_optical:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            rear_left_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            rear_right_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            right_optical:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            srr_front_left_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            srr_front_right_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            srr_rear_left_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            srr_rear_right_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            vlp16_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+          Name: VW Passat
+          Robot Description: robot_description
+          TF Prefix: ""
+          Update Interval: 0
+          Value: true
+          Visual Enabled: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.300000012
+          Head Length: 0.200000003
+          Length: 0.300000012
+          Line Style: Lines
+          Line Width: 0.0299999993
+          Name: Path
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.0299999993
+          Shaft Diameter: 0.100000001
+          Shaft Length: 0.100000001
+          Topic: /Path_odometry
+          Unreliable: false
+          Value: true
+      Enabled: true
+      Name: Ego Vehicle
+    - Class: rviz/Group
+      Displays:
+        - Class: lanelet_rviz_plugin_ros::LaneletMapPlugin
+          Enabled: false
+          Name: LaneletMapPlugin
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /staticCenterlineShortestRoute
+          Name: staticCenterlineShortestRoute
+          Namespaces:
+            test: true
+          Queue Size: 100
+          Value: true
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /staticLeftBoundShortestRoute
+          Name: staticLeftBoundShortestRoute
+          Namespaces:
+            test: true
+          Queue Size: 100
+          Value: true
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /staticLeftCriticalBoundShortestRoute
+          Name: staticLeftCriticalBoundShortestRoute
+          Namespaces:
+            test: true
+          Queue Size: 100
+          Value: true
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /staticRightBoundShortestRoute
+          Name: staticRightBoundShortestRoute
+          Namespaces:
+            test: true
+          Queue Size: 100
+          Value: true
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /staticRightCriticalBoundShortestRoute
+          Name: staticRightCriticalBoundShortestRoute
+          Namespaces:
+            test: true
+          Queue Size: 100
+          Value: true
+      Enabled: true
+      Name: Lanelet Group
+    - Alpha: 0.699999988
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: false
+      Name: Map
+      Topic: /OccupancyGridMap
+      Unreliable: false
+      Use Timestamp: false
+      Value: false
+    - Alpha: 0.200000003
+      Blocks: 4
+      Class: rviz_plugins/AerialMapDisplay
+      Draw Behind: false
+      Enabled: true
+      Frame Convention: XYZ -> ENU
+      Name: AerialMapDisplay
+      Object URI: https://www.wmts.nrw.de/geobasis/wmts_nw_dop/tiles/nw_dop/EPSG_25832_16/{z}/{x}/{y}
+      Topic: /gps/fix
+      Value: true
+      Zoom: 16
+  Enabled: true
+  Global Options:
+    Background Color: 70; 70; 70
+    Default Light: true
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Angle: 0
+      Class: rviz/TopDownOrtho
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.0599999987
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.00999999978
+      Scale: 6.81472015
+      Target Frame: base_link
+      Value: TopDownOrtho (rviz)
+      X: 0
+      Y: 0
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1056
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Manta Left:
+    collapsed: false
+  Manta Left Mono Depth Estimation:
+    collapsed: false
+  Manta Left Segmentation:
+    collapsed: false
+  Manta Right:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000021f0000031afc0200000008fb000000100044006900730070006c00610079007301000000e80000031a000000d700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000002cf00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00540065006c0065006f00700000000306000000b70000004900ffffff00000001000001430000031afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007301000000e80000015a000000ad00fffffffb0000001200530065006c0065006300740069006f006e0100000248000001ba0000006100ffffff000000020000073f000000e2fc010000000bfb0000001200530065006c0065006300740069006f006e0100000000000001780000000000000000fb00000014004d0061006e007400610020004c00650066007401000000000000038e0000007d00fffffffb00000016004d0061006e007400610020005200690067006800740100000394000003ab0000008600fffffffb0000002e004d0061006e007400610020004c0065006600740020005300650067006d0065006e0074006100740069006f006e000000056e000001d1000000e100fffffffb00000040004d0061006e007400610020004c0065006600740020004d006f006e006f00200044006500700074006800200045007300740069006d006100740069006f006e00000004bd000002820000012200fffffffb0000000a00560069006500770073030000004e00000080000002e100000197fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000001200430061006d005f005200690067006800740100000000000003bb0000000000000000fb0000001000430061006d005f004c00650066007401000003c10000037e000000000000000000000003000005a00000003efc0100000002fb0000000800540069006d00650000000000000005a00000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000003d10000031a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Teleop:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 1855
+  X: 65
+  Y: 24

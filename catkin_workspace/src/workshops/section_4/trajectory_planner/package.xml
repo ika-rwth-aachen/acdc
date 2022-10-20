@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>trajectory_planner</name>
+  <version>0.0.1</version>
+  <description>The trajectory_planner package</description>
+  
+  <author email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</author>
+  <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ct_core</build_depend>
+  <build_depend>ct_models</build_depend>
+  <build_depend>ct_rbd</build_depend>
+  <depend>ct_optcon</depend>
+  <depend>roscpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>definitions</depend>
+  <depend>dynamic_reconfigure</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+
+</package>
