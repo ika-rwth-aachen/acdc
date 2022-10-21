@@ -3,7 +3,7 @@
 [![Build Main](https://github.com/ika-rwth-aachen/acdc/actions/workflows/build.yml/badge.svg)](https://github.com/ika-rwth-aachen/acdc/actions/workflows/build.yml)
 
 
-This repository belongs to the MOOC [Automated and Connected Driving Challenges (ACDC)](https://www.edx.org/course/automated-and-connected-driving-challenges). It contains Jupyter Notebook programming assignments. Enroll in the MOOC to get access to the solutions.
+This repository belongs to the MOOC [Automated and Connected Driving Challenges (ACDC)](https://www.edx.org/course/automated-and-connected-driving-challenges). It contains ROS programming assignments. Enroll in the MOOC to get access to the solutions.
 
 
 # Automated and Connected Driving Challenges
