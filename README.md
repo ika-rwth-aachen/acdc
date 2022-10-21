@@ -13,7 +13,7 @@ Repository of the official MOOC to learn [ROS](https://www.ros.org/) and algorit
 Taught by the [Institute for Automotive Engineering (ika)](https://www.ika.rwth-aachen.de/), RWTH Aachen University.
 
 
-## Instructions and exercises for this repository can be found in the [**ACDC-Wiki**](https://github.com/ika-rwth-aachen/acdc-wiki)!
+## Instructions and exercises for this repository can be found in the [**Wiki**](https://github.com/ika-rwth-aachen/acdc/wiki)!
 
 
 ## Quick Start
