@@ -5,10 +5,7 @@
   <version>0.1.0</version>
   <description>Controller for the racing vehicle</description>
 
-  <maintainer email="simon.schaefer@ika.rwth-aachen.de">Simon Schaefer</maintainer>
-  <maintainer email="nico.neumann@ika.rwth-aachen.de">Nico Neumann</maintainer>
-
-  <license>TODO</license>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
