@@ -19,7 +19,7 @@ Taught by the [Institute for Automotive Engineering (ika)](https://www.ika.rwth-
 ## Quick Start
 Clone the repository __with__ the contained submodules:
 ```bash
-git clone --recurse-submodules git@github.com:ika-rwth-aachen/acdc.git
+git clone --recurse-submodules https://github.com/ika-rwth-aachen/acdc.git
 ```
 
 Pull the docker image that is needed to run our environment
