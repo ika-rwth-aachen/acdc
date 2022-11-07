@@ -6,8 +6,6 @@
 
   <maintainer email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</maintainer>
 
-  <author email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</author>
-
   <license>MIT</license>
   
   <buildtool_depend>catkin</buildtool_depend>

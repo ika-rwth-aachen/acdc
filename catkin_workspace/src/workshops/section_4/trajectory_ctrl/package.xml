@@ -4,7 +4,6 @@
   <version>0.0.1</version>
   <description>The trajector_ctrl package receives an ika-Trajectory and generates the specific vehicle controls!</description>
 
-  <author email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</author>
   <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
   
   <license>MIT</license>

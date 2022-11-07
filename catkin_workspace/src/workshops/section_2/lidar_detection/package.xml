@@ -6,9 +6,6 @@
 
   <maintainer email="christian.geller@ika.rwth-aachen.de">Christian Geller</maintainer>
 
-  <author email="christian.geller@ika.rwth-aachen.de">Christian Geller</author>
-  <author email="fabian.thomsen@ika.rwth-aachen.de">Fabian Thomsen</author>
-
   <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>

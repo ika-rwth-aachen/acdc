@@ -4,7 +4,6 @@
   <version>0.0.1</version>
   <description>The trajectory_planner package</description>
   
-  <author email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</author>
   <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
 
   <license>MIT</license>

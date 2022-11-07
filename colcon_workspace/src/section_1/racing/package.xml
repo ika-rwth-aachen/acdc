@@ -3,7 +3,9 @@
 <package format="3">
   <name>racing</name>
   <version>0.1.0</version>
-  <description>Controller for the racing vehicle</description>
+  <description>Controller for the racing vehicle</description>  
+  
+  <maintainer email="christian.geller@ika.rwth-aachen.de">Christian Geller</maintainer>
 
   <license>MIT</license>
 

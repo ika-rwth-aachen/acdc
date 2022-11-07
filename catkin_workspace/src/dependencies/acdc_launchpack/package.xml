@@ -4,7 +4,7 @@
   <version>0.1.0</version>
   <description>Launch-Pack for ACDC Workshops. Containing URDF and Launch-Files. Moreover holding the transformation node.</description>
 
-  <maintainer email="guido.kueppers@ika.rwth-aachen.de">Guido Küppers</maintainer>
+  <maintainer email="acdc@ika.rwth-aachen.de">ACDC</maintainer>
 
   <license>Copyright (c) 2020, Institute for Automotive Engineering (ika), RWTH University</license>
 

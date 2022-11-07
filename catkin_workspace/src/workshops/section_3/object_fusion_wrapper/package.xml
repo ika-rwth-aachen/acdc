@@ -6,8 +6,9 @@
         ROS-wrapper for usage of the object_fusion package as a ROS node.
     </description>
 
-    <maintainer email="michael.hoss@ika.rwth-aachen.de">Michael Hoss</maintainer>
-    <license>TODO</license>
+    <maintainer email="acdc@ika.rwth-aachen.de">ACDC</maintainer>
+
+    <license>MIT</license>
 
     <depend>message_generation</depend>
     <depend>definitions</depend>

@@ -6,9 +6,6 @@
 
   <maintainer email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</maintainer>
 
-  <author email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</author>
-
-
   <license>MIT</license>
   
   <exec_depend>python-tensorflow-pip</exec_depend>

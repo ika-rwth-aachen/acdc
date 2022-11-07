@@ -4,9 +4,9 @@
   <version>0.1.0</version>
   <description>Controller for the racing vehicle</description>
 
-  <maintainer email="simon.schaefer@ika.rwth-aachen.de">Simon Schaefer</maintainer>
+  <maintainer email="christian.geller@ika.rwth-aachen.de">Christian Geller</maintainer>
 
-  <license>TODO</license>
+  <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
