@@ -24,7 +24,7 @@
 #include <cmath>
 
 void VehicleController::computeTargetVelocity() {
-  // START CODE (improve the lateral control)
+  // START CODE (improve the longitudinal control)
 
   const float FACTOR = 2.0f;
   const float FACTOR2 = 8.0f;
@@ -38,7 +38,7 @@ void VehicleController::computeTargetVelocity() {
 }
 
 void VehicleController::computeTargetSteeringAngle() {
-  // START CODE (improve the longitudinal control)
+  // START CODE (improve the lateral control)
 
   const float FACTOR = 0.5f;
 
