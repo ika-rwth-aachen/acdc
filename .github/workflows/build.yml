@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
 
   build_images:
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
 
     steps:
         - name: Checkout Repository
@@ -42,7 +42,7 @@ jobs:
 
   build_workspace:
     needs: build_images
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     container: 
       image: rwthika/acdc:latest
 
@@ -53,12 +53,12 @@ jobs:
         run: |
              source /opt/ros/noetic/setup.bash
              cd catkin_workspace
-             catkin build --summarize --no-notify --no-status --force-color
+             catkin build --summarize --no-notify --no-status --force-color -j1
 
 
   clean_workspace:
     needs: build_workspace
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     if: always()
     container: 
       image: rwthika/acdc:latest
