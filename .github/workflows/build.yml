@@ -9,9 +9,8 @@ jobs:
 
     steps:
         - name: Checkout Repository
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
           with:
-            token: ${{ secrets.ACCESS_TOKEN }}
             submodules: recursive
         
         - name: Logout from any Docker Repository
