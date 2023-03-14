@@ -38,23 +38,18 @@ jobs:
 #            cache-to: type=registry,ref=rwthika/acdc:buildcache,mode=max
 #            platforms: linux/amd64,linux/arm64
 
-  clone_workspace:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v3
-          with:
-            submodules: recursive    
-
 
   build_workspace:
-    needs: clone_workspace
     runs-on: ubuntu-latest
     container: 
       image: rwthika/acdc:latest
-
     
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive   
+      
       - name: Build Workspace
         shell: bash
         run: |
