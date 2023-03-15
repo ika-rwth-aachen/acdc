@@ -4,6 +4,7 @@ on: [push, pull_request]
   
 jobs:
 
+#  # Deactivated, because Github runner does not have enough resources to build image
 #  build_images:
 #    runs-on: ubuntu-latest
 #
@@ -57,18 +58,3 @@ jobs:
              cd catkin_workspace
              catkin build --summarize --no-notify --no-status --force-color -j1
 
-
-  clean_workspace:
-    needs: build_workspace
-    runs-on: ubuntu-latest
-    if: always()
-    container: 
-      image: rwthika/acdc:latest
-    
-    steps:
-      - name: Clean Workspace
-        shell: bash
-        run: |
-             cd catkin_workspace
-             catkin clean --yes --all
-             rm -r .catkin_tools
