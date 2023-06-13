@@ -23,15 +23,20 @@ def generate_launch_description():
         default_value='true',
         description='Use simulation/Gazebo clock time')
 
-
-    rosbag_play_node = ExecuteProcess(
-        cmd=[('ros2', 'bag', 'play'), '--rate', '0.05', '-l', '--clock',
-              '/home/rosuser/ws/bag/left_camera_templergraben',
-             '--topics', '/sensors/camera/left/image_raw',
-             '/sensors/camera/left/camera_info'],
+    # ROSBAG PLAY node
+    rosbag_play_node = Node(
+        package='rosbag2',
+        executable='play',
+        namespace='player',
         output='screen',
-        emulate_tty=True
+        arguments=[
+            '--rate', '0.05', '-l', '--clock',
+            '/home/rosuser/ws/bag/left_camera_templergraben',
+            '--topics', '/sensors/camera/left/image_raw',
+            '/sensors/camera/left/camera_info'
+        ]
     )
+    
 
     # STEREO IMAGE PROC node
     stereo_image_proc_node = Node(

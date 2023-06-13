@@ -9,10 +9,9 @@
 
   <license>MIT</license>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
-
   <exec_depend>python-tensorflow-pip</exec_depend>
 
+  <buildtool_depend>ament_cmake</buildtool_depend>
   <build_depend>rclpy</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
@@ -23,9 +22,6 @@
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-      <depend>ros2bag</depend>
-  <depend>navigation2</depend>
-
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
