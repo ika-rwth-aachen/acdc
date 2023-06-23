@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #
 #  ==============================================================================
@@ -28,101 +28,38 @@
 
 import rclpy
 from rclpy.node import Node
-import numpy as np
 from sensor_msgs.msg import Image
 
+import numpy as np
 import cv2
 from cv_bridge import CvBridge
-
 import time
 import os
-import img_utils
+from .img_utils import resize_image
 import xml.etree.ElementTree as ET
 
 WITH_TF = True
 try:
     import tensorflow as tf
-except ImportError:
-    rclpy.logging.get_logger("camera_segmentation").warning("This node was not compiled with TensorFlow. It will shut down.")
+except:
     WITH_TF = False
-
 
 class ImageSegmentation(Node):
 
-    def __init__(self):
-        super().__init__("camera_segmentation")
-
-        # Load parameters
-        self.load_parameters()
-
-        # Create cv2-msg converter bridge
-        self.cv_bridge = CvBridge()
-
-        # Load frozen graph
-        self.load_frozen_graph(self.frozen_graph)
-
-        # Create publisher for passing on segmented image
-        self.pub_seg = self.create_publisher(Image, "/image_rect_segmented", 1)
-
-        # Listen for input image
-        self.sub_image = self.create_subscription(
-            Image, "/image_rect_color", self.predict, 1
-        )
-
-    def load_parameters(self):
-        prefix = "image_segmentation/"
-
-        self.get_logger().info("Loading parameters ...")
-
-        package_dir = os.path.join(os.path.dirname(__file__), os.pardir)
-
-        self.frozen_graph = os.path.join(package_dir, self.get_parameter(prefix + "frozen_graph").value)
-        self.path_xml_conversion_file = os.path.join(package_dir, self.get_parameter(prefix + "xml_conversion_file").value)
-        self.resize_width = self.get_parameter(prefix + "resize_width").value or 1936
-        self.resize_height = self.get_parameter(prefix + "resize_height").value or 1216
-
-        # Load one hot encoding
-        self.color_palette, self.class_names, self.color_to_label = self.parse_convert_xml(
-            self.path_xml_conversion_file
-        )
-
-    def predict(self, img_rect_color_msg):
+    def predict(self, img_color_msg):
         t0 = time.time()
-
-        # Convert message to cv2-image
-        input_img = self.cv_bridge.imgmsg_to_cv2(img_rect_color_msg, desired_encoding="rgb8")
-
-        # Resize image
-        input_img = img_utils.resize_image(input_img, [self.resize_height, self.resize_width])
-
-        # Append batch dimension
+        input_img = self.cv_bridge.imgmsg_to_cv2(img_color_msg, desired_encoding="rgb8")
+        input_img = resize_image(input_img, [self.resize_height, self.resize_width])
         input_img = input_img[None]
         t1 = time.time()
-
-        # Perform semantic segmentation
         predictions = self.frozen_func(tf.cast(input_img, tf.uint8))
-
         t2 = time.time()
-
-        # Remove batch dimension
         prediction = tf.squeeze(predictions).numpy()
-
-        # Decode image to RGB
         prediction = self.segmentation_map_to_rgb(prediction).astype(np.uint8)
-
-        # Convert output back to message
         seg_msg = self.cv_bridge.cv2_to_imgmsg(prediction, encoding="rgb8")
-
-        # Assign header of input msg
-        seg_msg.header = img_rect_color_msg.header
-
+        seg_msg.header = img_color_msg.header
         t3 = time.time()
-
-        # Log processing duration
-        self.get_logger().info(
-            "(prep) %fs | (pred) %fs | (post) %fs | (total) %fs", t1 - t0, t2 - t1, t3 - t2, t3 - t0
-        )
-
+        #self.get_logger().info("(prep) %fs | (pred) %fs | (post) %fs | (total) %fs", t1-t0, t2-t1, t3-t2, t3-t0)
         self.pub_seg.publish(seg_msg)
 
     @staticmethod
@@ -135,45 +72,38 @@ class ImageSegmentation(Node):
 
         return wrapped_import.prune(
             tf.nest.map_structure(import_graph.as_graph_element, inputs),
-            tf.nest.map_structure(import_graph.as_graph_element, outputs),
-        )
+            tf.nest.map_structure(import_graph.as_graph_element, outputs))
 
     def load_frozen_graph(self, path_to_frozen_graph):
         self.sess = None
         self.graph = tf.Graph()
 
-        self.input_tensor_name = "input:0"
-        self.output_tensor_name = "prediction:0"
+        self.input_tensor_name = 'input:0'
+        self.output_tensor_name = 'prediction:0'
 
-        with tf.io.gfile.GFile(path_to_frozen_graph, "rb") as file_handle:
+        with tf.io.gfile.GFile(path_to_frozen_graph, 'rb') as file_handle:
             graph_def = tf.compat.v1.GraphDef()
             loaded = graph_def.ParseFromString(file_handle.read())
 
-        # Wrap frozen graph to ConcreteFunctions
-        self.frozen_func = self.wrap_frozen_graph(
-            graph_def=graph_def,
-            inputs=[self.input_tensor_name],
-            outputs=[self.output_tensor_name],
-            print_graph=True,
-        )
+        self.frozen_func = self.wrap_frozen_graph(graph_def=graph_def,
+                                                  inputs=[self.input_tensor_name],
+                                                  outputs=[self.output_tensor_name],
+                                                  print_graph=True)
 
     def segmentation_map_to_rgb(self, segmentation_map):
-        """
-        Converts segmentation map to a RGB encoding according to self.color_palette
-        Eg. 0 (Class 0) -> Pixel value [128, 64, 128] which is on index 0 of self.color_palette
-            1 (Class 1) -> Pixel value [244, 35, 232] which is on index 1 of self.color_palette
 
-        self.color_palette has shape [256, 3]. Each index of the first dimension is associated
-        with an RGB value. The index corresponds to the class ID.
+        ### START CODE HERE ### 
 
-        :param segmentation_map: ndarray numpy with shape (height, width)
-        :return: RGB encoding with shape (height, width, 3)
-        """
-        rgb_encoding = np.random.randint(
-            low=0,
-            high=255,
-            size=[self.resize_height, self.resize_width, 3],
-        )
+        # Solution:
+        # Apply the color palette to the segmentation map. self.color_palette has
+        # shape [256, 3] and if for example access positon 0 in this array, we obtain
+        # the RGB color code for the first class. Thus, we can apply the hole segmentation
+        # maps to self.color_palette in order to convert the class id in the map to 
+        # the color coding
+        rgb_encoding = self.color_palette[segmentation_map]
+
+        ### END CODE HERE ###
+
         return rgb_encoding
 
     def parse_convert_xml(self, conversion_file_path):
@@ -183,11 +113,11 @@ class ImageSegmentation(Node):
 
         color_palette = np.zeros((256, 3), dtype=np.uint8)
         class_list = np.ones((256), dtype=np.uint8) * 255
-        class_names = np.array(["" for _ in range(256)], dtype="<U25")
+        class_names = np.array(["" for _ in range(256)], dtype='<U25')
         for idx, defElement in enumerate(defRoot.findall("SLabel")):
             from_color = np.fromstring(defElement.get("fromColour"), dtype=int, sep=" ")
             to_class = np.fromstring(defElement.get("toValue"), dtype=int, sep=" ")
-            class_name = defElement.get("Name").lower()
+            class_name = defElement.get('Name').lower()
             if to_class in class_list:
                 color_to_label[tuple(from_color)] = int(to_class)
             else:
@@ -196,7 +126,6 @@ class ImageSegmentation(Node):
                 class_names[idx] = class_name
                 color_to_label[tuple(from_color)] = int(to_class)
 
-        # Sort classes according to is train ID
         sort_indexes = np.argsort(class_list)
 
         class_list = class_list[sort_indexes]
@@ -205,13 +134,43 @@ class ImageSegmentation(Node):
 
         return color_palette, class_names, color_to_label
 
+    def load_parameters(self):
+        self.declare_parameter('frozen_graph')
+        self.declare_parameter('xml_conversion_file')
+        self.declare_parameter('resize_width', 1936)
+        self.declare_parameter('resize_height', 1216)
+
+        # self.frozen_graph = self.get_parameter('frozen_graph').get_parameter_value().string_value
+        self.frozen_graph = "/home/rosuser/ws/ros2_ws/src/image_segmentation_r2/models/mobilenet_v3_large_968_608_os8.pb"
+        # self.xml_conversion_file = self.get_parameter('xml_conversion_file').get_parameter_value().string_value
+        self.xml_conversion_file = "/home/rosuser/ws/ros2_ws/src/image_segmentation_r2/models/convert_cityscapes_to_ika_reduced.xml"
+        self.resize_width = self.get_parameter('resize_width').get_parameter_value().integer_value
+        self.resize_height = self.get_parameter('resize_height').get_parameter_value().integer_value
+
+        self.color_palette, self.class_names, self.color_to_label = self.parse_convert_xml(self.xml_conversion_file)
+
+    def setup(self):
+        self.cv_bridge = CvBridge()
+        self.load_frozen_graph(self.frozen_graph)
+        self.pub_seg = self.create_publisher(Image, "/image_segmented", 10)
+        self.sub_image = self.create_subscription(Image, "/image_color", self.predict, 10)
+
+    def __init__(self):
+        super().__init__('camera_segmentation')
+
+        if WITH_TF:
+            self.load_parameters()
+            self.setup()
 
 def main(args=None):
     rclpy.init(args=args)
-    vision = ImageSegmentation()
-    rclpy.spin(vision)
-    rclpy.shutdown()
 
+    vision = ImageSegmentation()
+
+    rclpy.spin(vision)
+
+    vision.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == "__main__":
     main()

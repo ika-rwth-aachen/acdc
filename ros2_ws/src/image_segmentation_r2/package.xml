@@ -18,8 +18,6 @@
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>rosbag2</depend>
-  <depend>nav2_bt_navigator</depend>
-
 
 
   <test_depend>ament_copyright</test_depend>

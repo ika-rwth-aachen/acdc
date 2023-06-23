@@ -9,6 +9,12 @@ from launch.actions import ExecuteProcess
 def generate_launch_description():
     # Get the package directory
     image_segmentation_dir = get_package_share_directory('image_segmentation_r2')
+    
+    config = os.path.join(
+        image_segmentation_dir,
+        'launch',
+        'params.yaml'
+    )
 
     # Declare launch arguments
     use_sim_time = DeclareLaunchArgument(
@@ -16,45 +22,45 @@ def generate_launch_description():
         default_value='true',
         description='Use simulation/Gazebo clock time')
 
-    """# ROSBAG PLAY node
+    # ROSBAG PLAY node
     rosbag_play_node = ExecuteProcess(
-        cmd=['ros2', 'bag', 'play', '--rate', '0.05', '-l',
+        cmd=['ros2', 'bag', 'play', '--rate', '0.1', '-l',
              '/home/rosuser/ws/bag/left_camera_templergraben',
              '--topics', '/sensors/camera/left/image_raw',
              '/sensors/camera/left/camera_info'],
         output='screen'
-    )"""
+    )
 
-    # STEREO IMAGE PROC node
+    # IMAGE_PROC node
     image_proc_node = Node(
         package='image_proc',
         name='image_proc',
         executable='image_proc',
-        namespace='sensors/camera/',
-        output='screen'
+        namespace='sensors/camera/left',
+        output='screen',
+        remappings=[
+            ('image', 'image_raw'),
+        ],
     )
-
-    # CAMERA SEGMENTATION NODE
+        # CAMERA SEGMENTATION NODE
     camera_segmentation_node = Node(
         package='image_segmentation_r2',
         name='image_segmentation',
         executable='image_segmentation',
         output='screen',
-        parameters=[
-            {'params_file': os.path.join(image_segmentation_dir, 'launch', 'params.yaml')}
-        ],
+        parameters=[config],
         remappings=[
-            ('image_rect_color', 'sensors/camera/left/image_rect_color')
+            ('image_color', 'sensors/camera/left/image_color')
         ]
     )
 
-    # NODES FOR VISUALIZATION
+        # NODES FOR VISUALIZATION
     segmentation_viewer_node = Node(
         package='image_view',
         executable='image_view',
         name='segmentation_viewer',
         remappings=[
-            ('image', 'image_rect_segmented'),
+            ('image', 'image_segmented'),
         ],
     )
 
@@ -63,7 +69,7 @@ def generate_launch_description():
         executable='image_view',
         name='camera_left',
         remappings=[
-            ('image', 'sensors/camera/left/image_rect_color'),
+            ('image', 'sensors/camera/left/image_color'),
         ],
     )
 
@@ -72,8 +78,8 @@ def generate_launch_description():
 
     # Add the actions to the launch description
     ld.add_action(use_sim_time)
-    #ld.add_action(rosbag_play_node)
-    #ld.add_action(stereo_image_proc_node)
+    ld.add_action(rosbag_play_node)
+    ld.add_action(image_proc_node)
     ld.add_action(camera_segmentation_node)
     ld.add_action(segmentation_viewer_node)
     ld.add_action(camera_left_node)
