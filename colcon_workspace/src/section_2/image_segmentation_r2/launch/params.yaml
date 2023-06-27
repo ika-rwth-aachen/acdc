@@ -1,6 +1,6 @@
 image_segmentation:
   ros__parameters:
-    frozen_graph: models/mobilenet_v3_small_968_608_os8.pb
+    frozen_graph: models/mobilenet_v3_large_968_608_os8.pb
     xml_conversion_file: models/convert_cityscapes_to_ika_reduced.xml
     resize_width: 968
     resize_height: 608
