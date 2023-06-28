@@ -3,7 +3,7 @@
 <package format="3">
   <name>image_segmentation_r2</name>
   <version>0.1.0</version>
-  <description>This package performs semantic image segmentation on camera images.</description>
+  <description>This package performs semantic point cloud segmentation.</description>
 
   <maintainer email="till.beemelmanns@rwth-aachen.de">Till Beemelmanns</maintainer>
 

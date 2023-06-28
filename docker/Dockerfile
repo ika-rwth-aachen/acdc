@@ -112,6 +112,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-foxy-ros-base \
     ros-foxy-ros1-bridge \
     ros-foxy-image-pipeline \
+    ros-foxy-sensor-msgs-py \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
