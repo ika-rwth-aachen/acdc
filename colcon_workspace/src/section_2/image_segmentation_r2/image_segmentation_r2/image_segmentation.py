@@ -33,6 +33,7 @@ import cv2
 from cv_bridge import CvBridge
 import time
 import os
+from ament_index_python.packages import get_package_share_directory
 from .img_utils import resize_image
 import xml.etree.ElementTree as ET
 
@@ -176,7 +177,8 @@ class ImageSegmentation(Node):
 
         # get the directory that this script is in
         script_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),os.pardir)
-
+        #script_dir = "/home/rosuser/colcon_workspace/src/section_2/image_segmentation_r2"
+        
         # get the filename from the parameter and append it to the script directory
         frozen_graph_file = self.get_parameter('frozen_graph').get_parameter_value().string_value
         self.frozen_graph = os.path.join(script_dir, frozen_graph_file)
@@ -189,7 +191,6 @@ class ImageSegmentation(Node):
 
         # self load one hot encoding
         self.color_palette, self.class_names, self.color_to_label = self.parse_convert_xml(self.path_xml_conversion_file)
-
 
     def setup(self):
 
@@ -209,8 +210,8 @@ class ImageSegmentation(Node):
         # initialize ROS node
         self.get_logger().info("Initializing camera_segmentation node...")
 
-        self.declare_parameter('frozen_graph')
-        self.declare_parameter('xml_conversion_file')
+        self.declare_parameter('frozen_graph', 'default_value')
+        self.declare_parameter('xml_conversion_file', 'default_value')
         self.declare_parameter('resize_width', 1936)
         self.declare_parameter('resize_height', 1216)
 

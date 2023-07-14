@@ -45,17 +45,16 @@ class PCLSegmentation(Node):
     Implements a point cloud segmentation node.
     """
     def predict(self, pcl_msg):
-        pcl = np.array(list(pc2.read_points(pcl_msg)))
-
+        pcl = np.array(pc2.read_points(pcl_msg))
+        self.get_logger().info("pcl : {}".format(pcl))
+        self.get_logger().info("done")
         # perform fov filter by using hv_in_range
         cond = self.hv_in_range(x=pcl[:, 0],
                                 y=pcl[:, 1],
                                 z=pcl[:, 2],
                                 fov=[-self.left_azimuth, self.right_azimuth])
-        #self.get_logger().info("pcl : {}".format(self.left_azimuth))
         # apply fov filter
         pcl = pcl[cond]
-        #self.get_logger().info("pcl : {}".format(pcl))
         # get depth map
         lidar = self.pcl_spherical_projection(pcl=pcl,
                                               height=self.num_rings,
@@ -352,16 +351,16 @@ class PCLSegmentation(Node):
         self.get_logger().info("Initializing pointcloud_segmentation node...")
 
         # decleare parameters
-        self.declare_parameter('model_path') 
-        self.declare_parameter('palette_file') 
-        self.declare_parameter('do_visualizations') 
-        self.declare_parameter('num_classes') 
-        self.declare_parameter('left_azimuth') 
-        self.declare_parameter('right_azimuth')
-        self.declare_parameter('num_rings')
-        self.declare_parameter('num_azimuth')
-        self.declare_parameter('normalization_mean')
-        self.declare_parameter('normalization_std') 
+        self.declare_parameter('model_path','default_value') 
+        self.declare_parameter('palette_file','default_value') 
+        self.declare_parameter('do_visualizations', True) 
+        self.declare_parameter('num_classes',0) 
+        self.declare_parameter('left_azimuth',0.0)
+        self.declare_parameter('right_azimuth',0.0)
+        self.declare_parameter('num_rings',0)
+        self.declare_parameter('num_azimuth',0)
+        self.declare_parameter('normalization_mean', [0.0,0.0,0.0,0.0])
+        self.declare_parameter('normalization_std', [0.0,0.0,0.0,0.0]) 
 
         # load parameters
         self.load_parameters()

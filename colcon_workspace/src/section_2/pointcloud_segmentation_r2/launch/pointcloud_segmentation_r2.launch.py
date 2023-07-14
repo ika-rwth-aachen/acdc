@@ -21,7 +21,7 @@ def generate_launch_description():
     # ROSBAG PLAY node
     rosbag_play_node = ExecuteProcess(
         cmd=['ros2', 'bag', 'play','--rate', '0.75', '-l',
-             '/home/rosuser/ws/bag/lidar_campus_melaten',
+             '/home/rosuser/bag/lidar_campus_melaten',
         ],
         output='screen'
     )

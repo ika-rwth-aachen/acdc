@@ -124,6 +124,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
 
 COPY TensorFlowConfig.cmake /usr/local/lib/cmake/tensorflow/TensorFlowConfig.cmake
 
-RUN mkdir -p $DOCKER_HOME/ws/catkin_workspace
-WORKDIR $DOCKER_HOME/ws/catkin_workspace
+RUN mkdir -p $DOCKER_HOME/ws/colcon_workspace
+WORKDIR $DOCKER_HOME/ws/colcon_workspace
 USER root 
