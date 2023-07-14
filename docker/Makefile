@@ -14,20 +14,22 @@ help:
 build: # build for current platform 
 	@docker buildx build \
 		--load \
-		--cache-from type=registry,ref=rwthika/acdc:latest \
-		--tag rwthika/acdc:latest \
+		--file Dockerfile.humble \
+		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
+		--tag rwthika/acdc:ros2-cuda-tf \
 		.
 
 push: # build and push for both platforms
 	@docker buildx build \
 		--push \
+		--file Dockerfile.humble \
 		--platform linux/amd64,linux/arm64 \
-		--cache-from type=registry,ref=rwthika/acdc:latest \
-		--tag rwthika/acdc:latest \
+		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
+		--tag rwthika/acdc:ros2-cuda-tf \
 		.
 
 pull:
-	@docker pull rwthika/acdc:latest
+	@docker pull rwthika/acdc:ros2-cuda-tf
 
 clean:
-	@docker rmi -f rwthika/acdc:latest
+	@docker rmi -f rwthika/acdc:ros2-cuda-tf
