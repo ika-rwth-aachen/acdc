@@ -45,9 +45,12 @@ class PCLSegmentation(Node):
     Implements a point cloud segmentation node.
     """
     def predict(self, pcl_msg):
-        pcl = np.array(pc2.read_points(pcl_msg))
-        self.get_logger().info("pcl : {}".format(pcl))
-        self.get_logger().info("done")
+        
+        pcl = pc2.read_points(pcl_msg)
+
+        # Cast the structured NumPy array to a regular NumPy array
+        pcl = np.array(pcl.tolist())
+
         # perform fov filter by using hv_in_range
         cond = self.hv_in_range(x=pcl[:, 0],
                                 y=pcl[:, 1],
@@ -88,7 +91,7 @@ class PCLSegmentation(Node):
 
         if self.do_visualizations:
             # visualize
-    
+
             pred_cls_color_bgr = predictions_rgb[..., ::-1]  #RGB TO BGR
             cv2.imshow("Segmented PCL", cv2.resize(pred_cls_color_bgr, (0, 0), fx=4, fy=4))
             cv2.waitKey(1)
@@ -112,7 +115,7 @@ class PCLSegmentation(Node):
         i = np.delete(i, delete_ids)
         l = np.delete(l, delete_ids)
         rgb_float = np.delete(np.asarray(rgb_float), delete_ids)
-        
+
         # create list of points
         points = list(zip(x, y, z, i, l, rgb_float))
 
@@ -121,7 +124,7 @@ class PCLSegmentation(Node):
                                              points=points)
 
         ### START TASK 2 CODE HERE ###
-        
+
         # Task 2:
         # call publisher to publish the message "segmented_pcl_msg"
 
@@ -176,7 +179,7 @@ class PCLSegmentation(Node):
         spherical_projection[(height-1)-r, phi_, 4] = d
 
         return spherical_projection
-    
+
     def hv_in_range(self, x, y, z, fov, fov_type='h'):
         """
         Extract filtered in-range velodyne coordinates based on azimuth & elevation angle limit
@@ -200,17 +203,14 @@ class PCLSegmentation(Node):
                                   np.arctan2(z, d) > (fov[0] * np.pi / 180))
         else:
             raise NameError("fov type must be set between 'h' and 'v' ")
-   
+
     def rgb_to_float(self, color):
         """ Converts an RGB list to the packed float format used by PCL
-
             From the PCLdocs:
             "Due to historical reasons (PCL was first developed as a ROS package),
              the RGB information is packed into an integer and casted to a float"
-
             Args:
                 color (list): 3-element list of integers [0-255,0-255,0-255]
-
             Returns:
                 float_rgb: RGB value packed as a float
         """
@@ -262,9 +262,9 @@ class PCLSegmentation(Node):
         msg_pf6.offset = np.int(28)
         msg_pf6.datatype = PointField.FLOAT32
         msg_pf6.count = np.int(1)
-        
+
         return [msg_pf1, msg_pf2, msg_pf3, msg_pf4, msg_pf5, msg_pf6]
-    
+
     def parse_convert_xml(self, conversion_file_path):
         """
         Parse XML conversion file and compute color_palette 
@@ -296,7 +296,7 @@ class PCLSegmentation(Node):
         color_palette = color_palette[sort_indexes]
 
         return color_palette, class_names, color_to_label
-    
+
     def load_parameters(self):
         """
         Load ROS parameters and store them
@@ -304,16 +304,17 @@ class PCLSegmentation(Node):
         self.get_logger().info("Loading parameters ...")
 
         # get the directory that this script is in
-        script_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),os.pardir)
-        self.get_logger().info(script_dir)
-        
+        package_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),os.pardir)
+        #package_dir = "/home/rosuser/colcon_workspace/src/section_2/point_cloud_segmentation_r2"
+
+
 
         # get the filename from the parameter and append it to the script directory
         model_path_file = self.get_parameter('model_path').get_parameter_value().string_value
-        self.model_path = os.path.join(script_dir, model_path_file)
+        self.model_path = os.path.join(package_dir, model_path_file)
 
         palette_file = self.get_parameter('palette_file').get_parameter_value().string_value
-        self.palette_file_path = os.path.join(script_dir, palette_file)
+        self.palette_file_path = os.path.join(package_dir, palette_file)
 
 
         self.do_visualizations = self.get_parameter('do_visualizations').get_parameter_value().bool_value
@@ -324,7 +325,8 @@ class PCLSegmentation(Node):
         self.num_azimuth = self.get_parameter('num_azimuth').get_parameter_value().integer_value
         self.normalization_mean = np.array([[self.get_parameter("normalization_mean").get_parameter_value().double_array_value]], dtype=np.float32)
         self.normalization_std = np.array([[self.get_parameter("normalization_std").get_parameter_value().double_array_value]], dtype=np.float32)
-          
+
+
         # load one hot encoding
         self.color_palette, self.class_names, self.color_to_label = self.parse_convert_xml(self.palette_file_path)
 
@@ -343,28 +345,28 @@ class PCLSegmentation(Node):
 
 
     def __init__(self):
-       
+
         # initialize ROS node
         super().__init__('camera_segmentation')
-        
+
         # initialize ROS node
         self.get_logger().info("Initializing pointcloud_segmentation node...")
 
         # decleare parameters
-        self.declare_parameter('model_path','default_value') 
-        self.declare_parameter('palette_file','default_value') 
-        self.declare_parameter('do_visualizations', True) 
-        self.declare_parameter('num_classes',0) 
-        self.declare_parameter('left_azimuth',0.0)
-        self.declare_parameter('right_azimuth',0.0)
-        self.declare_parameter('num_rings',0)
-        self.declare_parameter('num_azimuth',0)
-        self.declare_parameter('normalization_mean', [0.0,0.0,0.0,0.0])
-        self.declare_parameter('normalization_std', [0.0,0.0,0.0,0.0]) 
+        self.declare_parameter('model_path', rclpy.Parameter.Type.STRING) 
+        self.declare_parameter('palette_file', rclpy.Parameter.Type.STRING) 
+        self.declare_parameter('do_visualizations', rclpy.Parameter.Type.BOOL) 
+        self.declare_parameter('num_classes',rclpy.Parameter.Type.INTEGER) 
+        self.declare_parameter('left_azimuth',rclpy.Parameter.Type.DOUBLE)
+        self.declare_parameter('right_azimuth',rclpy.Parameter.Type.DOUBLE)
+        self.declare_parameter('num_rings',rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('num_azimuth',rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('normalization_mean', rclpy.Parameter.Type.DOUBLE_ARRAY)
+        self.declare_parameter('normalization_std', rclpy.Parameter.Type.DOUBLE_ARRAY) 
 
         # load parameters
         self.load_parameters()
- 
+
         # setup components
         self.setup()
 
@@ -375,7 +377,7 @@ def main(args=None):
 
     # keep node from exiting
     rclpy.spin(vision)
-    
+
     #ROS2 needs .destroy_node after spinning
     vision.destroy_node()
     rclpy.shutdown()
