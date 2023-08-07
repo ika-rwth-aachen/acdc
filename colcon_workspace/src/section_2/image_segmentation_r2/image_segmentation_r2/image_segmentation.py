@@ -176,12 +176,11 @@ class ImageSegmentation(Node):
         self.get_logger().info("Loading parameters ...")
 
         # get the directory that this script is in
-        package_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),os.pardir)
-        #package_dir = "/home/rosuser/colcon_workspace/src/section_2/image_segmentation_r2"
+        package_dir = get_package_share_directory('image_segmentation_r2')
         
         # get the filename from the parameter and append it to the script directory
         frozen_graph_file = self.get_parameter('frozen_graph').get_parameter_value().string_value
-        self.frozen_graph = os.path.join(package_dir, frozen_graph_file)
+        self.frozen_graph = os.path.join(package_dir,  frozen_graph_file)
 
         xml_conversion_file = self.get_parameter('xml_conversion_file').get_parameter_value().string_value
         self.path_xml_conversion_file = os.path.join(package_dir, xml_conversion_file)

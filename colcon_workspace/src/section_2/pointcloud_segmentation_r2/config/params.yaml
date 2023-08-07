@@ -1,7 +1,7 @@
 pointcloud_segmentation:
   ros__parameters:
     model_path: models/miou59_squeezeseg
-    palette_file: convert_xml/class_id_to_rgb.xml
+    palette_file: models/class_id_to_rgb.xml
     do_visualizations: True
             # class labels output of Keras SavedModel:
             # Road (0), Sidewalk (1), Building (2), Pole (3), Vegetation (4), Person (5),

@@ -29,6 +29,7 @@ import os
 import numpy as np
 import rclpy
 from rclpy.node import Node
+from ament_index_python.packages import get_package_share_directory
 import tensorflow as tf
 import cv2
 
@@ -192,7 +193,11 @@ class PCLSegmentation(Node):
         Return:
         `cond`:condition of points within fov or not
         Raise:
-        `NameError`:"fov type must be set between 'h' and 'v' "
+        `NameErroor_palette = np.zeros((256, 3), dtype=np.uint8)
+        class_list = np.ones((256), dtype=np.uint8) * 255
+        class_names = np.array(["" for _ in range(256)], dtype='<U25')
+        for idx, defElement in enumerate(defRoot.findall("SLabel")):
+           r`:"fov type must be set between 'h' and 'v' "
         """
         d = np.sqrt(x ** 2 + y ** 2 + z ** 2)
         if fov_type == 'h':
@@ -223,7 +228,6 @@ class PCLSegmentation(Node):
         float_rgb = struct.unpack('f', struct.pack('i', hex_rgb))[0]
 
         return float_rgb
-
 
     def make_point_field(self):
 
@@ -304,10 +308,7 @@ class PCLSegmentation(Node):
         self.get_logger().info("Loading parameters ...")
 
         # get the directory that this script is in
-        package_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),os.pardir)
-        #package_dir = "/home/rosuser/colcon_workspace/src/section_2/point_cloud_segmentation_r2"
-
-
+        package_dir = get_package_share_directory('pointcloud_segmentation_r2')
 
         # get the filename from the parameter and append it to the script directory
         model_path_file = self.get_parameter('model_path').get_parameter_value().string_value
@@ -315,7 +316,6 @@ class PCLSegmentation(Node):
 
         palette_file = self.get_parameter('palette_file').get_parameter_value().string_value
         self.palette_file_path = os.path.join(package_dir, palette_file)
-
 
         self.do_visualizations = self.get_parameter('do_visualizations').get_parameter_value().bool_value
         self.num_classes = self.get_parameter('num_classes').get_parameter_value().integer_value
@@ -325,7 +325,6 @@ class PCLSegmentation(Node):
         self.num_azimuth = self.get_parameter('num_azimuth').get_parameter_value().integer_value
         self.normalization_mean = np.array([[self.get_parameter("normalization_mean").get_parameter_value().double_array_value]], dtype=np.float32)
         self.normalization_std = np.array([[self.get_parameter("normalization_std").get_parameter_value().double_array_value]], dtype=np.float32)
-
 
         # load one hot encoding
         self.color_palette, self.class_names, self.color_to_label = self.parse_convert_xml(self.palette_file_path)
