@@ -180,3 +180,8 @@ qtcreator-*
 # End of https://www.gitignore.io/api/c++,ros,clion
 
 bag/play_real_bag.sh
+colcon_workspace/src/section_2/image_segmentation_r2/package.xml
+bag/left_camera_templergraben.db3
+.gitignore
+bag/lidar_campus_melaten.db3
+bag/semantic_8_cams.db3

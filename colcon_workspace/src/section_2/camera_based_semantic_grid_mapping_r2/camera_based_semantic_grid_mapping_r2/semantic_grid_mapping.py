@@ -27,8 +27,12 @@
 #
 
 import rclpy
+from rclpy.node import Node
+from rclpy.time import Time
+
 import tf2_ros
-import tf_conversions 
+import tf_transformations
+
 # Messages
 from sensor_msgs.msg import CompressedImage, CameraInfo, Image
 # Synchronization
@@ -39,9 +43,12 @@ from cv_bridge import CvBridge
 
 import numpy as np
 
-class IPM():
-    def __init__(self) -> None:
-        
+class IPM(Node):
+    def __init__(self):
+        super().__init__('inverse_perspective_mapping')
+        # initialize parameters
+        self.get_logger().info("Initializing ipm node...")
+
         # Load parameters (dst path for images, input topic)
         self.load_parameters()
         
@@ -50,9 +57,9 @@ class IPM():
         for image_topic, info_topic in zip(self.image_topics_in, self.info_topics_in):
             ### START Task 3 CODE HERE ###
             # create subscriber for topic
-            image_sub = message_filters.Subscriber(image_topic, Image, queue_size=1)
+            image_sub = message_filters.Subscriber(Image,image_topic, queue_size=1)
             # create a subscriber for camera info topic
-            info_sub = message_filters.Subscriber(info_topic, CameraInfo, queue_size=1)
+            info_sub = message_filters.Subscriber(CameraInfo, info_topic, queue_size=1)
             ### END Task 3 CODE HERE ###
             # add subscribers to array
             subs.append(image_sub)
@@ -64,7 +71,7 @@ class IPM():
         self.sync_sub.registerCallback(self.compute_bev) 
 
         # initialize publisher
-        self.pub = rospy.Publisher('/BEV_image', Image, queue_size=5)
+        self.pub = self.create_publisher(Image, '/BEV_image', 5)
 
         # tf listener for coordinates transformations
         self.tfBuffer = tf2_ros.Buffer()
@@ -124,7 +131,7 @@ class IPM():
         # initialize output
         bev_total_img = np.zeros((self.config['output_height'], self.config['output_width'],3), np.uint8)
         # apply IPM to each Image using information from the corresponding CameraInfo messages
-        common_time = rospy.Time(0)
+        common_time = Time(seconds=0, nanoseconds=0)
         for image_msg, cam_info_msg in images_with_info:
             
             ### START Task 5, Part 1 CODE HERE ###
@@ -138,7 +145,7 @@ class IPM():
             quaternion = [quaternion.x, quaternion.y , quaternion.z, quaternion.w] # convert to list
 
             # convert quaternion to (roll,pitch,yaw)
-            roll, pitch, yaw = tf_conversions.transformations.euler_from_quaternion(quaternion)          
+            roll, pitch, yaw = tf_transformations.euler_from_quaternion(quaternion)          
 
             # compute rotation matrix
             Rz = np.array([[np.cos(yaw), -np.sin(yaw), 0.0],
@@ -187,26 +194,41 @@ class IPM():
     
     
     def load_parameters(self):
-        self.image_topics_in = rospy.get_param("~image_topics_in")
-        self.info_topics_in = rospy.get_param("~info_topics_in")
-        self.vehicle_base_link = rospy.get_param("~vehicle_base_link")
+
+        self.declare_parameter('image_topics_in', 'default_value')
+        self.declare_parameter('info_topics_in', 'default_value')
+        self.declare_parameter('vehicle_base_link', 'default_value')
+        self.declare_parameter('px_per_m', 'default_value')
+        self.declare_parameter('output_width', 'default_value')
+        self.declare_parameter('output_height', 'default_value')
+
+        self.image_topics_in = self.get_parameter('image_topics_in').get_parameter_value().string_value
+        self.info_topics_in = self.get_parameter('info_topics_in').get_parameter_value().string_value
+        self.vehicle_base_link = self.get_parameter('vehicle_base_link').get_parameter_value().string_value
 
         config = {}
-        config["px_per_m"] = rospy.get_param("~px_per_m") # number of pixels per meter
-        config["output_width"] = rospy.get_param("~output_width") 
-        config["output_height"] = rospy.get_param("~output_height") 
+        config["px_per_m"] = self.get_parameter('px_per_m').get_parameter_value().integer_value
+        config["output_width"] = self.get_parameter('output_width').get_parameter_value().integer_value
+        config["output_height"] = self.get_parameter('output_height').get_parameter_value().integer_value
         # shift to center of output image
-        config["shift_x"] = config["output_width"] / 2.0 
-        config["shift_y"] = config["output_height"] /2.0
+        config["shift_x"] = config["output_width"] / 2.0
+        config["shift_y"] = config["output_height"] / 2.0
         self.config = config
 
-if __name__ == '__main__':
-    # initialize node
-    rospy.init_node('inverse_perspective_mapping')
-    bad_data = IPM()
-    try:
-        rospy.spin()
-    except KeyboardInterrupt:
-        rospy.loginfo("Shutting down node!")
+def main(args=None):
+    rclpy.init(args=args)
 
+    ipm = IPM()
+
+    try:
+        rclpy.spin(ipm)
+    except KeyboardInterrupt:
+        rclpy.loginfo("Shutting down node!")
+    
+    #ROS2 needs .destroy_node after spinning
+    ipm.destroy_node()
+    rclpy.shutdown()
+    
+if __name__ == "__main__":
+    main()
 

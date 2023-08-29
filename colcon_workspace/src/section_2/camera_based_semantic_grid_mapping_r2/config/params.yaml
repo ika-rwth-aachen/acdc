@@ -1,0 +1,28 @@
+semantic_grid_mapping:
+  ros__parameters:
+    image_topics_in : [
+    "/carla/ego_vehicle/semantic_segmentation_front_left_1/image", 
+    "/carla/ego_vehicle/semantic_segmentation_front_left_2/image", 
+    "/carla/ego_vehicle/semantic_segmentation_front_right_1/image", 
+    "/carla/ego_vehicle/semantic_segmentation_front_right_2/image", 
+    "/carla/ego_vehicle/semantic_segmentation_back_left_1/image", 
+    "/carla/ego_vehicle/semantic_segmentation_back_left_2/image", 
+    "/carla/ego_vehicle/semantic_segmentation_back_right_1/image", 
+    "/carla/ego_vehicle/semantic_segmentation_back_right_2/image" 
+                                        ]
+
+    info_topics_in : [
+    "/carla/ego_vehicle/semantic_segmentation_front_left_1/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_front_left_2/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_front_right_1/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_front_right_2/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_back_left_1/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_back_left_2/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_back_right_1/camera_info", 
+    "/carla/ego_vehicle/semantic_segmentation_back_right_2/camera_info" ]   
+    
+    vehicle_base_link: "ego_vehicle"
+    px_per_m : 10
+    output_width: 800
+    output_height: 600
+

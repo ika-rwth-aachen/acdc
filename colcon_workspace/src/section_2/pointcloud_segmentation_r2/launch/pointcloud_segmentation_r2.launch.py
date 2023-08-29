@@ -25,7 +25,7 @@ def generate_launch_description():
         ],
         output='screen'
     )
-        # CAMERA SEGMENTATION NODE
+    # POINTCLOUD SEGMENTATION NODE
     pointcloud_segmentation_node = Node(
         package='pointcloud_segmentation_r2',
         name='pointcloud_segmentation',
@@ -33,7 +33,6 @@ def generate_launch_description():
         output='screen',
         parameters=[config]
     )
-
 
     # Create the launch description and populate
     ld = LaunchDescription()
