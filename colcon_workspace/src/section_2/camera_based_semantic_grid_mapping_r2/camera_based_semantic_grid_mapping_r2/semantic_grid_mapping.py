@@ -29,12 +29,13 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.time import Time
+from rclpy.qos import QoSProfile
 
 import tf2_ros
 import tf_transformations
 
 # Messages
-from sensor_msgs.msg import CompressedImage, CameraInfo, Image
+from sensor_msgs.msg import CameraInfo, Image
 # Synchronization
 import message_filters
 # OpenCV 
@@ -51,19 +52,19 @@ class IPM(Node):
 
         # Load parameters (dst path for images, input topic)
         self.load_parameters()
-        
+        qos_profile = QoSProfile(depth=1)
         # setup subscribers
         subs = []  # array with all subscribers that should be synchronized
         for image_topic, info_topic in zip(self.image_topics_in, self.info_topics_in):
             ### START Task 3 CODE HERE ###
             # create subscriber for topic
-            image_sub = message_filters.Subscriber(Image,image_topic, queue_size=1)
+            image_sub = message_filters.Subscriber(self,Image,image_topic, qos_profile=qos_profile )
             # create a subscriber for camera info topic
-            info_sub = message_filters.Subscriber(CameraInfo, info_topic, queue_size=1)
+            info_sub = message_filters.Subscriber(self,CameraInfo, info_topic, qos_profile=qos_profile)
             ### END Task 3 CODE HERE ###
             # add subscribers to array
             subs.append(image_sub)
-            subs.append(info_sub)
+            subs.append(info_sub) 
         
         # synchronized subscriber
         self.sync_sub = message_filters.ApproximateTimeSynchronizer(subs, queue_size=5., slop=0.01)
@@ -195,16 +196,24 @@ class IPM(Node):
     
     def load_parameters(self):
 
-        self.declare_parameter('image_topics_in', 'default_value')
-        self.declare_parameter('info_topics_in', 'default_value')
-        self.declare_parameter('vehicle_base_link', 'default_value')
-        self.declare_parameter('px_per_m', 'default_value')
-        self.declare_parameter('output_width', 'default_value')
-        self.declare_parameter('output_height', 'default_value')
+        self.declare_parameter('image_topics_in', rclpy.Parameter.Type.STRING_ARRAY)
+        self.declare_parameter('info_topics_in', rclpy.Parameter.Type.STRING_ARRAY)
+        self.declare_parameter('vehicle_base_link',rclpy.Parameter.Type.STRING)
+        self.declare_parameter('px_per_m', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('output_width', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('output_height', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('test', 10000000)
+        self.test = self.get_parameter('test').get_parameter_value().integer_value
+        self.get_logger().info("TESTTTTTTT")
+        self.get_logger().info("test: " + str(self.test))
 
-        self.image_topics_in = self.get_parameter('image_topics_in').get_parameter_value().string_value
-        self.info_topics_in = self.get_parameter('info_topics_in').get_parameter_value().string_value
+
+        self.image_topics_in = self.get_parameter('image_topics_in').get_parameter_value().string_array_value
+        self.info_topics_in = self.get_parameter('info_topics_in').get_parameter_value().string_array_value
         self.vehicle_base_link = self.get_parameter('vehicle_base_link').get_parameter_value().string_value
+        #self.get_logger().info("image_topics_in: " + [self.image_topics_in])
+        # self.get_logger().info("info_topics_in: " + self.info_topics_in)
+        # self.get_logger().info("vehicle_base_link: " + self.vehicle_base_link)
 
         config = {}
         config["px_per_m"] = self.get_parameter('px_per_m').get_parameter_value().integer_value
