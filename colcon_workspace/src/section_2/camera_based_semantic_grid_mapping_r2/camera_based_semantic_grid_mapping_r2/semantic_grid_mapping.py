@@ -76,7 +76,7 @@ class IPM(Node):
 
         # tf listener for coordinates transformations
         self.tfBuffer = tf2_ros.Buffer()
-        self.tfListener = tf2_ros.TransformListener(self.tfBuffer)
+        self.tfListener = tf2_ros.TransformListener(self.tfBuffer,self)
         # create a cv_bridge to convert between ros and opencv images
         self.cv_bridge = CvBridge()
 
@@ -180,7 +180,7 @@ class IPM(Node):
 
             ### START Task 4 CODE HERE ###
             # extract intrinsic matrix K (3x3) from camera info topic
-            K = np.reshape(cam_info_msg.K, (3,3)) # replace the placeholder and use the actual camera intrinsics
+            K = np.reshape(cam_info_msg.k, (3,3)) # replace the placeholder and use the actual camera intrinsics
             ### END Task 4 CODE HERE ###
 
             # decode image
@@ -202,19 +202,11 @@ class IPM(Node):
         self.declare_parameter('px_per_m', rclpy.Parameter.Type.INTEGER)
         self.declare_parameter('output_width', rclpy.Parameter.Type.INTEGER)
         self.declare_parameter('output_height', rclpy.Parameter.Type.INTEGER)
-        self.declare_parameter('test', 10000000)
-        self.test = self.get_parameter('test').get_parameter_value().integer_value
-        self.get_logger().info("TESTTTTTTT")
-        self.get_logger().info("test: " + str(self.test))
-
 
         self.image_topics_in = self.get_parameter('image_topics_in').get_parameter_value().string_array_value
         self.info_topics_in = self.get_parameter('info_topics_in').get_parameter_value().string_array_value
         self.vehicle_base_link = self.get_parameter('vehicle_base_link').get_parameter_value().string_value
-        #self.get_logger().info("image_topics_in: " + [self.image_topics_in])
-        # self.get_logger().info("info_topics_in: " + self.info_topics_in)
-        # self.get_logger().info("vehicle_base_link: " + self.vehicle_base_link)
-
+        
         config = {}
         config["px_per_m"] = self.get_parameter('px_per_m').get_parameter_value().integer_value
         config["output_width"] = self.get_parameter('output_width').get_parameter_value().integer_value

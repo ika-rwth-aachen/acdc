@@ -64,8 +64,8 @@ def generate_launch_description():
     ld.add_action(use_sim_time)
     ld.add_action(rosbag_play_node)
     ld.add_action(semantic_grid_mapping_node)
-    #ld.add_action(front_left_segmented_image_node)
-    #ld.add_action(front_right_segmented_image_node)
+    ld.add_action(front_left_segmented_image_node)
+    ld.add_action(front_right_segmented_image_node)
     ld.add_action(segmentation_viewer_node)
 
     return ld
