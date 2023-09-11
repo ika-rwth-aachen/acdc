@@ -58,9 +58,9 @@ class IPM(Node):
         for image_topic, info_topic in zip(self.image_topics_in, self.info_topics_in):
             ### START Task 3 CODE HERE ###
             # create subscriber for topic
-            image_sub = message_filters.Subscriber(self,Image,image_topic, qos_profile=qos_profile )
+            image_sub = message_filters.Subscriber(self, Image,image_topic, qos_profile=qos_profile)
             # create a subscriber for camera info topic
-            info_sub = message_filters.Subscriber(self,CameraInfo, info_topic, qos_profile=qos_profile)
+            info_sub = message_filters.Subscriber(self, CameraInfo, info_topic, qos_profile=qos_profile)
             ### END Task 3 CODE HERE ###
             # add subscribers to array
             subs.append(image_sub)
@@ -179,7 +179,7 @@ class IPM(Node):
 
 
             ### START Task 4 CODE HERE ###
-            # extract intrinsic matrix K (3x3) from camera info topic
+            # extract intrinsic matrix k (3x3) from camera info topic
             K = np.reshape(cam_info_msg.k, (3,3)) # replace the placeholder and use the actual camera intrinsics
             ### END Task 4 CODE HERE ###
 
