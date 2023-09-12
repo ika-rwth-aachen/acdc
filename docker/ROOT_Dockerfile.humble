@@ -1,6 +1,5 @@
 FROM rwthika/acdc:ros2-cuda
 
-
 RUN pip install tensorflow==2.13.0
 RUN pip install transforms3d
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -12,16 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-humble-tf2-sensor-msgs \
     ros-humble-tf-transformations\
     && rm -rf /var/lib/apt/lists/*
-
-ARG UID=1000
-ARG GID=1000
-
-RUN groupadd -g $GID rosuser && \
-    useradd -u $UID -g $GID -m rosuser
-
-USER rosuser
-
-
+    
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics

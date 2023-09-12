@@ -1,3 +1,6 @@
+UID := $(shell id -u)
+GID := $(shell id -g)
+
 all: help
 
 help:
@@ -6,7 +9,7 @@ help:
 	@echo ""
 	@echo "   1. make build     - build image"
 	@echo "   2. make push      - push image"
-	@echo "   3. make pull 		- pull image"
+	@echo "   3. make pull 	    - pull image"
 	@echo "   4. make clean     - remove image"
 	@echo ""
 
@@ -16,6 +19,8 @@ build: # build for current platform
 		--load \
 		--file Dockerfile.humble \
 		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
+		--build-arg UID=$(UID) \
+		--build-arg GID=$(GID) \
 		--tag rwthika/acdc:ros2-cuda-tf \
 		.
 
