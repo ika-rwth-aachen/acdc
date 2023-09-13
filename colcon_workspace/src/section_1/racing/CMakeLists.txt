@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5) # required for modern CMake features
+cmake_minimum_required(VERSION 3.8) # required for modern CMake features
 
 include_guard(GLOBAL) # this CMakeLists can only be read once in this project
 

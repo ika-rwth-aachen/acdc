@@ -1,0 +1,8 @@
+publisher_node:
+  ros__parameters:
+    base_message: "ROS2 is awesome!"
+    topic: "cpp_pubsub_tutorial"
+
+subscriber_node:
+  ros__parameters:
+    topic: "cpp_pubsub_tutorial"
