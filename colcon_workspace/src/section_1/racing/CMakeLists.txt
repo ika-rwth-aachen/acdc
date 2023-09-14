@@ -49,7 +49,7 @@ target_include_directories(${PROJECT_NAME}_library PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
     PRIVATE src)
-target_compile_features(${PROJECT_NAME}_lib PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(${PROJECT_NAME}_library PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 
 
 # add a building output: a ROS-node that wraps the ROS-independent library
