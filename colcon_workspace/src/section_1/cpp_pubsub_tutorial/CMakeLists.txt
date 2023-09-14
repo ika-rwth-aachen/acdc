@@ -21,13 +21,15 @@ find_package(std_msgs REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 
-#Executables for publisher and subscriber
+#Add executables for publisher and subscriber
 add_executable(publisher src/publisher_node.cpp)
+# Link the ROS node to the ROS packages used to encode send and receive signals
 ament_target_dependencies(publisher 
     rclcpp 
     std_msgs)
 
 add_executable(subscriber src/subscriber_node.cpp)
+# Link the ROS node to the ROS packages used to encode send and receive signals
 ament_target_dependencies(subscriber 
     rclcpp 
     std_msgs)
