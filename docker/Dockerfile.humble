@@ -1,29 +1,19 @@
-FROM rwthika/acdc:ros2-cuda
+FROM rwthika/ros2-tf:humble-desktop-full-tf2.11.0
 
-
-RUN pip install tensorflow==2.13.0
 RUN pip install transforms3d
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    ros-humble-image-pipeline \
-    ros-humble-sensor-msgs-py \
+    ros-humble-geometry-msgs \
     ros-humble-geometry2 \
+    ros-humble-image-pipeline \
     ros-humble-message-filters \
-    ros-humble-tf2-geometry-msgs \
-    ros-humble-tf2-sensor-msgs \
+    ros-humble-nav-msgs \
+    ros-humble-sensor-msgs \
+    ros-humble-sensor-msgs-py \
+    ros-humble-std-msgs \
     ros-humble-tf-transformations\
+    ros-humble-tf2 \
+    ros-humble-tf2-geometry-msgs \
+    ros-humble-tf2-ros \
+    ros-humble-tf2-sensor-msgs \
+    libgeographic-dev \
     && rm -rf /var/lib/apt/lists/*
-
-ARG UID=1000
-ARG GID=1000
-
-RUN groupadd -g $GID rosuser && \
-    useradd -u $UID -g $GID -m rosuser
-
-USER rosuser
-
-
-# nvidia-container-runtime
-ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
-
-WORKDIR /home/rosuser/colcon_workspace
