@@ -36,7 +36,7 @@ ament_target_dependencies(subscriber
 
 # Set the install directories to the correct locations
 install(
-    DIRECTORY include launch config
+    DIRECTORY launch config
     DESTINATION share/${PROJECT_NAME}/
 )
 
