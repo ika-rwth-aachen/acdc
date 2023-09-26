@@ -1,7 +1,7 @@
 #include <localization/GNSSLocalizationNode.hpp>
 
 #include <GeographicLib/UTMUPS.hpp>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 /**
  * @brief Namespace for gnss_localization_node
