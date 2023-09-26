@@ -10,3 +10,6 @@
 [submodule "catkin_workspace/src/dependencies/tensorflow_cpp"]
 	path = catkin_workspace/src/dependencies/tensorflow_cpp
 	url = https://github.com/ika-rwth-aachen/tensorflow_cpp
+[submodule "colcon_workspace/src/section_2/localization/kiss-icp"]
+	path = colcon_workspace/src/section_2/localization/kiss-icp
+	url = https://github.com/PRBonn/kiss-icp.git
