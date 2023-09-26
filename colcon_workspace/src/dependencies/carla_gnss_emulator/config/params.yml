@@ -1,0 +1,5 @@
+carla_gnss_emulator:
+  ros__parameters:
+    gnss_publish_period: 1.0
+    utm_zone: 31
+    is_northern_hemisphere: true
