@@ -98,11 +98,13 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
 bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point)
 {
   try {
+    // START TASK 1 CODE HERE
     int zone;
     bool northp;
     utm_point.header.frame_id="utm";
     GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
     return true;
+    // END TASK 1 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
     return false;
@@ -120,9 +122,11 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
 bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame)
 {
   try {
+    // START TASK 2 CODE HERE
     geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
     tf2::doTransform(input_point, output_point, tf);
     return true;
+    // END TASK 2 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
     return false;
@@ -138,6 +142,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
  */
 void GNSSLocalizationNode::estimateGNSSHeading(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose)
 {
+    // START TASK 3 CODE HERE
     // calculate the yaw angle from two sequential gnss-points
     double dx = current_point.point.x-last_point.point.x;
     double dy = current_point.point.y-last_point.point.y;
@@ -151,6 +156,7 @@ void GNSSLocalizationNode::estimateGNSSHeading(const geometry_msgs::msg::PointSt
     tf2::Quaternion q;
     q.setRPY(0, 0, yaw);
     output_pose.pose.orientation = tf2::toMsg(q);
+    // END TASK 3 CODE HERE
 }
 
 /**
@@ -236,6 +242,7 @@ void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initi
  */
 void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose, const geometry_msgs::msg::Vector3& delta_translation, const tf2::Quaternion& delta_rotation)
 {
+  // START TASK 4 CODE HERE
   // The delta values are given in a vehicle centered frame --> we need to transform them into the map frame
   // First apply delta orientation to the pose
   tf2::Quaternion orientation;
@@ -253,6 +260,7 @@ void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose,
   // Apply dx and dy (in map coordinates) to the position
   pose.pose.position.x += map_dx;
   pose.pose.position.y += map_dy;
+  // END TASK 4 CODE HERE
 }
 
 /**
