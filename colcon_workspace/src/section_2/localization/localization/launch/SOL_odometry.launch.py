@@ -38,7 +38,7 @@ def generate_launch_description():
             executable='odometry_node',
             output="screen",
             # START TASK 1 CODE HERE
-            remappings=[('pointcloud_topic', '/my_pcl_topic')],
+            remappings=[('pointcloud_topic', '/lidar/pointcloud')],
             parameters=[{
                     'publish_alias_tf': False,
                     'publish_odom_tf': True,

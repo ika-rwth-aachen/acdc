@@ -93,7 +93,7 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
  * @param[in] latitude latitude coordinate in decimal degree
  * @param[in] longitude longitude coordinate in decimal degree
  * @param[out] geometry_msgs::msg::PointStamped indicating the position in the utm system
- * @return bool indicating if projection was succesfull
+ * @return bool indicating if projection was succesful
  */
 bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point)
 {
@@ -103,7 +103,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
     bool northp;
     utm_point.header.frame_id="utm";
     GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
-    // return true if succesfull
+    // return true if succesful
     return true;
     // END TASK 1 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
@@ -118,7 +118,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
  * @param[in] input_point 
  * @param[out] output_point 
  * @param[in] output_frame the frame to transform input_point to
- * @return bool indicating if transformation was succesfull
+ * @return bool indicating if transformation was succesful
  */
 bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame)
 {
@@ -126,7 +126,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
     // START TASK 2 CODE HERE
     geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
     tf2::doTransform(input_point, output_point, tf);
-    // return true if succesfull
+    // return true if succesful
     return true;
     // END TASK 2 CODE HERE
   } catch (tf2::TransformException& ex) {
@@ -199,7 +199,7 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
  * @param previous_odometry the previous odometry measurement
  * @param delta_translation the translation of the vehicle to move from the previous odometry pose to the current odometry pose
  * @param delta_rotation the rotation of the vehicle to move from the previous odometry pose to the current odometry pose
- * @return bool indicating if function call was successfull 
+ * @return bool indicating if function call was successful
  */
 bool GNSSLocalizationNode::getIncrementalMovement(const nav_msgs::msg::Odometry& current_odometry, const nav_msgs::msg::Odometry& previous_odometry, geometry_msgs::msg::Vector3& delta_translation, tf2::Quaternion& delta_rotation)
 {

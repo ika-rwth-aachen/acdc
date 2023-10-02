@@ -93,19 +93,19 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
  * @param[in] latitude latitude coordinate in decimal degree
  * @param[in] longitude longitude coordinate in decimal degree
  * @param[out] geometry_msgs::msg::PointStamped indicating the position in the utm system
- * @return bool indicating if projection was succesfull
+ * @return bool indicating if projection was succesful
  */
 bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point)
 {
   try {
-    // START TASK 1 CODE HERE
+    // START TASK 2 CODE HERE
 
 
 
 
-    // return true if succesfull
+    // return true if succesful
     return false;
-    // END TASK 1 CODE HERE
+    // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
     return false;
@@ -118,17 +118,17 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
  * @param[in] input_point 
  * @param[out] output_point 
  * @param[in] output_frame the frame to transform input_point to
- * @return bool indicating if transformation was succesfull
+ * @return bool indicating if transformation was succesful
  */
 bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame)
 {
   try {
-    // START TASK 2 CODE HERE
+    // START TASK 3 CODE HERE
 
 
-    // return true if succesfull
+    // return true if succesful
     return false;
-    // END TASK 2 CODE HERE
+    // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
     return false;
@@ -144,7 +144,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
  */
 void GNSSLocalizationNode::estimateGNSSHeading(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose)
 {
-    // START TASK 3 CODE HERE
+    // START TASK 4 CODE HERE
     // calculate the yaw angle from two sequential gnss-points
 
 
@@ -158,7 +158,7 @@ void GNSSLocalizationNode::estimateGNSSHeading(const geometry_msgs::msg::PointSt
 
 
 
-    // END TASK 3 CODE HERE
+    // END TASK 4 CODE HERE
 }
 
 /**
@@ -199,7 +199,7 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
  * @param previous_odometry the previous odometry measurement
  * @param delta_translation the translation of the vehicle to move from the previous odometry pose to the current odometry pose
  * @param delta_rotation the rotation of the vehicle to move from the previous odometry pose to the current odometry pose
- * @return bool indicating if function call was successfull 
+ * @return bool indicating if function call was successful
  */
 bool GNSSLocalizationNode::getIncrementalMovement(const nav_msgs::msg::Odometry& current_odometry, const nav_msgs::msg::Odometry& previous_odometry, geometry_msgs::msg::Vector3& delta_translation, tf2::Quaternion& delta_rotation)
 {
@@ -253,7 +253,7 @@ void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose,
   // now perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
   double initial_yaw;
   getYawFromQuaternion(initial_yaw, orientation);
-  // START TASK 4 CODE HERE
+  // START TASK 5 CODE HERE
 
 
 
@@ -262,7 +262,7 @@ void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose,
   // Apply dx and dy (in map coordinates) to the position
 
 
-  // END TASK 4 CODE HERE
+  // END TASK 5 CODE HERE
 }
 
 /**
