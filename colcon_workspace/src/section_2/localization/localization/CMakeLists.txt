@@ -56,4 +56,18 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+  if(BUILD_TESTING)
+    find_package(ament_cmake_gtest REQUIRED)
+    ament_add_gtest(${PROJECT_NAME}-test test/test_gnss_localization.cpp)
+    target_include_directories(${PROJECT_NAME}-test PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include>
+    )
+    target_include_directories(${PROJECT_NAME}-test PUBLIC test)
+    ament_target_dependencies(${PROJECT_NAME}-test
+      GeographicLib
+      geometry_msgs
+    )
+  endif()
+
 ament_package()
