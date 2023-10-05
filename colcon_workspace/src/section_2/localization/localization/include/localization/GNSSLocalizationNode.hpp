@@ -35,7 +35,7 @@ private:
 
   bool projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point);
   bool transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame);
-  void estimateGNSSHeading(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose);
+  void estimateGNSSYawAngle(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose);
   bool getIncrementalMovement(const nav_msgs::msg::Odometry& current_odometry, const nav_msgs::msg::Odometry& previous_odometry, geometry_msgs::msg::Vector3& delta_translation, tf2::Quaternion& delta_rotation);
   void setInitialPose(geometry_msgs::msg::PoseStamped& initial_pose);
   void posePrediction(geometry_msgs::msg::PoseStamped& pose, const geometry_msgs::msg::Vector3& delta_translation, const tf2::Quaternion& delta_rotation);

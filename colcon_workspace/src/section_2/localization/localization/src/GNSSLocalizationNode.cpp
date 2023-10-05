@@ -72,11 +72,11 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
   // publish the gps point as message
   publisher_gnss_point_->publish(map_point);
 
-  // Estimate the yaw from two gnss-points within the map-frame
-  if(last_gnss_map_point_!=nullptr) // We need two gnss-points to estimate the heading --> check if the last_gnss_map_point_ is available
+  // Estimate the yaw angle from two gnss-points within the map-frame
+  if(last_gnss_map_point_!=nullptr) // We need two gnss-points to estimate the yaw angle --> check if the last_gnss_map_point_ is available
   {
     geometry_msgs::msg::PoseStamped map_pose;
-    estimateGNSSHeading(map_point, *last_gnss_map_point_, map_pose);
+    estimateGNSSYawAngle(map_point, *last_gnss_map_point_, map_pose);
     // store the map_pose in a member variable
     gnss_map_pose_ = std::make_shared<geometry_msgs::msg::PoseStamped>(map_pose);
     publisher_gnss_pose_->publish(*gnss_map_pose_);
@@ -99,12 +99,12 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
 {
   try {
     // START TASK 2 CODE HERE
-
-
-
-
+    int zone;
+    bool northp;
+    utm_point.header.frame_id="utm";
+    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
     // return true if succesful
-    return false;
+    return true;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
@@ -124,10 +124,10 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 {
   try {
     // START TASK 3 CODE HERE
-
-
+    geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
+    tf2::doTransform(input_point, output_point, tf);
     // return true if succesful
-    return false;
+    return true;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
@@ -136,17 +136,16 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 }
 
 /**
- * @brief This function estimates the heading of the vehicle with respect to two given point-measurements
+ * @brief This function estimates the yaw-angle of the vehicle with respect to two given point-measurements
  * 
  * @param[in] current_point the current GNSS Point
  * @param[in] last_point the previous GNSS Point
  * @param[out] output_pose geometry_msgs::msg::Pose including the current_point and an additional 2D orientation
  */
-void GNSSLocalizationNode::estimateGNSSHeading(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose)
+void GNSSLocalizationNode::estimateGNSSYawAngle(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose)
 {
     // START TASK 4 CODE HERE
     // calculate the yaw angle from two sequential gnss-points
-
 
 
 
