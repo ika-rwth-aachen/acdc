@@ -129,7 +129,7 @@ class PCLSegmentation(Node):
         # Task 2:
         # call publisher to publish the message "segmented_pcl_msg"
 
-        self.pub_seg.publish(segmented_pcl_msg)
+
         ### END TASK 2 CODE HERE ###
 
 
@@ -337,8 +337,15 @@ class PCLSegmentation(Node):
         # create point field for cloud_creator
         self.point_field = self.make_point_field()
 
-        # create publisher for passing on depth estimation and camera info      
-        self.pub_seg = self.create_publisher(PointCloud2, "/points2_segmented", 1)
+        ### START TASK 1 CODE HERE ###
+
+        # Task 1:
+        # create publisher for the segmented point cloud, publish on topic "/points2_segmented"
+        # The publish type is the PointCloud2 data format
+
+        
+        ### END TASK 1 CODE HERE ###
+        
         # listen for input image and camera info
         self.sub_pcl = self.create_subscription(PointCloud2, "/points2", self.predict, 1)
 
