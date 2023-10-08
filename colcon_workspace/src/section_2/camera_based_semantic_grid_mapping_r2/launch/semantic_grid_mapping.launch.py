@@ -19,7 +19,7 @@ def generate_launch_description():
     # ROSBAG PLAY node
     rosbag_play_node = ExecuteProcess(
         cmd=['ros2', 'bag', 'play', '--rate', '0.1', '-l',
-             '/home/rosuser/bag/semantic_8_cams.db3'],
+             '/home/rosuser/ws/bag/semantic_8_cams.db3'],
         output='screen'
     )
 
