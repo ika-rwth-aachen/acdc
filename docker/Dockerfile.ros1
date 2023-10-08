@@ -116,9 +116,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
-
 COPY TensorFlowConfig.cmake /usr/local/lib/cmake/tensorflow/TensorFlowConfig.cmake
 
-RUN mkdir -p $DOCKER_HOME/ws/catkin_workspace
-WORKDIR $DOCKER_HOME/ws/catkin_workspace
-USER root 
+WORKDIR /home/rosuser/ws/catkin_workspace
