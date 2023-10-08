@@ -45,4 +45,4 @@ All programming tasks can be run inside of a Docker container, which we provide.
 
 ## License
 
-Copyright (c) 2022, Institute for Automotive Engineering (ika), RWTH University
+Copyright (c) 2023-2024, Institute for Automotive Engineering (ika), RWTH University
