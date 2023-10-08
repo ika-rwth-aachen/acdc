@@ -1,6 +1,3 @@
-UID := $(shell id -u)
-GID := $(shell id -g)
-
 all: help
 
 help:
@@ -13,28 +10,32 @@ help:
 	@echo "   4. make clean     - remove image"
 	@echo ""
 
-	
-build: # build for current platform 
-	@docker buildx build \
-		--load \
-		--file Dockerfile.humble \
-		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
-		--build-arg UID=$(UID) \
-		--build-arg GID=$(GID) \
-		--tag rwthika/acdc:ros2-cuda-tf \
-		.
-
-push: # build and push for both platforms
+build_ros1:
 	@docker buildx build \
 		--push \
-		--file Dockerfile.humble \
+		--file Dockerfile.ros1 \
 		--platform linux/amd64,linux/arm64 \
+		--cache-from type=registry,ref=rwthika/acdc:ros1-cuda-tf \
+		--tag rwthika/acdc:ros1-cuda-tf \
+		.
+
+
+build_ros2:
+	@docker buildx build \
+		--push \
+		--file Dockerfile.ros2 \
 		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
 		--tag rwthika/acdc:ros2-cuda-tf \
 		.
 
-pull:
+pull_ros1:
+	@docker pull rwthika/acdc:ros1-cuda-tf
+
+clean_ros1:
+	@docker rmi -f rwthika/acdc:ros1-cuda-tf
+
+pull_ros2:
 	@docker pull rwthika/acdc:ros2-cuda-tf
 
-clean:
+clean_ros2:
 	@docker rmi -f rwthika/acdc:ros2-cuda-tf
