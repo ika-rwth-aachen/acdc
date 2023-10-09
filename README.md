@@ -32,15 +32,20 @@ All programming tasks can be run inside of a Docker container, which we provide.
     git clone --recurse-submodules https://github.com/ika-rwth-aachen/acdc.git
     ```
 
-2. Pull the Docker image that is needed to run our tasks.:
+2. Pull the Docker image that is needed to run our tasks:
     ```bash
-    docker pull rwthika/acdc:latest
+    docker pull rwthika/acdc:ros1
     ```
 
-3. In a terminal, navigate to the Docker directory of this repository and launch the ACDC Docker container with the provided run script:
+3. If you also want to execute our new ROS2 tasks, then you would also need to pull the following image:
+    ```bash
+    docker pull rwthika/acdc:ros2
+    ```
+
+4. In a terminal, navigate to the Docker directory of this repository and launch the ACDC Docker container with the provided run script:
     ```bash
     # acdc/docker
-    ./run.sh
+    ./ros1_run.sh
     ```
 
 ## License

@@ -15,8 +15,8 @@ build_ros1:
 		--push \
 		--file Dockerfile.ros1 \
 		--platform linux/amd64,linux/arm64 \
-		--cache-from type=registry,ref=rwthika/acdc:ros1-cuda-tf \
-		--tag rwthika/acdc:ros1-cuda-tf \
+		--cache-from type=registry,ref=rwthika/acdc:ros1 \
+		--tag rwthika/acdc:ros1 \
 		.
 
 
@@ -24,18 +24,19 @@ build_ros2:
 	@docker buildx build \
 		--push \
 		--file Dockerfile.ros2 \
-		--cache-from type=registry,ref=rwthika/acdc:ros2-cuda-tf \
-		--tag rwthika/acdc:ros2-cuda-tf \
+		--platform linux/amd64,linux/arm64 \
+		--cache-from type=registry,ref=rwthika/acdc:ros2 \
+		--tag rwthika/acdc:ros2 \
 		.
 
 pull_ros1:
-	@docker pull rwthika/acdc:ros1-cuda-tf
+	@docker pull rwthika/acdc:ros1
 
 clean_ros1:
-	@docker rmi -f rwthika/acdc:ros1-cuda-tf
+	@docker rmi -f rwthika/acdc:ros1
 
 pull_ros2:
-	@docker pull rwthika/acdc:ros2-cuda-tf
+	@docker pull rwthika/acdc:ros2
 
 clean_ros2:
-	@docker rmi -f rwthika/acdc:ros2-cuda-tf
+	@docker rmi -f rwthika/acdc:ros2
