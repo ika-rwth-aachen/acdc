@@ -43,7 +43,7 @@ jobs:
   build_workspace:
     runs-on: ubuntu-latest
     container: 
-      image: rwthika/acdc:latest
+      image: rwthika/acdc:ros1
     
     steps:
       - name: Checkout Repository
