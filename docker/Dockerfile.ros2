@@ -1,6 +1,15 @@
-FROM rwthika/ros2-tf:humble-desktop-full-tf2.11.0
+FROM rwthika/ros2:humble-desktop-full
 
-RUN pip install transforms3d
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    curl \
+    bash-completion \
+    dirmngr \
+    gnupg2 \
+    lsb-release \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install tensorflow transforms3d
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-humble-geometry-msgs \
     ros-humble-geometry2 \
