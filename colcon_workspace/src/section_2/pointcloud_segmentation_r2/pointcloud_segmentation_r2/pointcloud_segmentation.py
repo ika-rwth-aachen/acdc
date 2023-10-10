@@ -129,7 +129,7 @@ class PCLSegmentation(Node):
         # Task 2:
         # call publisher to publish the message "segmented_pcl_msg"
 
-        self.pub_seg.publish(segmented_pcl_msg)
+
         ### END TASK 2 CODE HERE ###
 
 
@@ -233,39 +233,39 @@ class PCLSegmentation(Node):
 
         msg_pf1 = pc2.PointField()
         msg_pf1.name = str('x')
-        msg_pf1.offset = np.int(0)
+        msg_pf1.offset = int(0)
         msg_pf1.datatype = PointField.FLOAT32
-        msg_pf1.count = np.int(1)
+        msg_pf1.count = int(1)
 
         msg_pf2 = pc2.PointField()
         msg_pf2.name = str('y')
-        msg_pf2.offset = np.int(4)
+        msg_pf2.offset = int(4)
         msg_pf2.datatype = PointField.FLOAT32
-        msg_pf2.count = np.int(1)
+        msg_pf2.count = int(1)
 
         msg_pf3 = pc2.PointField()
         msg_pf3.name = str('z')
-        msg_pf3.offset = np.int(8)
+        msg_pf3.offset = int(8)
         msg_pf3.datatype = PointField.FLOAT32
-        msg_pf3.count = np.int(1)
+        msg_pf3.count = int(1)
 
         msg_pf4 = pc2.PointField()
         msg_pf4.name = str('intensity')
-        msg_pf4.offset = np.int(16)
-        msg_pf4.datatype = np.int(7)
-        msg_pf4.count = np.int(1)
+        msg_pf4.offset = int(16)
+        msg_pf4.datatype = int(7)
+        msg_pf4.count = int(1)
 
         msg_pf5 = pc2.PointField()
         msg_pf5.name = str('label')
-        msg_pf5.offset = np.int(20)
-        msg_pf5.datatype = np.int(4)
-        msg_pf5.count = np.int(1)
+        msg_pf5.offset = int(20)
+        msg_pf5.datatype = int(4)
+        msg_pf5.count = int(1)
 
         msg_pf6 = pc2.PointField()
         msg_pf6.name = str('rgb')
-        msg_pf6.offset = np.int(28)
+        msg_pf6.offset = int(28)
         msg_pf6.datatype = PointField.FLOAT32
-        msg_pf6.count = np.int(1)
+        msg_pf6.count = int(1)
 
         return [msg_pf1, msg_pf2, msg_pf3, msg_pf4, msg_pf5, msg_pf6]
 
@@ -337,8 +337,15 @@ class PCLSegmentation(Node):
         # create point field for cloud_creator
         self.point_field = self.make_point_field()
 
-        # create publisher for passing on depth estimation and camera info      
-        self.pub_seg = self.create_publisher(PointCloud2, "/points2_segmented", 1)
+        ### START TASK 1 CODE HERE ###
+
+        # Task 1:
+        # create publisher for the segmented point cloud, publish on topic "/points2_segmented"
+        # The publish type is the PointCloud2 data format
+
+        
+        ### END TASK 1 CODE HERE ###
+        
         # listen for input image and camera info
         self.sub_pcl = self.create_subscription(PointCloud2, "/points2", self.predict, 1)
 

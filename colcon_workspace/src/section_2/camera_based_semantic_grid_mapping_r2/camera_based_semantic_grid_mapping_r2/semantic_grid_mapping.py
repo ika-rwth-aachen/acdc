@@ -58,9 +58,9 @@ class IPM(Node):
         for image_topic, info_topic in zip(self.image_topics_in, self.info_topics_in):
             ### START Task 3 CODE HERE ###
             # create subscriber for topic
-            image_sub = message_filters.Subscriber(self, Image,image_topic, qos_profile=qos_profile)
+            image_sub = message_filters.Subscriber(self, Image, None, qos_profile=qos_profile)
             # create a subscriber for camera info topic
-            info_sub = message_filters.Subscriber(self, CameraInfo, info_topic, qos_profile=qos_profile)
+            info_sub = message_filters.Subscriber(self, CameraInfo, None, qos_profile=qos_profile)
             ### END Task 3 CODE HERE ###
             # add subscribers to array
             subs.append(image_sub)
@@ -137,50 +137,47 @@ class IPM(Node):
             
             ### START Task 5, Part 1 CODE HERE ###
             # use tfBuffer to look up the transformation from the vehicle's base link frame to the camera frame.
-            transform = self.tfBuffer.lookup_transform(cam_info_msg.header.frame_id, self.vehicle_base_link, common_time)
+            # transform = self.tfBuffer.lookup_transform(None, None, None) # uncomment and adjust
             ### END Task 5, Part 1 CODE HERE ###
             
             ### START Task 5, Part 2 CODE HERE ###
             # extract quaternion from transform and transform it into a list
-            quaternion = transform.transform.rotation # extract from transform
-            quaternion = [quaternion.x, quaternion.y , quaternion.z, quaternion.w] # convert to list
-
+            # quaternion = transform.transform.REPLACE_ME # adjust and uncomment
+            # quaternion = [REPLACE_ME.x, REPLACE_ME.y , REPLACE_ME.z, REPLACE_ME.w] # uncomment and adjust 
+            
             # convert quaternion to (roll,pitch,yaw)
-            roll, pitch, yaw = tf_transformations.euler_from_quaternion(quaternion)          
-
+            # roll, pitch, yaw = REPLACE_ME # uncomment and adjust
+            
             # compute rotation matrix
-            Rz = np.array([[np.cos(yaw), -np.sin(yaw), 0.0],
-                [np.sin(yaw), np.cos(yaw), 0.0],
-                [0.0, 0.0, 1.0]])
-            Ry = np.array([[np.cos(pitch), 0.0, np.sin(pitch)],
-                [0.0, 1.0, 0.0],
-                [-np.sin(pitch), 0.0, np.cos(pitch)]])
-            Rx = np.array([[1.0, 0.0, 0.0],
-                    [0.0, np.cos(roll), -np.sin(roll)],
-                    [0.0, np.sin(roll), np.cos(roll)]])
-            R = Rz.dot(Ry.dot(Rx))
+            Rz = None # Replace with actual matrix
+            Ry = None # Replace with actual matrix
+            Rx = None # Replace with actual matrix
+            R = None # Replace with actual matrix (combination of Rx, Ry, Rz)
 
 
-            # extract translation from transform
-            t = transform.transform.translation
-            t = [t.x, t.y, t.z]
+            # extract translation from transform 
+            # t = transform.transform.REPLACE_ME # uncomment and adjust
+            # t = [t.x, t.y, t.z]  # uncomment
 
             # convert t to a numpy array
-            t = np.array(t)
+            # t = REPLACE_ME # uncomment and adjust
 
             # combine translation (3x1) and rotation matrix (3x3) into a 4x4 homogeneous transform
             # representing the extrinsic matrix E
             # first combine R and t
-            E = np.column_stack([R,t]) # uncomment and adjust
+            # E = np.REPLACE_ME([REPLACE_ME, REPLACE_ME]) # uncomment and adjust
             # then add 1 row ([0., 0., 0., 1.]) to complete the transform
-            E = np.row_stack([E, np.array([0.,0.,0.,1.])]) # uncomment and adjust
+            # E = np.row_stack([E, REPLACE_ME]) # uncomment and adjust
 
+            PLACE_HOLDER_EXTRINSIC = np.array([[1., 0., 0., 1.],[0., 1., 0., 1.],[0., 0., 1., 1.],[0., 0., 0., 1.]]) # comment when done with task 5
+            E = PLACE_HOLDER_EXTRINSIC # comment when done with task 5
             ### END Task 5, Part 2 CODE HERE ###
 
 
             ### START Task 4 CODE HERE ###
-            # extract intrinsic matrix k (3x3) from camera info topic
-            K = np.reshape(cam_info_msg.k, (3,3)) # replace the placeholder and use the actual camera intrinsics
+            # extract intrinsic matrix K (3x3) from camera info topic
+            PLACE_HOLDER_INTRINSIC = [100., 0., 0., 0., 100., 0., 0., 0., 100.] # comment this line in your solution
+            K = np.reshape(PLACE_HOLDER_INTRINSIC, (3,3)) # replace the placeholder and use the actual camera intrinsics
             ### END Task 4 CODE HERE ###
 
             # decode image

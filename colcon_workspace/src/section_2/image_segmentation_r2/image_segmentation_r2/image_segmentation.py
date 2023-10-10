@@ -131,7 +131,11 @@ class ImageSegmentation(Node):
         
         # Task 1:
         # Replace the following command
-        rgb_encoding = self.color_palette[segmentation_map]
+        rgb_encoding = np.random.randint(
+            low=0,
+            high=255,
+            size=[self.resize_height, self.resize_width, 3]
+        )
 
         ### END CODE HERE ###
 

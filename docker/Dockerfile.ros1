@@ -116,14 +116,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
-# nvidia-container-runtime
-ENV NVIDIA_VISIBLE_DEVICES \
-    ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES \
-    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
-
 COPY TensorFlowConfig.cmake /usr/local/lib/cmake/tensorflow/TensorFlowConfig.cmake
 
-RUN mkdir -p $DOCKER_HOME/ws/colcon_workspace
-WORKDIR $DOCKER_HOME/ws/colcon_workspace
-USER root 
+WORKDIR /home/rosuser/ws/catkin_workspace

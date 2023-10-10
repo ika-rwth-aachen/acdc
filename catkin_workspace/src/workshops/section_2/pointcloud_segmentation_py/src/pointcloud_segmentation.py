@@ -127,7 +127,7 @@ class PCLSegmentation:
         # Task 2:
         # call publisher to publish the message "segmented_pcl_msg"
 
-        self.pub_seg.publish(segmented_pcl_msg)
+
         ### END TASK 2 CODE HERE ###
 
 
@@ -306,7 +306,6 @@ class PCLSegmentation:
 
 
         ### END TASK 1 CODE HERE ###
-        self.pub_seg = rospy.Publisher("/points2_segmented", PointCloud2, queue_size=1)
 
         # listen for input image and camera info
         self.sub_pcl = rospy.Subscriber("/points2", PointCloud2, self.predict, queue_size=1)
