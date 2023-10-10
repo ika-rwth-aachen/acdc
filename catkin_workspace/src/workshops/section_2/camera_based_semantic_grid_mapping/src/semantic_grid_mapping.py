@@ -45,16 +45,14 @@ class IPM():
         # Load parameters (dst path for images, input topic)
         self.load_parameters()
         
-        PLACE_HOLDER_1 = "NONEXISTENT_CAMERA_IMAGE_TOPIC"
-        PLACE_HOLDER_2 = "NONEXISTENT_CAMERA_INFO_TOPIC"
         # setup subscribers
         subs = []  # array with all subscribers that should be synchronized
         for image_topic, info_topic in zip(self.image_topics_in, self.info_topics_in):
             ### START Task 3 CODE HERE ###
             # create subscriber for topic
-            image_sub = message_filters.Subscriber(PLACE_HOLDER_1, Image, queue_size=1)
+            image_sub = message_filters.Subscriber(None, Image, queue_size=1)
             # create a subscriber for camera info topic
-            info_sub = message_filters.Subscriber(PLACE_HOLDER_2, CameraInfo, queue_size=1)
+            info_sub = message_filters.Subscriber(None, CameraInfo, queue_size=1)
             ### END Task 3 CODE HERE ###
             # add subscribers to array
             subs.append(image_sub)

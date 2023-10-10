@@ -1,0 +1,13 @@
+<robot name="passat_ika_carla">
+
+  <link name="ego_vehicle"/>
+
+  <link name="ego_vehicle/lidar"/>
+
+  <joint name="ego_vehicle_to_lidar" type="fixed">
+    <origin xyz="0 0 1.7" />
+    <parent link="ego_vehicle"/>
+    <child link="ego_vehicle/lidar"/>
+  </joint>
+
+</robot>

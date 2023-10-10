@@ -30,19 +30,19 @@
 #include <cmath>
 
 void VehicleController::computeTargetVelocity() {
-    const float FACTOR = 2.0f;
-    const float FACTOR2 = 8.0f;
+    const float VELOCITY_FACTOR = 2.0f;
+    const float VELOCITY_TUNING = 8.0f;
     const float& front_distance = this->sensor_distances_[2];
 
     // The larger the free space in the front, the greater the velocity can be.
     // The tanh function - tuned with parameters - is useful to implement such behavior smoothly.
-    this->target_velocity_ = front_distance * FACTOR * std::tanh(front_distance * FACTOR2);
+    this->target_velocity_ = front_distance * VELOCITY_FACTOR * std::tanh(front_distance * VELOCITY_TUNING);
 }
 
 void VehicleController::computeTargetSteeringAngle() {
-    const float FACTOR = 0.5f;
+    const float STEERING_FACTOR = 0.5f;
 
-    // Calcualte relative lateral position on the road
+    // Calculate relative lateral position on the road
     // (how far towards right border is the cart located)
     const float& right_distance = this->sensor_distances_[0];
     const float& front_distance = this->sensor_distances_[2];
@@ -53,10 +53,10 @@ void VehicleController::computeTargetSteeringAngle() {
     // (and vice versa).
     // (Steering to the left = positive steering angle)
     // To achieve this in a smooth way, a parameter-tuned tanh function can be used.
-    this->target_steering_angle_ = (FACTOR/front_distance) * rightShift * std::tanh( std::abs(rightShift));
+    this->target_steering_angle_ = (STEERING_FACTOR/front_distance) * rightShift * std::tanh( std::abs(rightShift));
 }
 
-void VehicleController::overwriteLidarDistances(const float distances[3]) {
+void VehicleController::overwriteLidarDistances(const float distances[5]) {
     for(size_t i = 0; i<5; i++){
         this->sensor_distances_[i] = distances[i];
     }
@@ -74,8 +74,3 @@ double VehicleController::getTargetVelocity() {
 double VehicleController::getTargetSteeringAngle() {
     return this->target_steering_angle_;
 }
-
-
-
-
-

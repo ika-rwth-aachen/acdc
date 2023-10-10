@@ -43,7 +43,7 @@ jobs:
   build_workspace:
     runs-on: ubuntu-latest
     container: 
-      image: rwthika/acdc:latest
+      image: rwthika/acdc:ros2
     
     steps:
       - name: Checkout Repository
@@ -54,7 +54,7 @@ jobs:
       - name: Build Workspace
         shell: bash
         run: |
-             source /opt/ros/noetic/setup.bash
-             cd catkin_workspace
-             catkin build --summarize --no-notify --no-status --force-color -j1
+             source /opt/ros/humble/setup.bash
+             cd colcon_workspace
+             colcon build
 

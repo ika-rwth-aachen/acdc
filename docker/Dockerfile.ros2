@@ -1,0 +1,30 @@
+FROM rwthika/ros2:humble-desktop-full
+
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    curl \
+    bash-completion \
+    dirmngr \
+    gnupg2 \
+    lsb-release \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install tensorflow transforms3d
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    ros-humble-geometry-msgs \
+    ros-humble-geometry2 \
+    ros-humble-image-pipeline \
+    ros-humble-message-filters \
+    ros-humble-nav-msgs \
+    ros-humble-sensor-msgs \
+    ros-humble-sensor-msgs-py \
+    ros-humble-std-msgs \
+    ros-humble-tf-transformations\
+    ros-humble-tf2 \
+    ros-humble-tf2-geometry-msgs \
+    ros-humble-tf2-ros \
+    ros-humble-tf2-sensor-msgs \
+    libgeographic-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /home/rosuser/ws/colcon_workspace

@@ -34,18 +34,10 @@ using std::placeholders::_1;
 class VehicleControllerNode : public rclcpp::Node{
 public:
     VehicleControllerNode(): Node("vehicle_controller_node"){
-
-        this->declare_parameter<std::string>("vehicle.sensor_topic", "/vehicle/lidar_measurements");
-        this->declare_parameter<std::string>("vehicle.actuator_topic", "/vehicle/actuator_commands");
-
-        // Declare local variables for subscribe and publish topics
-        std::string subscribe_topic_sensors;
-        std::string publish_topic_actuators;
-
-        // Write publish and subscribe topics from parameter server into local variables
-        this->get_parameter("vehicle.sensor_topic", subscribe_topic_sensors);
-        this->get_parameter("vehicle.actuator_topic", publish_topic_actuators);
-
+        
+        // Declare and load the parameters
+        declareParameters();
+        loadParameters();
         RCLCPP_INFO(this->get_logger(), "Vehicle controller subscribes to: %s", subscribe_topic_sensors.c_str());
         RCLCPP_INFO(this->get_logger(), "Vehicle controller publishes to: %s", publish_topic_actuators.c_str());
 
@@ -64,12 +56,12 @@ public:
         delete vehicle_controller;
     }
 
-
 private:
     /**
  * @brief Callback function that is automatically triggered when a new Lidar scan is available
  * @param msg A pointer to message object that contains the new Lidar scan
  */
+
     void callbackLaserSensor(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
         // Copy argument data to local variable
         float distances[5] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
@@ -80,20 +72,29 @@ private:
         // Interface calls to the VehicleController instance
         vehicle_controller->overwriteLidarDistances(distances);
         vehicle_controller->computeTargetValues();
-        double linear_velocity = vehicle_controller->getTargetVelocity();
-        double steering_angle = vehicle_controller->getTargetSteeringAngle();
 
         // Convert local variables to a geometry_msgs::msg::Twist message for publishing.
-        auto new_action = geometry_msgs::msg::Twist();
-        geometry_msgs::msg::Vector3 steering;
-        geometry_msgs::msg::Vector3 velocity;
-        steering.z = steering_angle;
-        velocity.x = linear_velocity;
-        new_action.linear = velocity;
-        new_action.angular = steering;
+        geometry_msgs::msg::Twist new_action;
+        new_action.angular.z = vehicle_controller->getTargetSteeringAngle();
+        new_action.linear.x = vehicle_controller->getTargetVelocity();
 
         // Publish the newly computed actuator command to the topic
         publisher_actions_->publish(new_action);
+    }
+
+    void declareParameters()
+    {
+        // Declare the parameters with a default value
+        this->declare_parameter<std::string>("vehicle.sensor_topic", "/vehicle/lidar_measurements");
+        this->declare_parameter<std::string>("vehicle.actuator_topic", "/vehicle/actuator_commands");
+    }
+
+    void loadParameters()
+    {
+        // Write publish and subscribe topics from parameter server into local variables
+        subscribe_topic_sensors = this->get_parameter("vehicle.sensor_topic").as_string( );
+        publish_topic_actuators = this->get_parameter("vehicle.actuator_topic").as_string();
+
     }
 
     /* Declare variables outside of functions, such that they can be used
@@ -102,6 +103,10 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_actions_;
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscriber_sensor_data_;
     VehicleController *vehicle_controller = nullptr;
+
+    // Declare variables for subscribe and publish topics
+     std::string subscribe_topic_sensors;
+     std::string publish_topic_actuators;
 
 };
 

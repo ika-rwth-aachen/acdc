@@ -47,7 +47,7 @@ class PCLSegmentation:
     """
 
     def predict(self, pcl_msg):
-        pcl = np.array(list(sensor_msgs.point_cloud2.read_points(pcl_msg)))
+        pcl = np.array(list(pc2.read_points(pcl_msg)))
 
         # perform fov filter by using hv_in_range
         cond = self.hv_in_range(x=pcl[:, 0],
