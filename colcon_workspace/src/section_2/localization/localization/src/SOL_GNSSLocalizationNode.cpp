@@ -244,23 +244,24 @@ void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initi
 void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose, const geometry_msgs::msg::Vector3& delta_translation, const tf2::Quaternion& delta_rotation)
 {
   // The delta values are given in a vehicle centered frame --> we need to transform them into the map frame
-  // First apply delta orientation to the pose
+  // First perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
   tf2::Quaternion orientation;
   tf2::fromMsg(pose.pose.orientation, orientation);
-  orientation*=delta_rotation; // the multiplication of two quaternions represents two sequential rotations
-  pose.pose.orientation = tf2::toMsg(orientation);
-  // now perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
-  double initial_yaw;
-  getYawFromQuaternion(initial_yaw, orientation);
+  double yaw;
+  getYawFromQuaternion(yaw, orientation);
   // START TASK 5 CODE HERE
   double alpha = std::atan2(delta_translation.y, delta_translation.x);
-  double beta = initial_yaw - alpha;
+  double beta = yaw - alpha;
   double translation_magnitude = std::sqrt(std::pow(delta_translation.x, 2.0)+std::pow(delta_translation.y, 2.0));
   double map_dx = translation_magnitude*std::cos(beta);
   double map_dy = translation_magnitude*std::sin(beta);
   // Apply dx and dy (in map coordinates) to the position
   pose.pose.position.x += map_dx;
   pose.pose.position.y += map_dy;
+  // Last apply delta orientation to the pose
+  // the multiplication of two quaternions represents two sequential rotations
+  orientation*=delta_rotation;
+  pose.pose.orientation = tf2::toMsg(orientation);
   // END TASK 5 CODE HERE
 }
 

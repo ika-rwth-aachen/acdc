@@ -99,12 +99,12 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
 {
   try {
     // START TASK 2 CODE HERE
-    int zone;
-    bool northp;
-    utm_point.header.frame_id="utm";
-    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+
+
+
+
     // return true if succesful
-    return true;
+    return false;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
@@ -124,10 +124,10 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 {
   try {
     // START TASK 3 CODE HERE
-    geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
-    tf2::doTransform(input_point, output_point, tf);
+
+
     // return true if succesful
-    return true;
+    return false;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
@@ -244,14 +244,11 @@ void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initi
 void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose, const geometry_msgs::msg::Vector3& delta_translation, const tf2::Quaternion& delta_rotation)
 {
   // The delta values are given in a vehicle centered frame --> we need to transform them into the map frame
-  // First apply delta orientation to the pose
+  // First perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
   tf2::Quaternion orientation;
   tf2::fromMsg(pose.pose.orientation, orientation);
-  orientation*=delta_rotation; // the multiplication of two quaternions represents two sequential rotations
-  pose.pose.orientation = tf2::toMsg(orientation);
-  // now perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
-  double initial_yaw;
-  getYawFromQuaternion(initial_yaw, orientation);
+  double yaw;
+  getYawFromQuaternion(yaw, orientation);
   // START TASK 5 CODE HERE
 
 
@@ -259,6 +256,11 @@ void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose,
 
 
   // Apply dx and dy (in map coordinates) to the position
+
+
+  // Last apply delta orientation to the pose
+  // the multiplication of two quaternions represents two sequential rotations
+
 
 
   // END TASK 5 CODE HERE
