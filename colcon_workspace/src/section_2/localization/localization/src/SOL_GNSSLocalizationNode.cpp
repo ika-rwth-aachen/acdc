@@ -169,7 +169,7 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
 {
   // store the incoming message in a local object
   nav_msgs::msg::Odometry current_odometry = *msg;
-  if(last_odometry_!=nullptr) // We need at least two odometry measurements
+  if(last_odometry_!=nullptr && gnss_map_pose_!=nullptr) // We need at least two odometry measurements and a GNSS estimate
   {
     // derive the incremental movement of the vehicle inbetween two odometry measurements
     geometry_msgs::msg::Vector3 delta_translation;

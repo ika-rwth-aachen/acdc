@@ -99,12 +99,12 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
 {
   try {
     // START TASK 2 CODE HERE
-
-
-
-
+    int zone;
+    bool northp;
+    utm_point.header.frame_id="utm";
+    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
     // return true if succesful
-    return false;
+    return true;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
@@ -124,10 +124,10 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 {
   try {
     // START TASK 3 CODE HERE
-
-
+    geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
+    tf2::doTransform(input_point, output_point, tf);
     // return true if succesful
-    return false;
+    return true;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
@@ -146,17 +146,17 @@ void GNSSLocalizationNode::estimateGNSSYawAngle(const geometry_msgs::msg::PointS
 {
     // START TASK 4 CODE HERE
     // calculate the yaw angle from two sequential gnss-points
-
-
-
+    double dx = current_point.point.x-last_point.point.x;
+    double dy = current_point.point.y-last_point.point.y;
+    double heading = std::atan2(dy,dx);
     // use header from input point
-
+    output_pose.header = current_point.header;
     // use the position provided through the input point
-
+    output_pose.pose.position = current_point.point;
     // generate a quaternion using the calculated yaw angle
-
-
-
+    tf2::Quaternion q;
+    q.setRPY(0, 0, heading);
+    output_pose.pose.orientation = tf2::toMsg(q);
     // END TASK 4 CODE HERE
 }
 
@@ -169,7 +169,7 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
 {
   // store the incoming message in a local object
   nav_msgs::msg::Odometry current_odometry = *msg;
-  if(last_odometry_!=nullptr) // We need at least two odometry measurements
+  if(last_odometry_!=nullptr && gnss_map_pose_!=nullptr) // We need at least two odometry measurements and a GNSS estimate
   {
     // derive the incremental movement of the vehicle inbetween two odometry measurements
     geometry_msgs::msg::Vector3 delta_translation;
@@ -260,7 +260,6 @@ void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose,
 
   // Last apply delta orientation to the pose
   // the multiplication of two quaternions represents two sequential rotations
-
 
 
   // END TASK 5 CODE HERE
