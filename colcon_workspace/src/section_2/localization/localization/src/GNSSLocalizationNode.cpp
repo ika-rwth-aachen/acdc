@@ -55,7 +55,7 @@ void GNSSLocalizationNode::setup()
 }
 
 /**
- * @brief This callback is invoked when the subscriber receives a gnss message
+ * @brief This callback is invoked when the subscriber receives a GNSS message
  *
  * @param[in] msg input
  */
@@ -72,8 +72,8 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
   // publish the gps point as message
   publisher_gnss_point_->publish(map_point);
 
-  // Estimate the yaw angle from two gnss-points within the map-frame
-  if(last_gnss_map_point_!=nullptr) // We need two gnss-points to estimate the yaw angle --> check if the last_gnss_map_point_ is available
+  // Estimate the yaw angle from two GNSS-points within the map-frame
+  if(last_gnss_map_point_!=nullptr) // We need two GNSS-points to estimate the yaw angle --> check if the last_gnss_map_point_ is available
   {
     geometry_msgs::msg::PoseStamped map_pose;
     estimateGNSSYawAngle(map_point, *last_gnss_map_point_, map_pose);
@@ -93,7 +93,7 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
  * @param[in] latitude latitude coordinate in decimal degree
  * @param[in] longitude longitude coordinate in decimal degree
  * @param[out] geometry_msgs::msg::PointStamped indicating the position in the utm system
- * @return bool indicating if projection was succesful
+ * @return bool indicating if projection was successful
  */
 bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point)
 {
@@ -103,7 +103,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
     bool northp;
     utm_point.header.frame_id="utm";
     GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
-    // return true if succesful
+    // return true if successful
     return true;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
@@ -118,7 +118,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
  * @param[in] input_point 
  * @param[out] output_point 
  * @param[in] output_frame the frame to transform input_point to
- * @return bool indicating if transformation was succesful
+ * @return bool indicating if transformation was successful
  */
 bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame)
 {
@@ -126,7 +126,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
     // START TASK 3 CODE HERE
     geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
     tf2::doTransform(input_point, output_point, tf);
-    // return true if succesful
+    // return true if successful
     return true;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
@@ -145,7 +145,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 void GNSSLocalizationNode::estimateGNSSYawAngle(const geometry_msgs::msg::PointStamped& current_point, const geometry_msgs::msg::PointStamped& last_point, geometry_msgs::msg::PoseStamped& output_pose)
 {
     // START TASK 4 CODE HERE
-    // calculate the yaw angle from two sequential gnss-points
+    // calculate the yaw angle from two sequential GNSS-points
     double dx = current_point.point.x-last_point.point.x;
     double dy = current_point.point.y-last_point.point.y;
     double heading = std::atan2(dy,dx);
@@ -176,7 +176,7 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
     tf2::Quaternion delta_rotation;
     if(!getIncrementalMovement(current_odometry, *last_odometry_, delta_translation, delta_rotation)) return;
     geometry_msgs::msg::PoseStamped pose;
-    // get the initial pose either from gnss or from the previous iteration
+    // get the initial pose either from GNSS or from the previous iteration
     setInitialPose(pose);
     // predict the corresponding vehicle pose
     posePrediction(pose, delta_translation, delta_rotation);
@@ -215,14 +215,14 @@ bool GNSSLocalizationNode::getIncrementalMovement(const nav_msgs::msg::Odometry&
 
 /**
  * @brief this function sets the initial pose for the current odometry step
- * the function either returns a new gnss-based pose estimate,
+ * the function either returns a new GNSS-based pose estimate,
  * or the pose derived by the previous iteration
  * 
  * @param[out] initial_pose the initial pose
  */
 void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initial_pose)
 {
-  // use gnss pose if new measurement is available or no pose from previous iteration is available
+  // use GNSS pose if new measurement is available or no pose from previous iteration is available
   if((predicted_map_pose_==nullptr || new_gnss_pose_) && gnss_map_pose_!=nullptr)
   {
     initial_pose = *gnss_map_pose_;
