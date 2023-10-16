@@ -99,12 +99,12 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
 {
   try {
     // START TASK 2 CODE HERE
-    int zone;
-    bool northp;
-    utm_point.header.frame_id="utm";
-    GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
+
+
+
+
     // return true if successful
-    return true;
+    return false;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from WGS84 to UTM failed: " << e.what());
@@ -124,10 +124,10 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
 {
   try {
     // START TASK 3 CODE HERE
-    geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
-    tf2::doTransform(input_point, output_point, tf);
+
+
     // return true if successful
-    return true;
+    return false;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
     RCLCPP_WARN_STREAM(this->get_logger(), "Tranformation from '" << input_point.header.frame_id << "' to '" << output_frame << "' is not available!");
