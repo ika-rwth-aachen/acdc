@@ -55,7 +55,7 @@ void GNSSLocalizationNode::setup()
 }
 
 /**
- * @brief This callback is invoked when the subscriber receives a GNSS message
+ * @brief This callback is invoked when the subscriber receives a gnss message
  *
  * @param[in] msg input
  */
@@ -72,8 +72,8 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
   // publish the gps point as message
   publisher_gnss_point_->publish(map_point);
 
-  // Estimate the yaw angle from two GNSS-points within the map-frame
-  if(last_gnss_map_point_!=nullptr) // We need two GNSS-points to estimate the yaw angle --> check if the last_gnss_map_point_ is available
+  // Estimate the yaw angle from two gnss-points within the map-frame
+  if(last_gnss_map_point_!=nullptr) // We need two gnss-points to estimate the yaw angle --> check if the last_gnss_map_point_ is available
   {
     geometry_msgs::msg::PoseStamped map_pose;
     estimateGNSSYawAngle(map_point, *last_gnss_map_point_, map_pose);
@@ -93,7 +93,7 @@ void GNSSLocalizationNode::gnssCallback(sensor_msgs::msg::NavSatFix::UniquePtr m
  * @param[in] latitude latitude coordinate in decimal degree
  * @param[in] longitude longitude coordinate in decimal degree
  * @param[out] geometry_msgs::msg::PointStamped indicating the position in the utm system
- * @return bool indicating if projection was successful
+ * @return bool indicating if projection was succesful
  */
 bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& longitude, geometry_msgs::msg::PointStamped& utm_point)
 {
@@ -103,7 +103,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
     bool northp;
     utm_point.header.frame_id="utm";
     GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, utm_point.point.x, utm_point.point.y);
-    // return true if successful
+    // return true if succesful
     return true;
     // END TASK 2 CODE HERE
   } catch (GeographicLib::GeographicErr& e) {
@@ -118,7 +118,7 @@ bool GNSSLocalizationNode::projectToUTM(const double& latitude, const double& lo
  * @param[in] input_point 
  * @param[out] output_point 
  * @param[in] output_frame the frame to transform input_point to
- * @return bool indicating if transformation was successful
+ * @return bool indicating if transformation was succesful
  */
 bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped& input_point, geometry_msgs::msg::PointStamped& output_point, const std::string& output_frame)
 {
@@ -126,7 +126,7 @@ bool GNSSLocalizationNode::transformPoint(const geometry_msgs::msg::PointStamped
     // START TASK 3 CODE HERE
     geometry_msgs::msg::TransformStamped tf = tf_buffer_->lookupTransform(output_frame, input_point.header.frame_id, input_point.header.stamp);
     tf2::doTransform(input_point, output_point, tf);
-    // return true if successful
+    // return true if succesful
     return true;
     // END TASK 3 CODE HERE
   } catch (tf2::TransformException& ex) {
@@ -146,17 +146,17 @@ void GNSSLocalizationNode::estimateGNSSYawAngle(const geometry_msgs::msg::PointS
 {
     // START TASK 4 CODE HERE
     // calculate the yaw angle from two sequential gnss-points
-
-
-
+    double dx = current_point.point.x-last_point.point.x;
+    double dy = current_point.point.y-last_point.point.y;
+    double heading = std::atan2(dy,dx);
     // use header from input point
-
+    output_pose.header = current_point.header;
     // use the position provided through the input point
-
+    output_pose.pose.position = current_point.point;
     // generate a quaternion using the calculated yaw angle
-
-
-
+    tf2::Quaternion q;
+    q.setRPY(0, 0, heading);
+    output_pose.pose.orientation = tf2::toMsg(q);
     // END TASK 4 CODE HERE
 }
 
@@ -169,14 +169,14 @@ void GNSSLocalizationNode::odometryCallback(nav_msgs::msg::Odometry::UniquePtr m
 {
   // store the incoming message in a local object
   nav_msgs::msg::Odometry current_odometry = *msg;
-  if(last_odometry_!=nullptr && gnss_map_pose_!=nullptr) // We need at least two odometry measurements and a GNSS estimate
+  if(last_odometry_!=nullptr) // We need at least two odometry measurements
   {
     // derive the incremental movement of the vehicle inbetween two odometry measurements
     geometry_msgs::msg::Vector3 delta_translation;
     tf2::Quaternion delta_rotation;
     if(!getIncrementalMovement(current_odometry, *last_odometry_, delta_translation, delta_rotation)) return;
     geometry_msgs::msg::PoseStamped pose;
-    // get the initial pose either from GNSS or from the previous iteration
+    // get the initial pose either from gnss or from the previous iteration
     setInitialPose(pose);
     // predict the corresponding vehicle pose
     posePrediction(pose, delta_translation, delta_rotation);
@@ -215,14 +215,14 @@ bool GNSSLocalizationNode::getIncrementalMovement(const nav_msgs::msg::Odometry&
 
 /**
  * @brief this function sets the initial pose for the current odometry step
- * the function either returns a new GNSS-based pose estimate,
+ * the function either returns a new gnss-based pose estimate,
  * or the pose derived by the previous iteration
  * 
  * @param[out] initial_pose the initial pose
  */
 void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initial_pose)
 {
-  // use GNSS pose if new measurement is available or no pose from previous iteration is available
+  // use gnss pose if new measurement is available or no pose from previous iteration is available
   if((predicted_map_pose_==nullptr || new_gnss_pose_) && gnss_map_pose_!=nullptr)
   {
     initial_pose = *gnss_map_pose_;
@@ -244,24 +244,23 @@ void GNSSLocalizationNode::setInitialPose(geometry_msgs::msg::PoseStamped& initi
 void GNSSLocalizationNode::posePrediction(geometry_msgs::msg::PoseStamped& pose, const geometry_msgs::msg::Vector3& delta_translation, const tf2::Quaternion& delta_rotation)
 {
   // The delta values are given in a vehicle centered frame --> we need to transform them into the map frame
-  // First perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
+  // First apply delta orientation to the pose
   tf2::Quaternion orientation;
   tf2::fromMsg(pose.pose.orientation, orientation);
-  double yaw;
-  getYawFromQuaternion(yaw, orientation);
+  orientation*=delta_rotation; // the multiplication of two quaternions represents two sequential rotations
+  pose.pose.orientation = tf2::toMsg(orientation);
+  // now perform the transformation of the translation into map coordinates, by using the yaw of the vehicle in map coordinates
+  double initial_yaw;
+  getYawFromQuaternion(initial_yaw, orientation);
   // START TASK 5 CODE HERE
-
-
-
-
-
+  double alpha = std::atan2(delta_translation.y, delta_translation.x);
+  double beta = initial_yaw - alpha;
+  double translation_magnitude = std::sqrt(std::pow(delta_translation.x, 2.0)+std::pow(delta_translation.y, 2.0));
+  double map_dx = translation_magnitude*std::cos(beta);
+  double map_dy = translation_magnitude*std::sin(beta);
   // Apply dx and dy (in map coordinates) to the position
-
-
-  // Last apply delta orientation to the pose
-  // the multiplication of two quaternions represents two sequential rotations
-
-
+  pose.pose.position.x += map_dx;
+  pose.pose.position.y += map_dy;
   // END TASK 5 CODE HERE
 }
 
