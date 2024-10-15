@@ -1,5 +1,5 @@
 ---
-name: ACDC MOOC issue template
+name: Advanced - Issue Template
 about: Issue template for ACDC MOOC participants
 title: ''
 labels: ''
@@ -9,6 +9,7 @@ assignees: ''
 
 > Thanks for creating an issue, we will support you as soon as possible.  
 > Please fill out the issue template below by answering **all** questions.
+> Providing as much information as possible will help us to solve the problem as fast as possible!
 
 1. **Are you using a virtual machine or are you using native Ubuntu?**
 
