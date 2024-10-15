@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 > Please make sure that you have googled, asked ChatGPT or searched for the problem before you post an issue here! Thanks!
-> Provide as much information as possible will help us to solve the problem as fast as possible!
+> Providing as much information as possible will help us to solve the problem as fast as possible!
 
 
 ## Setup (Virtual Machine, Ubuntu, Windows)
